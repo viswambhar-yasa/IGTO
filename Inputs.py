@@ -40,6 +40,16 @@ class Inputs():
     def knot_vector(self,n,degree):
         '''
         This function return knotvector based on the number of control points and degree of Bspline
+        Parameters
+        ----------
+        control_points : int
+            number of points along with weights.
+        degree : int
+            order of B-splines  0-constant, 1-linear, 2-quadratic, 3-cubic.
+
+        Returns
+        -------
+        KNOTVECTOR - an array containing knots based on control points
         '''
         size=n+degree+1
         self.knotvector=np.zeros(size)
@@ -75,41 +85,3 @@ class Inputs():
         return self.netakntvtr
 
 
-'''
-Give the required dimension of the beam 
-'''
-length=1
-height=1
-width=1
-
-'''
-provide the number of elements in each direction
-
-'''
-nx=2
-ny=2
-nz=2
-
-'''
-Provide the  information for knot vector in each direction
-'''
-n=nx+1
-p=ny+1
-q=nz+1
-
-xidegree=2
-etadegree=2
-netadegree=2
-
-C=Inputs(length,height,width,nx,ny,nz,xidegree,etadegree,netadegree)
-global control_points
-control_points=C.crtpts_coordinates()
-global xi_knotvector
-global eta_knotvector
-global neta_knotvector
-
-xi_knotvector=C.knot_vector(9,2)
-eta_knotvector=C.eta_knotvector()
-neta_knotvector=C.neta_knotvector()
-
-print(xi_knotvector)
