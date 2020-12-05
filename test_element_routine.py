@@ -1,6 +1,8 @@
-from element_routine import gauss_quadrature,unittoparametric,jacobian
+from element_routine import gauss_quadrature,unittoparametric,jacobian,assemble,element_routine,apply_BC 
 from numpy import array,array_equiv,zeros,linalg,sin,cos,radians,transpose
-
+from Inputs import *
+from geometry import knot_connectivity,controlpointassembly
+from boundary_conditions import BC_Switcher
 import pytest
 
 def test__gauss_quadrature_1point_true():

@@ -1,44 +1,25 @@
-from Inputs import Inputs
+from geometry import trilinear_der,knot_index,bspline_basis,derbspline_basis
+import numpy as np
+from Inputs import *
+
+    
+
+
+def elementorder(numx,numy,numz):
+    index=0
+    el_order=np.zeros((numx,numz,numy))
+    for i in range(numz):
+        for j in range(numy):
+            for k in range(numx):
+                el_order[k,i,j]=index
+                index+=1
+    return el_order
 
 
 
-
-if __name__ == "__main__":
-    '''
-    Give the required dimension of the beam 
-    '''
-    length=1
-    height=1
-    width=1
-
-    '''
-    provide the number of elements in each direction
-
-    '''
-    nx=2
-    ny=2
-    nz=2
-
-    '''
-    Provide the  information for knot vector in each direction
-    '''
-    n=nx+1
-    p=ny+1
-    q=nz+1
-
-    xidegree=2
-    etadegree=2
-    netadegree=2
-
-    C=Inputs(length,height,width,nx,ny,nz,xidegree,etadegree,netadegree)
-    global control_points
-    control_points=C.crtpts_coordinates()
-    global weights
-    weights=control_points[:,-1]
-    global xi_knotvector
-    global eta_knotvector
-    global neta_knotvector
-
-    xi_knotvector=C.xi_knotvector()
-    eta_knotvector=C.eta_knotvector()
-    neta_knotvector=C.neta_knotvector()
+print(XI_DEGREE,ETA_DEGREE,NETA_DEGREE)
+print(XI_KNOTVECTOR)
+print(ETA_KNOTVECTOR)
+print(NETA_KNOTVECTOR)
+WEIGHTS=np.ones(8)
+DR_DX,DR_DY,DR_DZ,R =trilinear_der(0.4,0.5,0.3,WEIGHTS)

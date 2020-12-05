@@ -1,6 +1,5 @@
 import numpy as np 
 import pytest 
-from Inputs import *
 
 
 def knot_index(degree,U,knotvector):
@@ -153,8 +152,38 @@ def derbspline_basis(knot_index,degree,U,knotvector):
     return np.array(derBasis)
 
 
-def trilinear_der(Ux,Uy,Uz,weights,xdegree=XI_DEGREE,xknotvector=XI_KNOTVECTOR,ydegree=ETA_DEGREE,yknotvector=ETA_KNOTVECTOR,zdegree=ETA_DEGREE,zknotvector=ETA_KNOTVECTOR):
+def trilinear_der(Ux,Uy,Uz,weights,xdegree,xknotvector,ydegree,yknotvector,zdegree,zknotvector):
+    '''
+    
 
+    Parameters
+    ----------
+    Ux : TYPE
+        DESCRIPTION.
+    Uy : TYPE
+        DESCRIPTION.
+    Uz : TYPE
+        DESCRIPTION.
+    weights : TYPE
+        DESCRIPTION.
+    xdegree : TYPE, optional
+        DESCRIPTION. The default is XI_DEGREE.
+    xknotvector : TYPE, optional
+        DESCRIPTION. The default is XI_KNOTVECTOR.
+    ydegree : TYPE, optional
+        DESCRIPTION. The default is ETA_DEGREE.
+    yknotvector : TYPE, optional
+        DESCRIPTION. The default is ETA_KNOTVECTOR.
+    zdegree : TYPE, optional
+        DESCRIPTION. The default is ETA_DEGREE.
+    zknotvector : TYPE, optional
+        DESCRIPTION. The default is ETA_KNOTVECTOR.
+
+    Returns
+    -------
+    None.
+
+    '''
     x_index=knot_index(xdegree,Ux,xknotvector)
     y_index=knot_index(ydegree,Uy,yknotvector)
     z_index=knot_index(zdegree,Uz,zknotvector)
@@ -178,12 +207,12 @@ def trilinear_der(Ux,Uy,Uz,weights,xdegree=XI_DEGREE,xknotvector=XI_KNOTVECTOR,y
     windex=0
 
     for k in range(zdegree+1):
-        for i in range(ydegree+1):
-            for j in range(xdegree+1):
-                W+=Nx[j]*Ny[i]*Nz[k]*weights[windex]
-                W_dx+=DNx[j]*Ny[i]*Nz[k]*weights[windex]
-                W_dy+=Nx[j]*DNy[i]*Nz[k]*weights[windex]
-                W_dz+=Nx[j]*Ny[i]*DNz[k]*weights[windex]
+        for j in range(ydegree+1):
+            for i in range(xdegree+1):
+                W+=Nx[i]*Ny[j]*Nz[k]*weights[windex]
+                W_dx+=DNx[i]*Ny[j]*Nz[k]*weights[windex]
+                W_dy+=Nx[i]*DNy[j]*Nz[k]*weights[windex]
+                W_dz+=Nx[i]*Ny[j]*DNz[k]*weights[windex]
                 windex+=1
 
     dR_dx=np.zeros((xdegree+1)*(ydegree+1)*(zdegree+1))
@@ -201,23 +230,109 @@ def trilinear_der(Ux,Uy,Uz,weights,xdegree=XI_DEGREE,xknotvector=XI_KNOTVECTOR,y
         R=np.zeros((xdegree+1)*(ydegree+1)*(zdegree+1))
     else:
         for k in range(zdegree+1):
-            zind=z_index-ydegree+k
-            for i in range(ydegree+1):
-               
-                for j in range(xdegree+1):
+            for j in range(ydegree+1):
+                for i in range(xdegree+1):
                     w=weights[windex]/(W*W)
-                    R[p]=(Nx[j]*Ny[i]*Nz[k]*W*w)
-                    dR_dx[p]=(DNx[j]*Ny[i]*Nz[k]*W-Nx[j]*Ny[i]*Nz[k]*W_dx)*w
-                    dR_dy[p]=(Nx[j]*DNy[i]*Nz[k]*W-Nx[j]*Ny[i]*Nz[k]*W_dy)*w
-                    dR_dz[p]=(Nx[j]*Ny[i]*DNz[k]*W-Nx[j]*Ny[i]*Nz[k]*W_dz)*w
+                    R[p]=(Nx[i]*Ny[j]*Nz[k]*W*w)
+                    dR_dx[p]=(DNx[i]*Ny[j]*Nz[k]*W-Nx[i]*Ny[j]*Nz[k]*W_dx)*w
+                    dR_dy[p]=(Nx[i]*DNy[j]*Nz[k]*W-Nx[i]*Ny[j]*Nz[k]*W_dy)*w
+                    dR_dz[p]=(Nx[i]*Ny[j]*DNz[k]*W-Nx[i]*Ny[j]*Nz[k]*W_dz)*w
                     p=p+1
                     windex+=1
 
     return [dR_dx,dR_dy,dR_dz,R]
 
-Xi_degree=Eta_degree=Neta_degree=4
-WEIGHTS=np.ones((Xi_degree+1)**3)
-Xi_knotvector=Eta_knotvector=Eta_knotvector=[0,0,0,0,0,0.16666667,0.33333333,0.5,0.6666666,0.83333333,1,1,1,1,1]
-DR_DX,DR_DY,DR_DZ,R =trilinear_der(0.6,0.5,0.3,WEIGHTS,Xi_degree,Xi_knotvector,Eta_degree,Eta_knotvector,Neta_degree,Eta_knotvector)
-output=R<0
-print(np.all(output)==False)
+
+def elementorder(numx,numy,numz):
+    '''
+    
+
+    Parameters
+    ----------
+    numx : TYPE
+        DESCRIPTION.
+    numy : TYPE
+        DESCRIPTION.
+    numz : TYPE
+        DESCRIPTION.
+
+    Returns
+    -------
+    el_order : TYPE
+        DESCRIPTION.
+
+    '''
+    index=0
+    el_order=np.zeros((numx,numz,numy))
+    for i in range(numz):
+        for j in range(numy):
+            for k in range(numx):
+                el_order[k,i,j]=index
+                index+=1
+    return el_order
+
+def knot_connectivity(n,p,q,knotconnectivityU,knotconnectivityV,knotconnectivityW):
+    '''
+    
+
+    Parameters
+    ----------
+    element : TYPE
+        DESCRIPTION.
+    n : TYPE, optional
+        DESCRIPTION. The default is N.
+    p : TYPE, optional
+        DESCRIPTION. The default is P.
+    q : TYPE, optional
+        DESCRIPTION. The default is Q.
+    knotconnectivityU : TYPE, optional
+        DESCRIPTION. The default is XI_KNOTCONNECTIVITY.
+    knotconnectivityV : TYPE, optional
+        DESCRIPTION. The default is ETA_KNOTCONNECTIVITY.
+    knotconnectivityW : TYPE, optional
+        DESCRIPTION. The default is NETA_KNOTCONNECTIVITY.
+
+    Returns
+    -------
+    TYPE
+        DESCRIPTION.
+
+    '''
+    index=np.zeros((n*p*q,3))
+    count=0
+    for k in range(len(knotconnectivityW)):
+        for j in range(len(knotconnectivityV)):
+            for i in range(len(knotconnectivityU)):
+                index[count,:]=[i,j,k]
+                count+=1
+    index=index.astype(int)
+    return  index
+
+
+def controlpointassembly(n,p,q,nU,nV,nW,xdegree,ydegree,zdegree,knotconnectivityU,knotconnectivityV,knotconnectivityW):#modigy this 
+    '''
+    for 2 elements
+    
+    front face numbering
+    3-4-5
+    0-1-2
+
+    back face numbering
+    9-10-11
+    6-7-8
+    '''
+    elements_assembly=np.zeros(((nU*nV*nW),(xdegree+1)*(ydegree+1)*(zdegree+1)))
+    elements_order=elementorder(n,p,q)
+    a=0 
+    for i in range(nW):
+        for j in range(nV):
+            for k in range(nU):
+                c=0
+                for l in range(len(knotconnectivityW[i,:])):
+                    for m in range(len(knotconnectivityV[j,:])):
+                        for n in range(len(knotconnectivityU[k,:])):
+                            elements_assembly[a,c]=elements_order[knotconnectivityU[k,n],knotconnectivityW[i,l], knotconnectivityV[j,m]]
+                            c+=1
+                a+=1
+    elements_assembly=elements_assembly.astype(int)
+    return elements_assembly

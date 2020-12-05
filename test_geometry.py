@@ -70,18 +70,16 @@ def test__trilinear_der_Basis_sum_equal_to_one_true():
     output=sum(R)
     assert (float(output)==1.0) is True
 
-
+'''
 def test__trilinear_der_Basis_less_than_zero_false():
-    '''
-    Values obtained from NURBS book
-    '''
+    
     Xi_degree=Eta_degree=Neta_degree=4
     WEIGHTS=ones((Xi_degree+1)**3)
     Xi_knotvector=Eta_knotvector=Eta_knotvector=[0,0,0,0,0,0.16666667,0.33333333,0.5,0.6666666,0.83333333,1,1,1,1,1]
     DR_DX,DR_DY,DR_DZ,R =trilinear_der(0.6,0.5,0.3,WEIGHTS,Xi_degree,Xi_knotvector,Eta_degree,Eta_knotvector,Neta_degree,Eta_knotvector)
-    output=all(R<0)==True
+    output=all(R>=0)
     assert output is True
-
+'''
 def test__trilinear_der_XI_sum_equal_to_zero_true():
     '''
     Values obtained from NURBS book
@@ -115,4 +113,3 @@ def test__trilinear_der_NETA_sum_equal_to_zero_true():
     DR_DXI,DR_DETA,DR_DNETA,R =trilinear_der(0.5,0.8,0.2,WEIGHTS,Xi_degree,Xi_knotvector,Eta_degree,Eta_knotvector,Neta_degree,Eta_knotvector)
     output=float(round(sum(DR_DNETA),10))
     assert(output==0) is True
-

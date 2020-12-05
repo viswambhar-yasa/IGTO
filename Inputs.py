@@ -1,21 +1,21 @@
 import numpy as np
 import pytest
-
+#from pyevtk.hl import gridToVTK 
 
 class Inputs():
     '''
     A geometry class which
     '''
-    def __init__(self,length=2,height=2,width=2,nx=2,ny=2,nz=2,xidegree=2,etadegree=2,netadegree=2):
+    def __init__(self,length=1,height=1,width=1,nx=1,ny=1,nz=1,xidegree=1,etadegree=1,netadegree=1):
         self.length=length
         self.height=height
         self.width=width
-        self.nx=nx
-        self.ny=ny
-        self.nz=nz
-        self.n=(nx+1)
-        self.p=(ny+1)
-        self.q=(nz+1)
+        self.nx=nx-1
+        self.ny=ny-1
+        self.nz=nz-1
+        self.n=nx
+        self.p=ny
+        self.q=nz
         self.xidegree=xidegree
         self.etadegree=etadegree
         self.netadegree=netadegree
@@ -30,8 +30,8 @@ class Inputs():
         index=0
         for i in range(self.nz+1):
             for j in range(self.ny+1):
-                for k in range(self.nz+1):
-                    beam_coordinates.append([(k)*(self.length/self.nx),j*(self.height/self.ny),i*(self.width/self.nz),1])
+                for k in range(self.nx+1):
+                    beam_coordinates.append([(k)*(self.length/self.nx),j*(self.height/self.ny),i*(self.width/self.nz),1,index])
                     index+=1
         return np.array(beam_coordinates)
     
@@ -83,5 +83,42 @@ class Inputs():
     def neta_knotvector(self):
         self.netakntvtr=self.knot_vector(self.q,self.netadegree)
         return self.netakntvtr
+            
+    def knotconnect(self,n,degree):
+        '''
+        '''
+        knot=self.knot_vector(n,degree)
+        uniknots=np.unique(knot)
+        n=len(uniknots)-1
+        span=np.zeros((n,2))
+        elindex=np.zeros((n,2))
+        knotconnectivity=np.zeros((n,degree+1))
+        index=0
+        for i in range(0,n): 
+            if uniknots[i]!=uniknots[i+1]:
+                elindex[index,:]=[i+degree , i+1+degree]
+                span[index,:]=[uniknots[i],uniknots[i+1]]  
+                index+=1
+        j=0
+        while j <n:
+            knotconnectivity[j,:]=np.arange(elindex[j,0]-degree,elindex[j,0]+1)
+            j+=1
+        knotconnectivity=knotconnectivity.astype(int)
+        return span,knotconnectivity,uniknots,n
 
+    def xi_knotspan(self):
+        self.xi_span,self.xiknotconnectivity,self.xiuniknots,self.nXi=self.knotconnect(self.n,self.xidegree)
+        return self.xi_span,self.xiknotconnectivity,self.xiuniknots,self.nXi
+    
+    def eta_knotspan(self):
+        self.eta_span,self.etaknotconnectivity,self.etauniknots,self.nEta=self.knotconnect(self.p,self.etadegree)
+        return self.eta_span,self.etaknotconnectivity,self.etauniknots,self.nEta
+    
+    def neta_knotspan(self):
+        self.neta_span,self.netaknotconnectivity,self.netauniknots,self.nNeta=self.knotconnect(self.q,self.netadegree)
+        return self.neta_span,self.netaknotconnectivity,self.netauniknots,self.nNeta
+'''
+Give the required dimension of the beam 
 
+#gridToVTK("./control_points_mesh",x,y,z)
+'''
