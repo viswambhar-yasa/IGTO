@@ -103,34 +103,51 @@ def Heavyside_filter(element_density,beta,ll=0,lh=1,tol=0.01,fil_disp=True):
 #print(element_density)
 
 
-def Moving_asymptoes(dfun0,dcon,f0,c0,x0,L,U,loop,nel,vel,Xmin,Xmax,ma_disp,m=0.5,m_tol=0.1):
-
-    def Asymptoes(loop=loop,x0=x0,n=nel,Xmin=Xmin,Xmax=Xmax,L=L,U=U,move_tol_low=0.01,move_tol_high=10):#
+def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_disp,m=0.2,m_tol=0.1):
+    def Asymptoes(loop=loop,x0=x0,x1=x1,x2=x2,n=nel,Xmin=Xmin,Xmax=Xmax,L=L,U=U,move_tol_low=0.01,move_tol_high=10):#
         Lower=np.ones(n)
         Upper=np.ones(n)
-        if loop<3:
-            x=x0[:,loop]
-            Lower=x-0.5*(Xmax-Xmin)
-            Upper=x+0.5*(Xmax-Xmin)
+        if loop<=2:
+            Lower=x0-0.5*(Xmax-Xmin)
+            Upper=x0+0.5*(Xmax-Xmin)
             #print(Lower,Upper,x)
         else:
-            xk_2=x0[:,loop-2]
-            xk_1=x0[:,loop-1]
-            x=x0[:,loop]
-            gamma=(x-xk_1)*(xk_1-xk_2)
+            '''
+            gamma=(x0-x1)*(x1-x2)
             gamma[gamma<0]=0.7
             gamma[gamma>0]=1.2
-            gamma[gamma==0]=0
+            #gamma[gamma==0]=0
 
-            Lower=x-0.5*gamma*(xk_1-L)
-            Upper=x+0.5*gamma*(U-xk_2)
+            Lower=x0-0.5*gamma*(x1-L)
+            Upper=x0+0.5*gamma*(U-x2)
         
-            Lower=np.maximum(Lower,x-move_tol_high)
-            Lower=np.minimum(Lower,x-move_tol_low)
-            Upper=np.maximum(Upper,x+move_tol_low)
-            Upper=np.minimum(Upper,x+move_tol_high)
+            Lower=np.maximum(Lower,x0-move_tol_high)
+            Lower=np.minimum(Lower,x0-move_tol_low)
+            Upper=np.maximum(Upper,x0+move_tol_low)
+            Upper=np.minimum(Upper,x0+move_tol_high)
+            '''
+            xval=x0
+            xold1=x1
+            xold2=x2
+            zzz = (xval-xold1)*(xold1-xold2)
+            gamma = np.ones(nel)
+            gamma[np.where(zzz>0)] = 1.2
+            gamma[np.where(zzz<0)] = 0.7
+            #gamma[np.where(zzz==0)]= 0 
+            Lower = xval-gamma*(xold1-L)
+            #print(Lower)
+            Upper = xval+gamma*(U-xold1)
+            #print(Upper)
+            lowmin = xval-10*(Xmax-Xmin)
+            lowmax = xval-0.01*(Xmax-Xmin)
+            uppmin = xval+0.01*(Xmax-Xmin)
+            uppmax = xval+10*(Xmax-Xmin)
+            Lower = np.maximum(Lower,lowmin)
+            Lower = np.minimum(Lower,lowmax)
+            Upper = np.minimum(Upper,uppmax)
+            Upper = np.maximum(Upper,uppmin)
         ##output as : [ 1.5  0.5 -0.5], [6.5 5.5 4.5], [4 3 2]
-        return Lower,Upper,x
+        return Lower,Upper,x0
     
     def objective_constrains(x,Lower,Upper,dfun0=dfun0,f0=f0,Xmin=Xmin,Xmax=Xmax,tol=1e-5,tol1=0.001,tol2=1.001):#
         df_postive=np.maximum(dfun0,0)
@@ -260,15 +277,27 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,L,U,loop,nel,vel,Xmin,Xmax,ma_disp,m=0.
             #calculating initial step step
             #dw=np.maximum(dw,1e-5)
             #print(dw)
+            '''
             step_size=np.max(-1.01*(dw/w))
             #print(step_size)
             DL=np.max(-1.01*(dx/(x-np.array([alpha]).T)))
             DU=np.max(1.01*(dx/(np.array([beta]).T)-x))
             step_range=max(DL,DU)
             a=1/max(1.0,max(step_size,step_range))
+            '''
+            stepxx = -1.01*dw/w
+            stmxx = np.max(stepxx)
+            stepalfa =-1.01*(dx/(x-np.array([alpha]).T))
+            stmalfa = np.max(stepalfa)
+            stepbeta = 1.01*(dx/((np.array([beta]).T)-x))
+            stmbeta = np.max(stepbeta)
+            stmalbe = max(stmalfa,stmbeta)
+            stmalbexx = max(stmalbe,stmxx)
+            stminv = max(stmalbexx,1.0)
+            a = 1.0/stminv
             #print('a',a)
             it=0
-            max_iteration=50
+            max_iteration=550
             while it<max_iteration:
                 newx=x+a*dx
                 newy=y+a*dy
@@ -291,11 +320,13 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,L,U,loop,nel,vel,Xmin,Xmax,ma_disp,m=0.
                 #print('lam,eta,neta,nu,Zeta,s',x,y,z,lamda,s,Zeta,eta,neta,nu)
                 new_residualmax,new_residunorm=optimal_condtition(newx,newy,newz,newlam,new_s,newZeta,neweta,newneta,newnu,epsi)
                 it+=1
-                a=a*0.5
+                
+                
                 #print('line_residual',[new_residualmax,new_residunorm])
                 if new_residunorm <(2*resi_norm):
                       return newx,newy,newz,newlam,neweta,newneta,newnu,newZeta,new_s,new_residualmax,new_residunorm 
-                
+                a=a*0.5
+                #print('a1',a)
             
         
         def Newton_method(U,L,x,y,z,alpha,beta,p0,q0,pc,qc,epsi,lamda,s,Zeta,eta,neta,nu,residumax,residunorm,variable_vector=variable_vector,minimizer_vector=minimizer_vector):
@@ -331,7 +362,7 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,L,U,loop,nel,vel,Xmin,Xmax,ma_disp,m=0.
                     return dx,dy,dz,dlamda
             residnorm=residunorm        
             iteration=0
-            max_iteration=150
+            max_iteration=250
             while iteration<max_iteration:
                 iteration+=1
                 UX=np.array([U]).T-x
@@ -399,8 +430,8 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,L,U,loop,nel,vel,Xmin,Xmax,ma_disp,m=0.
                 w=np.concatenate((y,z,lamda,eta,neta,nu,s,Zeta),axis=0)
                 dw=np.concatenate((dy,dz,dlamda,deta,dneta,dnu,ds,dZeta),axis=0)
                 #lline search 
-                #print('w',np.round(w.T,3))
-                #print('dw',np.round(dw.T,3))
+                #print('w',np.round(w.T))
+                #print('dw',np.round(dw.T))
                 oldx=x
                 oldy=y
                 oldz=z
@@ -456,7 +487,7 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,L,U,loop,nel,vel,Xmin,Xmax,ma_disp,m=0.
             oldnu=nu
             oldZeta=Zeta
             olds=s
-            x,y,z,lamda,eta,neta,nu,Zeta,s=Newton_method(U,L,x,y,z,alpha,beta,p0,q0,pc,qc,epsi,lamda,s,Zeta,eta,neta,nu,residual_max,residunorm)
+            x,y,z,lamda,eta,neta,nu,Zeta,s=Newton_method(Upper,Lower,x,y,z,alpha,beta,p0,q0,pc,qc,epsi,lamda,s,Zeta,eta,neta,nu,residual_max,residunorm)
             
             xx1=oldx-x
             xx2=oldy-y
@@ -473,27 +504,27 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,L,U,loop,nel,vel,Xmin,Xmax,ma_disp,m=0.
             #    print(x)
         return x
         
-    L,U,x=Asymptoes()
+    Lower,Upper,x=Asymptoes()
     c = 10000*np.ones((vel,1))
     #print(c)
     d = np.ones((vel,1))
     a0 = 1
     a = np.zeros((vel,1))
     #calculating alpha and beta
-    alpha=np.maximum(Xmin,np.maximum((L+m_tol*(x-L)),(x-m*(Xmax-Xmin))))
-    beta=np.minimum(Xmax,np.minimum((U-m_tol*(U-x)),(x+m*(Xmax-Xmin))))
+    alpha=np.maximum(Xmin,np.maximum((Lower+m_tol*(x-Lower)),(x-m*(Xmax-Xmin))))
+    beta=np.minimum(Xmax,np.minimum((Upper-m_tol*(Upper-x)),(x+m*(Xmax-Xmin))))
     #x=Newton_Method(dfun0,f0,x,Lower,Upper,alpha,beta)
     #calculating dervivative of objective and constrains 
-    p0,q0=objective_constrains(x,L,U)
-    pc,qc,rc=Minimizer_constrains(x,L,U)
+    p0,q0=objective_constrains(x,Lower,Upper)
+    pc,qc,rc=Minimizer_constrains(x,Lower,Upper)
     b=-rc
     #print(L,U)
     #print(p0,q0,r0)
     #print(pc,qc,b)
     #print(a,b,c,d)
-    #print(L,U,alpha,beta,p0,q0,pc,qc,a,b,c,d)
+    #print(Lower,Upper,alpha,beta,p0,q0,pc,qc,a,b,c,d)
     #x,y,z,lamda,eta,neta,nu,Zeta,s=subsolv(2,3,L,U,alpha,beta,p0,q0,pc,qc,a0,a,b,c,d)
-    x=prime_dual(L,U,alpha,beta,p0,q0,pc,qc,a,b,c,d)
+    x=prime_dual(Lower,Upper,alpha,beta,p0,q0,pc,qc,a,b,c,d)
     #x,y,z,lamda,eta,neta,nu,Zeta,s,residual=prime_dual(L,U,alpha,beta,p0,q0,pc,qc,a,b,c,d)
     #print(x)
-    return x,L,U
+    return x,Lower,Upper
