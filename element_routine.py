@@ -243,7 +243,7 @@ def Compliance_matrix(E=100000,v=0.3):
     '''
     C=np.zeros((6,6))
     C[0,0]=C[1,1]=C[2,2]=(E/((1+v)*(1-2*v)))*(1-v)
-    C[3,3]=C[4,4]=C[5,5]=E/((1+v)*2)
+    C[3,3]=C[4,4]=C[5,5]=E/((1+v)*1)
     C[0,1]=C[0,2]=C[1,0]=C[2,0]=C[1,2]=C[2,1]=(E/((1+v)*(1-2*v)))*v
     return C
 
@@ -321,9 +321,12 @@ def apply_BC(K_G,F_E,fixed_dof,load_dof,P):
         DESCRIPTION.
 
     '''
-    reduced_GK=np.delete(K_G,fixed_dof,axis=0) #axis=0 is row
-    reduced_GK=np.delete(reduced_GK,fixed_dof,axis=1) 
+    #reduced_GK=np.delete(K_G,fixed_dof,axis=0) #axis=0 is row
+    #reduced_GK=np.delete(reduced_GK,fixed_dof,axis=1) 
+    reduced_GK=np.delete(np.delete(K_G, fixed_dof, 0),fixed_dof , 1)
     #axis=0 is row
     F_E[load_dof]=P
     reduced_F_E=np.delete(F_E,fixed_dof,axis=0)
     return reduced_GK,reduced_F_E
+
+#print(gauss_quadrature(1,1,1))

@@ -122,3 +122,63 @@ Give the required dimension of the beam
 
 #gridToVTK("./control_points_mesh",x,y,z)
 '''
+def main(l,h,w,x,y,z,X1,Y1,Z1,D,VF,pm,rm,O,L,E,v):
+    global length
+    length=l
+    global height
+    height=h
+    global width
+    width=w
+    global nx
+    nx=x
+    global ny
+    ny=y
+    global nz
+    nz=z
+    global XI_DEGREE
+    XI_DEGREE=X1
+    global ETA_DEGREE
+    ETA_DEGREE=Y1
+    global NETA_DEGREE
+    NETA_DEGREE=Z1
+    global density
+    density=D
+    global volume_frac
+    volume_frac=VF
+    global pmax
+    pmax=pm
+    global rmin
+    rmin=rm
+    global option
+    option=O
+    global load
+    load=L
+    global Youngs_modulus
+    Youngs_modulus=E
+    global poission_ratio
+    poission_ratio=v
+    print('Initial Values Assigned')
+'''
+main(length,height,width,option,nx,ny,nz,XI_DEGREE,ETA_DEGREE,NETA_DEGREE,density,volume_frac,pmax,rmin,option,load,Youngs_modulus,poission_ratio)
+
+
+N=nx
+P=ny
+Q=nz
+
+
+C=Inputs(length,height,width,N,P,Q,XI_DEGREE,ETA_DEGREE,NETA_DEGREE)
+
+CONTROL_POINTS=C.crtpts_coordinates()
+
+WEIGHTS=CONTROL_POINTS[:,-1]
+
+
+XI_KNOTVECTOR=C.xi_knotvector()
+ETA_KNOTVECTOR=C.eta_knotvector()
+NETA_KNOTVECTOR=C.neta_knotvector()
+XI_SPAN,XI_KNOTCONNECTIVITY,XI_UNIKNOTS,nU=C.xi_knotspan()
+ETA_SPAN,ETA_KNOTCONNECTIVITY,ETA_UNIKNOTS,nV=C.eta_knotspan()
+NETA_SPAN,NETA_KNOTCONNECTIVITY,NETA_UNIKNOTS,nW=C.neta_knotspan()
+
+'''

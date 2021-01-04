@@ -21,15 +21,58 @@ class BC_Switcher(object):
         fixed_nodes=np.array([index for index,j in enumerate(self.CONTROL_POINTS) if self.CONTROL_POINTS[index,0]==0])
         fixed_indicies=np.sort(np.concatenate((fixed_nodes*dof,dof*fixed_nodes+1,fixed_nodes*dof+2)))
 
-        load_nodes=np.array([index for index,j in enumerate(self.CONTROL_POINTS) if (self.CONTROL_POINTS[index,0]==self.length and (self.CONTROL_POINTS[index,1]==self.height or self.CONTROL_POINTS[index,1]==0) and (self.CONTROL_POINTS[index,2]==self.width or self.CONTROL_POINTS[index,2]==0))] )
+        load_nodes=np.array([index for index,j in enumerate(self.CONTROL_POINTS) if self.CONTROL_POINTS[index,0]==self.length and self.CONTROL_POINTS[index,1]==self.height and self.CONTROL_POINTS[index,2]==self.width] )
         load_indicies=np.sort((dof*load_nodes+1))
 
 
         return fixed_indicies,load_indicies,fixed_nodes,load_nodes
-    def number_1(self,CONTROL_POINTS,length,height,width):
-        return 'one'
-    def number_2(self,CONTROL_POINTS,length,height,width):
-        return 'two'
+    def number_1(self):
+
+        print('\n Cantilever beam with pressure at top \n')
+        dof=3
+        fixed_nodes=np.array([index for index,j in enumerate(self.CONTROL_POINTS) if self.CONTROL_POINTS[index,0]==0])
+        fixed_indicies=np.sort(np.concatenate((fixed_nodes*dof,dof*fixed_nodes+1,fixed_nodes*dof+2)))
+
+        load_nodes=np.array([index for index,j in enumerate(self.CONTROL_POINTS) if self.CONTROL_POINTS[index,1]==self.height and self.CONTROL_POINTS[index,0]!=0 ] )
+        load_indicies=np.sort((dof*load_nodes+1))
+
+
+        return fixed_indicies,load_indicies,fixed_nodes,load_nodes
+
+    def number_2(self):
+        print('\n Cantilever beam with pressure at top \n')
+        dof=3
+        fixed_nodes=np.array([index for index,j in enumerate(self.CONTROL_POINTS) if self.CONTROL_POINTS[index,0]==0])
+        fixed_indicies=np.sort(np.concatenate((fixed_nodes*dof,dof*fixed_nodes+1,fixed_nodes*dof+2)))
+
+        load_nodes=np.array([index for index,j in enumerate(self.CONTROL_POINTS) if self.CONTROL_POINTS[index,0]==self.length and self.CONTROL_POINTS[index,1]==0 and self.CONTROL_POINTS[index,2]==0  ] )
+        load_indicies=np.sort((dof*load_nodes+1))
+
+
+        return fixed_indicies,load_indicies,fixed_nodes,load_nodes
+
+    def number_3(self):
+        print('\n 2d case loading at y=height and x=length \n')
+        dof=3
+        fixed_nodes=np.array([index for index,j in enumerate(self.CONTROL_POINTS) if self.CONTROL_POINTS[index,0]==0])
+        fixed_indicies=np.sort(np.concatenate((fixed_nodes*dof,dof*fixed_nodes+1,fixed_nodes*dof+2)))
+
+        load_nodes=np.array([index for index,j in enumerate(self.CONTROL_POINTS) if (self.CONTROL_POINTS[index,0]==self.length and  self.CONTROL_POINTS[index,1]==self.height and self.CONTROL_POINTS[index,2]==0 )] )
+        load_indicies=np.sort((dof*load_nodes+1))
+        return fixed_indicies,load_indicies,fixed_nodes,load_nodes
+    
+    def number_4(self):
+
+        print('\n Cantilever beam with point load at the free end \n')
+        dof=3
+        fixed_nodes=np.array([index for index,j in enumerate(self.CONTROL_POINTS) if self.CONTROL_POINTS[index,0]==0])
+        fixed_indicies=np.sort(np.concatenate((fixed_nodes*dof,dof*fixed_nodes+1,fixed_nodes*dof+2)))
+
+        load_nodes=np.array([index for index,j in enumerate(self.CONTROL_POINTS) if (self.CONTROL_POINTS[index,0]==self.length and  self.CONTROL_POINTS[index,1]==self.width and  self.CONTROL_POINTS[index,2]==float(self.height/2))] )
+        load_indicies=np.sort((dof*load_nodes+1))
+
+
+        return fixed_indicies,load_indicies,fixed_nodes,load_nodes
 
 
 
@@ -42,16 +85,16 @@ print(s.indirect(0) )
 '''
 
 length=1
-height=1
-width=1
+height=0.1
+width=0.1
 
 '''
 provide the number of elements in each direction
 
 '''
-nx=2
-ny=2
-nz=2
+nx=6
+ny=6
+nz=7
 
 '''
 Provide the  information for knot vector in each direction
@@ -68,6 +111,7 @@ NETA_DEGREE=1
 C=Inputs(length,height,width,nx,ny,nz,XI_DEGREE,ETA_DEGREE,NETA_DEGREE)
 '''
 CONTROL_POINTS=C.crtpts_coordinates()
+print(CONTROL_POINTS)
 BC=BC_Switcher(CONTROL_POINTS,length,height,width)
-print(BC.indirect(0))
+print(BC.indirect(4))
 '''

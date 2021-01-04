@@ -31,18 +31,19 @@ H,DH=Knearestneighbours(rmin,nU,nV,nW)
 loop=0
 change=1
 g=1
-optimizer='MMA'
+optimizer='OC'
 penal=max(15*((1-poission_ratio)/(7-5*poission_ratio)),(3/2)*((1-poission_ratio)/(1-2*poission_ratio)))
 oc_disp=True
 bc_disp=True
 fil_disp=True
 mma_disp=True
 max_iterations=350
-AElement_Density=np.zeros((nel,max_iterations))
+Element1=element_density
+Element2=element_density
 beta=1
 filter_N=np.zeros((nel,(XI_DEGREE+1)*(ETA_DEGREE+1)*(NETA_DEGREE+1)))
-Lower=np.zeros((nel,1))
-Upper=np.ones((nel,1))
+Lower=np.zeros(nel)
+Upper=np.ones(nel)
 Xmin=np.zeros(nel)
 Xmax=np.ones(nel)
 while change >0.01 :
@@ -108,6 +109,7 @@ while change >0.01 :
         dcompliance[k]=np.transpose(U[dof_index])@(density_basis_dx[k]*K_E)@U[dof_index]
     compliance+=np.transpose(U)@(K_G)@U
     dv=np.ones(nel)
+    element_density=np.round(element_density,4)
     #
     #delement_density=beta*np.exp(-beta*element_density)+np.exp(-beta)
     #dcompliance=np.matmul(H,(delement_density*dcompliance/DH))
@@ -117,7 +119,6 @@ while change >0.01 :
     #np.append(X,element_density)
     #element_density=np.matmul(H,element_density/DH)
     old_el_density=element_density
-    AElement_Density[:,loop]=element_density
     if loop <=15:   
         g=1
     else:
@@ -137,15 +138,22 @@ while change >0.01 :
         element_density=np.round(element_density_updated,4)
     if optimizer=='MMA':
         dcompliance=np.matmul(H,(dcompliance/DH))
+        compliance=compliance
         dv=np.matmul(H,dv/DH)
-        v = ((np.sum(element_density))-volume_frac*nel)/(volume_frac*nel)
+        v = (np.sum(element_density)/nel)-volume_frac
+        print(v)
         #print(v1,v2)
         dv_dx  = (dv/ (volume_frac*nel))
         #print(dcompliance)
         #print(dv)
-        
-        element_density_updated,Lower,Upper=Moving_asymptoes(dcompliance,dv_dx,compliance,v,AElement_Density,Lower,Upper,loop,nel,1,Xmin,Xmax,True)
-        print(element_density_updated[:,0])
+        dfun0=dcompliance
+        dcon=dv_dx
+        f0=compliance
+        c0=v
+        element_density_updated,Lower,Upper=Moving_asymptoes(dfun0,dcon,f0,c0,element_density,Element1,Element2,Lower,Upper,loop,nel,1,Xmin,Xmax,True)
+        #print(element_density_updated[:,0])
+        Element2 = Element1.copy()
+        Element1 = element_density.copy()
         element_density=np.round(element_density_updated[:,0],4)
         '''
         if loop>3:
@@ -164,11 +172,11 @@ while change >0.01 :
         Xmin=np.zeros((nel,1))
         Xmax=np.ones((nel,1))
         element_density=np.array([element_density]).T
-        element_density,ymma,zmma,lam,xsi,eta,mu,zet,s,Lower,Upper=mmasub(1,nel,loop,element_density,Xmin,Xmax,xold1,xold2,compliance,dcompliance,v,dv,Lower,Upper,a0,a,c,d,move)
-        print(element_density_updated[:,0])
+        element_density_updated,ymma,zmma,lam,xsi,eta,mu,zet,s,Lower,Upper=mmasub(1,nel,loop,element_density,Xmin,Xmax,xold1,xold2,compliance,dcompliance,v,dv,Lower,Upper,a0,a,c,d,move)
+        #print(element_density_updated[:,0])
         element_density=np.round(element_density_updated[:,0],4)
         #element_density_updated=1
-        '''
+        #'''
     
 
     #Heavyside filter

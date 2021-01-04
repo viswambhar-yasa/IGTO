@@ -3,36 +3,36 @@ from geometry import knot_connectivity,controlpointassembly
 from element_routine import assemble,element_routine,apply_BC 
 from boundary_conditions import BC_Switcher
 #import pyvtk
-from analytical_solution import exact_displacements
-import matplotlib.pyplot as plt
-from mpl_toolkits import mplot3d
+
 
 
 import numpy as np
 
-length=1
-height=1
+length=48
+height=12
 width=1
 option=0
-'''
-provide the number of elements in each direction
-
-'''
-nx=5
-ny=4
+nx=40
+ny=8
 nz=4
+density=7850
+volume_frac=0.75
+pmax=3
+rmin=1.5
+load=-10
 
-'''
-Provide the  information for knot vector in each direction
-'''
+XI_DEGREE=3
+ETA_DEGREE=1
+NETA_DEGREE=1
+    
+Youngs_modulus=100000
+poission_ratio=0.3
+
 
 N=nx
 P=ny
 Q=nz
 
-XI_DEGREE=1
-ETA_DEGREE=1
-NETA_DEGREE=1
 
 C=Inputs(length,height,width,N,P,Q,XI_DEGREE,ETA_DEGREE,NETA_DEGREE)
 
@@ -49,8 +49,6 @@ ETA_SPAN,ETA_KNOTCONNECTIVITY,ETA_UNIKNOTS,nV=C.eta_knotspan()
 NETA_SPAN,NETA_KNOTCONNECTIVITY,NETA_UNIKNOTS,nW=C.neta_knotspan()
 
 
-Youngs_modulus=100000
-poission_ratio=0.3
 
 ncp=N*P*Q
 dof=3
@@ -97,33 +95,47 @@ for i in range(0,nel):
 
 BC=BC_Switcher(CONTROL_POINTS,length,height,width)
 fixed_dof,load_dof,fixed_pts,load_pts=BC.indirect(option)
-reduced_k,reduced_F=apply_BC(K_G,F_E,fixed_dof,load_dof,10)
-U=np.matmul(np.linalg.inv(reduced_k),reduced_F)
-
+reduced_k,reduced_F=apply_BC(K_G,F_E,fixed_dof,load_dof,load)
+U=np.linalg.solve(reduced_k,reduced_F)
+#print(load_pts)
 #print(np.round((reduced_k@U),10)-reduced_F)
 for j in fixed_dof: 
     U=np.insert(U,j,0)
-F_E[load_dof]=P
-print(U)
+   
+F_E[load_dof]=load
+#print(U)
+#print(F_E)
+print(U@F_E)
 U_new=np.array((U.reshape(len(CONTROL_POINTS),3)),dtype='float64')
 #print(U_new)
 New_control_points=CONTROL_POINTS[:,:-2]+U.reshape(len(CONTROL_POINTS),3)
+Ux=U_new[:,0]
 Uy=U_new[:,1]
-print(np.max(Uy))
-I=(width*(height**3))/12
+Uz=U_new[:,2]
+#print(Uy)
+from analytical_solution import exact_displacements
+ex_dis=np.array(exact_displacements(load,length,width,height,Youngs_modulus,poission_ratio,nx,ny))
+print(max(ex_dis[:,1:]))
+print(np.max(abs(U_new)))
+#print(CONTROL_POINTS,'\n')
+#print(New_control_points)
+#print(np.max(Uy))
+'''
+I=((width*(height**3))/12)
 maximum_deflection=(10*(length**3))/(3*Youngs_modulus*I)
 print(maximum_deflection)
-energy_stored=np.dot(0.5,np.matmul(U.transpose(),np.matmul(U,K_G)))
-print('\n strain energy stored in the Structure',energy_stored,'\n')
-
-
+'''
+'''
 exact_disp=exact_displacements(10,length,width,height,Youngs_modulus,nx)
 #print(exact_disp)
 
 nodes=np.array([index for index,j in enumerate(CONTROL_POINTS) if CONTROL_POINTS[index,1]==0 or CONTROL_POINTS[index,2]==0])
 node_ind=np.sort(np.concatenate((dof*nodes+1,nodes*dof+2)))
 #print(U[node_ind])
-'''
+
+
+
+
 #x1,x2,x3=plot3d(CONTROL_POINTS)
 #y1,y2,y3=plot3d(New_control_points)
 
