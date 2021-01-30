@@ -70,7 +70,7 @@ def test__trilinear_der_Basis_sum_equal_to_one_true():
     output=sum(R)
     assert (float(output)==1.0) is True
 
-'''
+
 def test__trilinear_der_Basis_less_than_zero_false():
     
     Xi_degree=Eta_degree=Neta_degree=4
@@ -79,7 +79,7 @@ def test__trilinear_der_Basis_less_than_zero_false():
     DR_DX,DR_DY,DR_DZ,R =trilinear_der(0.6,0.5,0.3,WEIGHTS,Xi_degree,Xi_knotvector,Eta_degree,Eta_knotvector,Neta_degree,Eta_knotvector)
     output=all(R>=0)
     assert output is True
-'''
+
 def test__trilinear_der_XI_sum_equal_to_zero_true():
     '''
     Values obtained from NURBS book
