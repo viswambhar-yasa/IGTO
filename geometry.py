@@ -96,9 +96,93 @@ def bspline_basis(knot_index,degree,U,knotvector):
     return Basis
 
 
+def derbspline_basis(i,p,xi,XI,g=1): ##modify
+    """
+    Modified version based on the alogorithm A2.3 in NURBS Book page no.72
+    Parameters
+    ----------
+    knot_index : integer
+                The position of the value U in knotvector
+    degree : int
+        order of B-splines  0-constant, 1-linear, 2-quadratic, 3-cubic
+    U : int
+            The value whose basis are to be found
+    knotvector : array or list
+            list of knot values.
 
+    Returns
+    -------
+    Array 
+        Derivatives of Basis array of dimension degree+1
+        It contains non-zero cox de boor based basis function
+            Ex= if degree=2 and knotindex=4 
+            der_basis=[N' 2_0, N' 3_1, N' 4_2].
+      """
+    #Inititation of dimentions for 2D matrices
+    ndu=np.zeros((p+1,p+1))
+    ders=np.zeros((p+1,p+1))
+    a=np.zeros((2,p+1))
+    left =np.zeros(p+2)
+    right =np.zeros(p+2)
+    
+    ndu[0][0]=1.0
+    for j in range(1,p+1):
+        left[j] = xi - XI[i+1-j]
+        right[j] = XI[i+j] - xi
+        saved=0.0
+        for r in range(j):
+            #Lower triangle
+            ndu[j][r] = right[r+1]+left[j-r]
+            temp=ndu[r][j-1]/ndu[j][r]
+            #Upper triangle
+            ndu[r][j] = saved+(right[r+1]*temp)
+            saved=left[j-r]*temp
+        ndu[j][j] = saved
+    for j in range (p+1): #Load the basis functions
+        ders[0][j]=ndu[j][p]
+    #This secion computes the derivatives
+    for r in range(p+1):
+        s1=0
+        s2=1 #Alternative rows in array a
+        a[0][0] = 1.0
+        #Loop to compute kth derivative
+        for k in range(1,g+1):
+            d=0.0
+            rk=r-k
+            pk=p-k
+            if(r>=k):
+                a[s2][0]=a[s1][0]/ndu[pk+1][rk]
+                d=a[s2][0]*ndu[rk][pk]
+            if(rk>=-1):
+                j1=1
+            else:
+                j1=-rk
+            if(r-1<=pk):
+                j2=k-1
+            else:
+                j2=p-r
+            for j in range (j1,j2+1):
+                a[s2][j] =(a[s1][j]-a[s1][j-1])/ndu[pk+1][rk+j]
+                d += (a[s2][j]*ndu[rk+j][pk])
+            if(r<=pk):
+                a[s2][k]=-a[s1][k-1]/ndu[pk+1][r]
+                d+=(a[s2][k]*ndu[r][pk])
+            ders[k][r]=d
+            #Switch rows
+            j=s1
+            s1=s2
+            s2=j
+            #Multiply through by the correct factors
+    r=p
+    for k in range(1,g+1):
+        for j in range(p+1):
+            ders[k][j] =ders[k][j]* r
+        r =r* (p-k)
+    derivatives=ders[1,:]
+    return np.array(derivatives)
+'''
 def derbspline_basis(knot_index,degree,U,knotvector):
-    '''
+    
      Modified version based on the alogorithm A2.3 in NURBS Book page no.72
     Parameters
     ----------
@@ -119,7 +203,7 @@ def derbspline_basis(knot_index,degree,U,knotvector):
             Ex= if degree=2 and knotindex=4 
             der_basis=[N' 2_0, N' 3_1, N' 4_2].
 
-    '''
+    
     if degree>=0:
         derBasis=np.zeros(degree+1)
         if  knot_index<degree or knot_index>(int(len(knotvector)-degree)):
@@ -150,7 +234,7 @@ def derbspline_basis(knot_index,degree,U,knotvector):
                 derBasis[r]=derBasis[r]-(Basis[r,degree-1]/Basis[degree,r])
         derBasis *=degree
     return np.array(derBasis)
-
+'''
 
 def trilinear_der(Ux,Uy,Uz,weights,xdegree,xknotvector,ydegree,yknotvector,zdegree,zknotvector):
     '''
@@ -271,6 +355,37 @@ def elementorder(numx,numy,numz):
                 index+=1
     return el_order
 
+def elementorder1(numx,numy,numz):
+    '''
+    
+
+    Parameters
+    ----------
+    numx : TYPE
+        DESCRIPTION.
+    numy : TYPE
+        DESCRIPTION.
+    numz : TYPE
+        DESCRIPTION.
+
+    Returns
+    -------
+    el_order : TYPE
+        DESCRIPTION.
+
+    '''
+    index=0
+    el_order=np.zeros((numx,numz,numy))
+    for k in range(numz):
+        for j in range(numy):
+            for i in range(numx):
+                el_order[i,k,j]=index
+                index+=1
+    return el_order
+
+#print(elementorder1(2,2,2))
+
+
 def knot_connectivity(n,p,q,knotconnectivityU,knotconnectivityV,knotconnectivityW):
     '''
     
@@ -333,6 +448,6 @@ def controlpointassembly(n,p,q,nU,nV,nW,xdegree,ydegree,zdegree,knotconnectivity
                         for n in range(len(knotconnectivityU[k,:])):
                             elements_assembly[a,c]=elements_order[knotconnectivityU[k,n],knotconnectivityW[i,l], knotconnectivityV[j,m]]
                             c+=1
-                a+=1
+                a+=1         
     elements_assembly=elements_assembly.astype(int)
     return elements_assembly

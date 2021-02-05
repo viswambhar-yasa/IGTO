@@ -1,6 +1,5 @@
 import numpy as np
-from geometry import controlpointassembly,knot_connectivity,trilinear_der
-from Inputs import *
+from geometry import controlpointassembly,knot_connectivity,trilinear_der,bspline_basis,derbspline_basis,knot_index
 import pytest
 
 def gauss_quadrature(p,q,r):
@@ -27,7 +26,7 @@ def gauss_quadrature(p,q,r):
     else:
         p=p+1
     if q>=5:
-        q=4
+        q=q+1
     else:
         q=q+1
     if r>=5:
@@ -126,7 +125,7 @@ def jacobian(Xi,Eta,Nta,Uspan,Vspan,Wspan,X,Y,Z,weights,xdegree,xknot_vector,yde
     pts=np.array([X,Y,Z])
     [dR_dxi,dR_deta,dR_dnta,nurbs]=trilinear_der(Xi,Eta,Nta,weights,xdegree,xknot_vector,ydegree,yknot_vector,zdegree,zknot_vector)
     DR_DXi=np.array([dR_dxi,dR_deta,dR_dnta])
-    jacobian12=pts@ np.transpose(DR_DXi)
+    #jacobian12=pts@ np.transpose(DR_DXi)
     jacobian1=np.zeros((3,3))
 
     dRxi_dx=np.dot(dR_dxi,X)
@@ -155,10 +154,10 @@ def jacobian(Xi,Eta,Nta,Uspan,Vspan,Wspan,X,Y,Z,weights,xdegree,xknot_vector,yde
     
     dRNta_dz=np.dot(dR_dnta,Z)
     jacobian1[2,2]=dRNta_dz
-    jacobian1=jacobian12
+    #jacobian1=jacobian12
     det_jacobian1=np.linalg.det(jacobian1)
 
-
+    #print(jacobian1)
     return jacobian1,det_jacobian1,det_jacobian2,DR_DXi,nurbs
 
 
@@ -218,9 +217,9 @@ def strain_displacement(Xi,Eta,Neta,jacobian1,det_jacobian1,DR_DXi,nurbs,nn):
         B[5,x]=DR_DX[2,i]
         B[5,z]=DR_DX[0,i]
         R[0,x]=nurbs[i]
-        R[0,y]=nurbs[i]
+        R[1,y]=nurbs[i]
         R[2,z]=nurbs[i]
-    
+    #print(B)
     return B,R
 
 
@@ -248,8 +247,7 @@ def Compliance_matrix(E=100000,v=0.3):
     return C
 
 def element_routine(X,Y,Z,weights,E,v,Uspan,Vspan,Wspan,xdegree,xknot_vector,ydegree,yknot_vector,zdegree,zknot_vector):
-    
-    Gauss_points,gauss_weights=gauss_quadrature(2,2,2)
+    Gauss_points,gauss_weights=gauss_quadrature(xdegree,ydegree,zdegree)
     C=Compliance_matrix(E,v)
     Ke=np.zeros((3*((xdegree+1)*(ydegree+1)*(zdegree+1)),3*((xdegree+1)*(ydegree+1)*(zdegree+1))))
     nn=((xdegree+1)*(ydegree+1)*(zdegree+1))
@@ -263,10 +261,82 @@ def element_routine(X,Y,Z,weights,E,v,Uspan,Vspan,Wspan,xdegree,xknot_vector,yde
         B,R=strain_displacement(Xi,Eta,Neta,jacobian1,det_jacobian1,DR_DXi,nurbs,nn)
         temp=np.transpose(B)@C
         Ke+=temp@B*(det_jacobian1*det_jacobian2*Wt)
-    return Ke,nurbs,R
+    return Ke,nurbs,R,B
 
+def stress_strain_element_routine(X,Y,Z,weights,displacements,E,v,Uspan,Vspan,Wspan,xdegree,xknot_vector,ydegree,yknot_vector,zdegree,zknot_vector):
+    Gauss_points,gauss_weights=gauss_quadrature(xdegree,ydegree,zdegree)
+    C=Compliance_matrix(E,v)
+    nn=((xdegree+1)*(ydegree+1)*(zdegree+1))
+    gp_strain=np.zeros((nn,6))
+    gp_stress=np.zeros((nn,6))
+    gp_disp=np.zeros((nn,3))
+    
+    gp=0
+    pts=np.array([X,Y,Z])
 
-def assemble(K_G,K_E,elindices,ncp):
+    u_index=knot_index(xdegree,Uspan[0],xknot_vector)
+    v_index=knot_index(ydegree,Vspan[0],yknot_vector)
+    w_index=knot_index(zdegree,Wspan[0],zknot_vector)
+    for i in range(len(Wspan)):
+        for j in range(len(Vspan)):
+            for k in range(len(Uspan)):
+                Xi=Uspan[k]
+                Eta=Vspan[j]
+                Neta=Wspan[i]
+
+                Nx=bspline_basis(u_index,xdegree,Xi,xknot_vector)
+                Ny=bspline_basis(v_index,ydegree,Eta,yknot_vector)
+                Nz=bspline_basis(w_index,zdegree,Neta,zknot_vector)
+
+                DNx=derbspline_basis(u_index,xdegree,Xi,xknot_vector)
+                DNy=derbspline_basis(v_index,ydegree,Eta,yknot_vector)
+                DNz=derbspline_basis(w_index,zdegree,Neta,zknot_vector)
+
+                W=0
+                W_dx=0
+                W_dy=0
+                W_dz=0
+                p=0
+                windex=0
+
+                for k in range(zdegree+1):
+                    for j in range(ydegree+1):
+                        for i in range(xdegree+1):
+                            W+=Nx[i]*Ny[j]*Nz[k]*weights[windex]
+                            W_dx+=DNx[i]*Ny[j]*Nz[k]*weights[windex]
+                            W_dy+=Nx[i]*DNy[j]*Nz[k]*weights[windex]
+                            W_dz+=Nx[i]*Ny[j]*DNz[k]*weights[windex]
+                            windex+=1
+
+                dR_dx=np.zeros((xdegree+1)*(ydegree+1)*(zdegree+1))
+                dR_dy=np.zeros((xdegree+1)*(ydegree+1)*(zdegree+1))
+                dR_dz=np.zeros((xdegree+1)*(ydegree+1)*(zdegree+1))
+                R=np.zeros((xdegree+1)*(ydegree+1)*(zdegree+1))
+
+                w=0
+                windex=0
+                for k in range(zdegree+1):
+                    for j in range(ydegree+1):
+                        for i in range(xdegree+1):
+                            w=weights[windex]/(W*W)
+                            R[p]=(Nx[i]*Ny[j]*Nz[k]*W*w)
+                            dR_dx[p]=(DNx[i]*Ny[j]*Nz[k]*W-Nx[i]*Ny[j]*Nz[k]*W_dx)*w
+                            dR_dy[p]=(Nx[i]*DNy[j]*Nz[k]*W-Nx[i]*Ny[j]*Nz[k]*W_dy)*w
+                            dR_dz[p]=(Nx[i]*Ny[j]*DNz[k]*W-Nx[i]*Ny[j]*Nz[k]*W_dz)*w
+                            p=p+1
+                            windex+=1
+                DR_DXi=np.array([dR_dx,dR_dy,dR_dz])
+                jacobian=pts@ np.transpose(DR_DXi)
+                det_jacobian=np.linalg.det(jacobian)
+                B,R=strain_displacement(Xi,Eta,Neta,jacobian,det_jacobian,DR_DXi,R,nn)
+                gp_strain[gp,:]=np.matmul(B,displacements)
+                gp_stress[gp,:]=np.matmul(C,gp_strain[gp,:])
+                gp_disp[gp,:]=np.matmul(R,displacements.T)
+                gp+=1
+        #F_internal=gauss_weights*B.T@C@strain*det_jacobian1*det_jacobian2*Wt
+    return gp_strain,gp_stress,gp_disp
+
+def assemble(K_G,K_E,elindices,ncp,K_disp=False):
     '''
     
 
@@ -294,9 +364,11 @@ def assemble(K_G,K_E,elindices,ncp):
     for i,ii in enumerate(gindices):
         for j,jj in enumerate(gindices):
             K_G[ii,jj]=K_G[ii,jj]+K_E[i,j]
+    if K_disp:        
+        print('Building Global Stiffness matrix \n')
     return K_G
 
-def apply_BC(K_G,F_E,fixed_dof,load_dof,P):
+def apply_BC(F_E,fixed_dof,load_dof,P,option=0,abc_disp=False):
     '''
     
 
@@ -323,10 +395,16 @@ def apply_BC(K_G,F_E,fixed_dof,load_dof,P):
     '''
     #reduced_GK=np.delete(K_G,fixed_dof,axis=0) #axis=0 is row
     #reduced_GK=np.delete(reduced_GK,fixed_dof,axis=1) 
-    reduced_GK=np.delete(np.delete(K_G, fixed_dof, 0),fixed_dof , 1)
+    #reduced_GK=np.delete(np.delete(K_G, fixed_dof, 0),fixed_dof , 1)
     #axis=0 is row
-    F_E[load_dof]=P
+    if option==4:
+        F_E[load_dof[0]]=P
+        F_E[load_dof[1]]=-P*2
+    else:
+        F_E[load_dof]=P
     reduced_F_E=np.delete(F_E,fixed_dof,axis=0)
-    return reduced_GK,reduced_F_E
+    if abc_disp:
+        print('Applying Boundary Conditions \n')
+    return reduced_F_E
 
 #print(gauss_quadrature(1,1,1))

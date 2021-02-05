@@ -1,5 +1,5 @@
 
-from Inputs import Inputs
+from test_preprocessing import Inputs
 from numpy import array, array_equiv
 import pytest
 
