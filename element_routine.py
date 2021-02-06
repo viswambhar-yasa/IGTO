@@ -26,7 +26,7 @@ def gauss_quadrature(p,q,r):
     else:
         p=p+1
     if q>=5:
-        q=q+1
+        q=4
     else:
         q=q+1
     if r>=5:
@@ -264,13 +264,11 @@ def element_routine(X,Y,Z,weights,E,v,Uspan,Vspan,Wspan,xdegree,xknot_vector,yde
     return Ke,nurbs,R,B
 
 def stress_strain_element_routine(X,Y,Z,weights,displacements,E,v,Uspan,Vspan,Wspan,xdegree,xknot_vector,ydegree,yknot_vector,zdegree,zknot_vector):
-    Gauss_points,gauss_weights=gauss_quadrature(xdegree,ydegree,zdegree)
-    C=Compliance_matrix(E,v)
     nn=((xdegree+1)*(ydegree+1)*(zdegree+1))
+    C=Compliance_matrix(E,v)
     gp_strain=np.zeros((nn,6))
     gp_stress=np.zeros((nn,6))
     gp_disp=np.zeros((nn,3))
-    
     gp=0
     pts=np.array([X,Y,Z])
 
@@ -333,8 +331,26 @@ def stress_strain_element_routine(X,Y,Z,weights,displacements,E,v,Uspan,Vspan,Ws
                 gp_stress[gp,:]=np.matmul(C,gp_strain[gp,:])
                 gp_disp[gp,:]=np.matmul(R,displacements.T)
                 gp+=1
-        #F_internal=gauss_weights*B.T@C@strain*det_jacobian1*det_jacobian2*Wt
-    return gp_strain,gp_stress,gp_disp
+    M=stress_interploation_matrix()   
+    nodal_stress=np.matmul(M,gp_stress)
+    nodal_strain=np.matmul(M,gp_strain) 
+    return gp_strain,gp_stress,gp_disp,nodal_stress,nodal_strain
+
+def stress_interploation_matrix():
+    a=(5+3*(3**(0.5)))/4
+    b=(1+3**(0.5))/4
+    c=(3**(0.5)-1)/4
+    d=(5-3*(3**(0.5)))/4
+    M=np.array([[a,b,b,c,b,c,c,d],
+                [b,c,c,d,a,b,b,c],
+                [c,d,b,c,b,c,a,b],
+                [b,c,a,b,c,d,b,c],
+                [b,a,c,b,c,b,d,c],
+                [c,b,d,c,b,a,c,b],
+                [d,c,c,b,c,b,b,a],
+                [c,b,b,a,d,c,c,b]])
+    return M
+
 
 def assemble(K_G,K_E,elindices,ncp,K_disp=False):
     '''

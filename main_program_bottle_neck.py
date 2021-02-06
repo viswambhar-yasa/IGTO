@@ -8,7 +8,7 @@ import pyvista as pv
 from gridtoVTK import VTK
 import sys
 from time_analysis_variables import *
-
+from plotting import time_analysis_plotting
 
 def Folder(path): 
 
@@ -2415,9 +2415,9 @@ while change > 0.01:
     print('       Execution time of this iteration :',loop_ex_time,'sec          Total execution Time:',Total_time,'sec') 
     print('=' * width1)
     print('\n')
-    if iterative_display or change<0.01 or ((loop%10)==0):
+    #if iterative_display or change<0.01 or ((loop%10)==0):
         #element_density_slided(i,CP,nx,ny,nz,element_density,optimizer,ns,'z','xz')
-        element_density_slided1(loop,CP,nx,ny,nz,element_density,optimizer)
+        #element_density_slided1(loop,CP,nx,ny,nz,element_density,optimizer)
     if loop >= max_iterations:
         print('~' * width1)
         fmt = '{:^' + str(width1) + '}'
@@ -2452,56 +2452,56 @@ print('\n                               Final Compliance with optimization      
 VTK(CONTROL_POINTS,element_density,nU,nV,nW,"Cantilever_beam")
 
 plotting(ii,CC,element_density,optimizer,option)
-
+np.savetxt("element_density.txt", element_density) 
 main_program_stop=time.time()
 main_program_execution_time=(main_program_stop-main_program_start)
 print('                       Total execution time of the whole program:',main_program_execution_time,'sec')
 if optimizer=='MMA':
       time_analysis_array=np.array([[' Folder ', Folder_Count , Folder_ex_time  , Folder_ex_time / Folder_Count ],
-                              [' knot_index ', knot_index_Count , knot_index_ex_time  , knot_index_ex_time / knot_index_Count ],
-                              [' bspline_basis ', bspline_basis_Count , bspline_basis_ex_time  , bspline_basis_ex_time / bspline_basis_Count ],
-                              [' derbspline_basis ', derbspline_basis_Count , derbspline_basis_ex_time  , derbspline_basis_ex_time / derbspline_basis_Count ],
-                              [' trilinear_der ', trilinear_der_Count , trilinear_der_ex_time  , trilinear_der_ex_time / trilinear_der_Count ],
-                              [' gauss_quadrature ', gauss_quadrature_Count , gauss_quadrature_ex_time  , gauss_quadrature_ex_time / gauss_quadrature_Count ],
+                              [' knot index ', knot_index_Count , knot_index_ex_time  , knot_index_ex_time / knot_index_Count ],
+                              [' bspline basis ', bspline_basis_Count , bspline_basis_ex_time  , bspline_basis_ex_time / bspline_basis_Count ],
+                              [' derbspline basis ', derbspline_basis_Count , derbspline_basis_ex_time  , derbspline_basis_ex_time / derbspline_basis_Count ],
+                              [' trilinear der ', trilinear_der_Count , trilinear_der_ex_time  , trilinear_der_ex_time / trilinear_der_Count ],
+                              [' gauss quadrature ', gauss_quadrature_Count , gauss_quadrature_ex_time  , gauss_quadrature_ex_time / gauss_quadrature_Count ],
                               [' unittoparametric ', unittoparametric_Count , unittoparametric_ex_time  , unittoparametric_ex_time / unittoparametric_Count ],
                               [' jacobian ', jacobian_Count , jacobian_ex_time  , jacobian_ex_time / jacobian_Count ],
-                              [' strain_displacement ', strain_displacement_Count , strain_displacement_ex_time  , strain_displacement_ex_time / strain_displacement_Count ],
-                              [' Compliance_matrix ', Compliance_matrix_Count , Compliance_matrix_ex_time  , Compliance_matrix_ex_time / Compliance_matrix_Count ],
-                              [' element_routine ', element_routine_Count , element_routine_ex_time  , element_routine_ex_time / element_routine_Count ],
+                              [' strain displacement ', strain_displacement_Count , strain_displacement_ex_time  , strain_displacement_ex_time / strain_displacement_Count ],
+                              [' Compliance matrix ', Compliance_matrix_Count , Compliance_matrix_ex_time  , Compliance_matrix_ex_time / Compliance_matrix_Count ],
+                              [' element routine ', element_routine_Count , element_routine_ex_time  , element_routine_ex_time / element_routine_Count ],
                               [' assemble ', assemble_Count , assemble_ex_time  , assemble_ex_time / assemble_Count ],
-                              [' apply_BC ', apply_BC_Count , apply_BC_ex_time  , apply_BC_ex_time / apply_BC_Count ],
+                              [' apply BC ', apply_BC_Count , apply_BC_ex_time  , apply_BC_ex_time / apply_BC_Count ],
                               [' Knearestneighbours ', Knearestneighbours_Count , Knearestneighbours_ex_time  , Knearestneighbours_ex_time / Knearestneighbours_Count ],
-                              [' Moving_asymptoes ', Moving_asymptoes_Count , Moving_asymptoes_ex_time  , Moving_asymptoes_ex_time / Moving_asymptoes_Count ],
+                              [' Moving asymptoes ', Moving_asymptoes_Count , Moving_asymptoes_ex_time  , Moving_asymptoes_ex_time / Moving_asymptoes_Count ],
                               [' Asymptoes ', Asymptoes_Count , Asymptoes_ex_time  , Asymptoes_ex_time / Asymptoes_Count ],
-                              [' objective_constrains ', objective_constrains_Count , objective_constrains_ex_time  , objective_constrains_ex_time / objective_constrains_Count ],
-                              [' Minimizer_constrains ', Minimizer_constrains_Count , Minimizer_constrains_ex_time  , Minimizer_constrains_ex_time / Minimizer_constrains_Count ],
-                              [' prime_dual ', prime_dual_Count , prime_dual_ex_time  , prime_dual_ex_time / prime_dual_Count ],
-                              [' linear_system_assembly ', linear_system_assembly_Count , linear_system_assembly_ex_time  , linear_system_assembly_ex_time / linear_system_assembly_Count ],
-                              [' initial_condition ', initial_condition_Count , initial_condition_ex_time  , initial_condition_ex_time / initial_condition_Count ],
-                              [' optimal_condtition ', optimal_condtition_Count , optimal_condtition_ex_time  , optimal_condtition_ex_time / optimal_condtition_Count ],
-                              [' line_search ', line_search_Count , line_search_ex_time  , line_search_ex_time / line_search_Count ],
-                              [' Newton_method', Newton_method_Count , Newton_method_ex_time  , Newton_method_ex_time / Newton_method_Count ],
-                              [' element_density_slided1 ', element_density_slided1_Count , element_density_slided1_ex_time  , element_density_slided1_ex_time / element_density_slided1_Count ]])
+                              [' objective constrains ', objective_constrains_Count , objective_constrains_ex_time  , objective_constrains_ex_time / objective_constrains_Count ],
+                              [' Minimizer constrains ', Minimizer_constrains_Count , Minimizer_constrains_ex_time  , Minimizer_constrains_ex_time / Minimizer_constrains_Count ],
+                              [' prime dual ', prime_dual_Count , prime_dual_ex_time  , prime_dual_ex_time / prime_dual_Count ],
+                              [' linear system_assembly ', linear_system_assembly_Count , linear_system_assembly_ex_time  , linear_system_assembly_ex_time / linear_system_assembly_Count ],
+                              [' initial condition ', initial_condition_Count , initial_condition_ex_time  , initial_condition_ex_time / initial_condition_Count ],
+                              [' optimal condtition ', optimal_condtition_Count , optimal_condtition_ex_time  , optimal_condtition_ex_time / optimal_condtition_Count ],
+                              [' line search ', line_search_Count , line_search_ex_time  , line_search_ex_time / line_search_Count ],
+                              [' Newton method', Newton_method_Count , Newton_method_ex_time  , Newton_method_ex_time / Newton_method_Count ],
+                              [' element density slided1 ', element_density_slided1_Count , element_density_slided1_ex_time  , element_density_slided1_ex_time / element_density_slided1_Count ]])
 
 if optimizer=='OC':
       time_analysis_array=np.array([[' Folder ', Folder_Count , Folder_ex_time  , Folder_ex_time / Folder_Count ],
-                              [' knot_index ', knot_index_Count , knot_index_ex_time  , knot_index_ex_time / knot_index_Count ],
-                              [' bspline_basis ', bspline_basis_Count , bspline_basis_ex_time  , bspline_basis_ex_time / bspline_basis_Count ],
-                              [' derbspline_basis ', derbspline_basis_Count , derbspline_basis_ex_time  , derbspline_basis_ex_time / derbspline_basis_Count ],
-                              [' trilinear_der ', trilinear_der_Count , trilinear_der_ex_time  , trilinear_der_ex_time / trilinear_der_Count ],
-                              [' gauss_quadrature ', gauss_quadrature_Count , gauss_quadrature_ex_time  , gauss_quadrature_ex_time / gauss_quadrature_Count ],
+                              [' knot index ', knot_index_Count , knot_index_ex_time  , knot_index_ex_time / knot_index_Count ],
+                              [' bspline basis ', bspline_basis_Count , bspline_basis_ex_time  , bspline_basis_ex_time / bspline_basis_Count ],
+                              [' derbspline basis ', derbspline_basis_Count , derbspline_basis_ex_time  , derbspline_basis_ex_time / derbspline_basis_Count ],
+                              [' trilinear der ', trilinear_der_Count , trilinear_der_ex_time  , trilinear_der_ex_time / trilinear_der_Count ],
+                              [' gauss quadrature ', gauss_quadrature_Count , gauss_quadrature_ex_time  , gauss_quadrature_ex_time / gauss_quadrature_Count ],
                               [' unittoparametric ', unittoparametric_Count , unittoparametric_ex_time  , unittoparametric_ex_time / unittoparametric_Count ],
                               [' jacobian ', jacobian_Count , jacobian_ex_time  , jacobian_ex_time / jacobian_Count ],
-                              [' strain_displacement ', strain_displacement_Count , strain_displacement_ex_time  , strain_displacement_ex_time / strain_displacement_Count ],
-                              [' Compliance_matrix ', Compliance_matrix_Count , Compliance_matrix_ex_time  , Compliance_matrix_ex_time / Compliance_matrix_Count ],
-                              [' element_routine ', element_routine_Count , element_routine_ex_time  , element_routine_ex_time / element_routine_Count ],
+                              [' strain displacement ', strain_displacement_Count , strain_displacement_ex_time  , strain_displacement_ex_time / strain_displacement_Count ],
+                              [' Compliance matrix ', Compliance_matrix_Count , Compliance_matrix_ex_time  , Compliance_matrix_ex_time / Compliance_matrix_Count ],
+                              [' element routine ', element_routine_Count , element_routine_ex_time  , element_routine_ex_time / element_routine_Count ],
                               [' assemble ', assemble_Count , assemble_ex_time  , assemble_ex_time / assemble_Count ],
-                              [' apply_BC ', apply_BC_Count , apply_BC_ex_time  , apply_BC_ex_time / apply_BC_Count ],
+                              [' apply BC ', apply_BC_Count , apply_BC_ex_time  , apply_BC_ex_time / apply_BC_Count ],
                               [' Knearestneighbours ', Knearestneighbours_Count , Knearestneighbours_ex_time  , Knearestneighbours_ex_time / Knearestneighbours_Count ],
-                              [' optimality_criteria ', optimality_criteria_Count , optimality_criteria_ex_time  , optimality_criteria_ex_time / optimality_criteria_Count ],
-                              [' element_density_slided1 ', element_density_slided1_Count , element_density_slided1_ex_time  , element_density_slided1_ex_time / element_density_slided1_Count ]])
-
-time_analysis_array[time_analysis_array[:,-1].argsort()] 
+                              [' optimality criteria ', optimality_criteria_Count , optimality_criteria_ex_time  , optimality_criteria_ex_time / optimality_criteria_Count ],
+                              [' element density slided1 ', element_density_slided1_Count , element_density_slided1_ex_time  , element_density_slided1_ex_time / element_density_slided1_Count ]])
+time_analysis_array_2=time_analysis_array
+time_analysis_array=time_analysis_array[time_analysis_array[:,-1].argsort()] 
 stdoutOrigin=sys.stdout 
 log_file_name="log_"+optimizer+".txt"
 sys.stdout = open(log_file_name, "w")
@@ -2540,3 +2540,79 @@ for i in range((no_of_function-1),0,-1):
 sys.stdout.close()
 sys.stdout=stdoutOrigin
 print("                                         Log file is generated")
+
+sorted=time_analysis_array[time_analysis_array[:,1].argsort()]
+x=sorted[:12,0]
+y=sorted[:12,1]
+
+time_analysis_plotting(x,y,optimizer)
+fig, ax = plt.subplots() 
+data=sorted[:5,-1]
+label=sorted[:5,0]
+x=np.linspace(0,5,5)
+plt.xticks(x, label)
+plt.title("Time analysis Average execution time") 
+plt.scatter(x, data)
+path="./results/"+optimizer+"_time_analysis_execution_time.png"
+
+fig.savefig(path)
+
+'''
+function_names = sorted[:5,0]
+  
+count = sorted[:5,-1]
+print(count)
+time_ex_data = str(sorted[:5,2])
+nof=len(time_analysis_array[:5,0]) 
+# Creating explode data 
+explode = [0.3,0.0,0.1,0.0,0.1]
+print(explode)  
+
+
+# Creating color parameters 
+colors = ( "orange", "blue", "brown", 
+          "grey", "indigo", "beige") 
+  
+# Wedge properties 
+wp = { 'linewidth' : 1, 'edgecolor' : "green" } 
+  
+# Creating autocpt arguments 
+  
+# Creating plot 
+fig, ax = plt.subplots() 
+wedges, texts, autotexts = ax.pie(count,  
+                                  autopct = '0', 
+                                  explode = explode,  
+                                  labels =function_names, 
+                                  shadow = True, 
+                                  colors = colors, 
+                                  startangle = 90, 
+                                  wedgeprops = wp, 
+                                  textprops = dict(color ="black")) 
+  
+# Adding legend 
+
+  
+plt.setp(autotexts, size = 8, weight ="bold") 
+ax.set_title("Time analysis Top 5 function ") 
+path="./results/"+optimizer+"_time_analysis.png"
+
+
+fig.savefig(path)
+
+fig, ax = plt.subplots() 
+
+sorted=time_analysis_array[time_analysis_array[:,1].argsort()]
+#time_analysis_array=time_analysis_array[time_analysis_array[:,-1].argsort()]   
+print(time_analysis_array)  
+# Creating dataset 
+function_names = sorted[:,-1]
+y=np.linspace(0,25,25)  
+count = sorted[:5,-1]
+print(count)
+time_ex_data = str(sorted[:5,2])
+
+plt.scatter(function_names,y)
+path="./results/"+optimizer+"_time_analysis1.png"
+fig.savefig(path)
+'''
