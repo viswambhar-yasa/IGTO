@@ -48,5 +48,5 @@ if __name__ == "__main__":
     from processing import *
 
 from plotting import *
-plotting(ii,CC,element_density,optimizer,option)
+plotting(ii,CC,VV,Mnd,element_density,optimizer,option)
 
