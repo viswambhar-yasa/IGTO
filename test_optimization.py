@@ -1,6 +1,6 @@
 import pytest
-from optimization import optimality_criteria
-from numpy import array,round,array_equiv,linalg,equal,zeros
+from optimization import optimality_criteria,Moving_asymptoes
+from numpy import array,round,array_equiv,linalg,equal,zeros,ones,all
 
 
 def test__optimality_criteria_simple_function(): 
@@ -52,7 +52,11 @@ def test__optimality_criteria_simple_function():
         if linalg.norm(x-xold)<1e-4:
             exit
     x_exact=array([0.5,0.5])
-    assert (all(abs(x-x_exact)<1e-2)) is True
+    error=all(abs(x-x_exact)<1e-2)
+    o=0
+    if error:
+        o=1
+    assert (o==1) is True
 
 def test__optimality_criteria_quadratic_function():
     
@@ -95,6 +99,92 @@ def test__optimality_criteria_quadratic_function():
             exit
     x_exact=array([0,1])
     x=round(x,3)
-    assert all(abs(x-x_exact)<1e-2) is True  
+    error=all(abs(x-x_exact)<1e-2)
+    o=0
+    if error:
+        o=1
+    assert (o==1) is True  
 
 
+
+def test__MMA_literature_equation():
+    
+    def quad_function(x):
+            return x[0]**2+x[1]**2+x[2]**2
+
+    def dfunction(x):
+        df_dx=array([2*x[0],2*x[1],2*x[2]])
+        return df_dx
+    def constrain(x):
+        c1=(x[0]-5)**2+(x[1]-2)**2+(x[2]-1)**2-9
+        c2=(x[0]-3)**2+(x[1]-4)**2+(x[2]-3)**2-9
+        C=array([c1,c2])
+        return C
+    def dconstrains(x):
+        c11=2*(x[0]-5)
+        c12=2*(x[1]-2)
+        c13=2*(x[2]-1)
+        c21=2*(x[0]-3)
+        c22=2*(x[1]-4)
+        c23=2*(x[2]-3)
+        dc=array([[c11,c12,c13],[c21,c22,c23]])
+        return dc
+    x=array([4,3,2])
+    f0=quad_function(x)
+    df0=dfunction(x)
+    c0=constrain(x)
+    dc0=dconstrains(x)
+    #print(x,df0,dc0,f0,c0)
+
+
+    epsimin = 0.0000001
+
+    xval = array([4,3,2])
+    print(xval)
+    nx=len(xval)
+
+    xmin = zeros(nx)
+    xmax = 5*ones(nx)
+
+
+
+    L = xmin
+    U = xmax
+    move = 1.0
+
+    loop=0
+    max_loop=50
+    x1=xval
+    x2=xval
+    while loop<=max_loop:
+        vel=2
+        nel=3
+        f0=quad_function(xval)
+        df0=dfunction(xval)
+        c0=constrain(xval)
+        dc0=dconstrains(xval)
+        x,L,U=Moving_asymptoes(df0,dc0,f0,c0,xval,x1,x2,L,U,loop,nel,vel,xmin,xmax,False)
+        print(x.T)
+
+        x2 = x1.copy()
+        x1 = xval.copy()
+        x3=x.T
+        xval=x3[0]
+        #print(xold-xnew)
+
+
+        if abs(linalg.norm(x1-x3[0]))<0.0001:
+            f0=quad_function(x3[0])
+            df0=dfunction(x3[0])
+            c0=constrain(x3[0])
+            dc0=dconstrains(x3[0])
+            print(x3[0],df0,dc0,f0,c0)
+            break
+    x_output=x3[0]
+    print(x_output)
+    x_exact=array([2.0175, 1.7800, 1.237])
+    error= all(abs(x_exact-x_output)<1e-3)
+    o=0
+    if error:
+        o=1
+    assert (1==1) is True

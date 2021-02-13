@@ -152,54 +152,7 @@ New_control_points = CONTROL_POINTS[:,:-2]+ U.reshape(len(CONTROL_POINTS), 3)
 UX = U_new[:, 0]
 UY = U_new[:, 1]
 UZ = U_new[:, 2]
-#print(np.concatenate((CONTROL_POINTS[:,:-2], U.reshape(len(CONTROL_POINTS), 3)),axis=1))
-#print(U_new)
-#print(New_control_points)
 
-gauss_points,gauss_weights=gauss_quadrature(XI_DEGREE,ETA_DEGREE,NETA_DEGREE)
-gauss_points_strains=np.zeros((nel,len(gauss_points),6))
-gauss_point_stresses=np.zeros((nel,len(gauss_points),6))
-gauss_point_disp=np.zeros((nel,len(gauss_points),3))
-C=Compliance_matrix(Youngs_modulus,poission_ratio)
-for i in range(0, nel): 
-    el_in = element_indicies[i, :]
-    sp_in = span_index[i, :]
-    X = CONTROL_POINTS[el_in, 0]
-    Y = CONTROL_POINTS[el_in, 1]
-    Z = CONTROL_POINTS[el_in, 2]
-    weights = CONTROL_POINTS[el_in, 3]
-    Uspan = XI_SPAN[sp_in[0], :]
-    Vspan = ETA_SPAN[sp_in[1], :]
-    Wspan = NETA_SPAN[sp_in[2], :]
-    u_index=np.sort(np.concatenate((el_in*dof,dof*el_in+1,el_in*dof+2)))
-    U_el=U[u_index].T
-    gauss_points_strains[i,:,:],gauss_point_stresses[i,:,:],gauss_point_disp[i,:,:] = stress_strain_element_routine(X, Y, Z, weights,U_el, Youngs_modulus, poission_ratio, Uspan, Vspan, Wspan, XI_DEGREE,
-                                    XI_KNOTVECTOR, ETA_DEGREE, ETA_KNOTVECTOR, NETA_DEGREE, NETA_KNOTVECTOR)                              
-    #print(gauss_point_stresses[i,:,0])
-strain_xx=strain_yy=strain_zz=strain_xy=strain_yz=strain_xz=np.zeros(len(CONTROL_POINTS[:,0]))
-sigma_xx=sigma_yy=sigma_zz=sigma_xy=sigma_yz=sigma_xz=np.zeros(len(CONTROL_POINTS[:,0]))
-Disp_x=Disp_y=Disp_z=np.zeros(len(CONTROL_POINTS[:,0]))
-print(gauss_point_disp)
-for i in range(0,nel):
-    el_in = element_indicies[i, :]
-
-    sigma_xx[el_in]=gauss_point_stresses[i,:,0]
-    #sigma_yy[el_in]=gauss_point_stresses[i,:,1]
-    #sigma_zz[el_in]=gauss_point_stresses[i,:,2]
-    #sigma_xy[el_in]=gauss_point_stresses[i,:,3]
-    #sigma_yz[el_in]=gauss_point_stresses[i,:,4]
-    #sigma_xz[el_in]=gauss_point_stresses[i,:,5]
-    #strain_xx[el_in]=gauss_points_strains[i,:,0]
-    #strain_yy[el_in]=gauss_points_strains[i,:,1]
-    #strain_zz[el_in]=gauss_points_strains[i,:,2]
-    #strain_xy[el_in]=gauss_points_strains[i,:,3]
-    #strain_yz[el_in]=gauss_points_strains[i,:,4]
-    #strain_xz[el_in]=gauss_points_strains[i,:,5]
-    Disp_x[el_in]=gauss_point_disp[i,:,0]
-    Disp_y[el_in]=gauss_point_disp[i,:,1]
-    Disp_z[el_in]=gauss_point_disp[i,:,2]
-#print('gauss_point_disp' ,gauss_point_disp[0,:,0])
- 
 IGA_stop = time.time() 
 IGA_ex_time=(IGA_stop-IGA_start)
 print('Execution time for IGA analysis at 100% volume :',IGA_ex_time,'\n')
@@ -392,9 +345,9 @@ while change > 0.01:
     print('=' * width1)
     print('\n')
     CPS = CONTROL_POINTS[:, :-2]
-    if iterative_display or change<0.01 or ((loop%10)==0):
+    if change<0.01 or (loop in [1,10,20,40,60,80,100,120,140,160,180,200,220,240,250]):
         ns=nU*10
-        deformation_plot(loop,CP,U,nx,ny,nz,element_density,optimizer)
+        #deformation_plot(loop,CP,U,nx,ny,nz,element_density,optimizer)
         #element_density_slided(i,CP,nx,ny,nz,element_density,optimizer,ns,'z','xz')
         element_density_slided1(loop,CP,nx,ny,nz,element_density,optimizer)
     if loop >= max_iterations:

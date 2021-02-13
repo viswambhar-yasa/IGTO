@@ -10,13 +10,16 @@ def Folder(path):
             os.makedirs(path)
     except OSError:
         print('Error: Creating directory. ' + path)
-def plotting(ii,CC,element_density,optimizer,option):
+      
+def plotting(ii,CC,VV,Mnd,element_density,optimizer,option):
     fig, ax = plt.subplots()
     ax.plot(ii,CC)
+    ax.plot(ii[-1], CC[-1],'bo')
+    ax.text(ii[-1], CC[-1],str(round(CC[-1],2)),color='b')
     ax.set_xlabel('iteration')
     ax.set_ylabel('Compliance')
     ax.set_xlim(0,ii[-1]+2)
-#ax.set_ylim(0,CC)
+    ax.set_ylim(0,CC[3])
     ax.set_title('Compliance change in each iteration')
     Folder('./results/')
     path="./results/"+optimizer+"_ComplianceVSiteration.png"
@@ -24,6 +27,8 @@ def plotting(ii,CC,element_density,optimizer,option):
 
     fig, ax1 = plt.subplots()
     ax1.plot(ii,VV)
+    ax.plot(ii[-1], VV[-1],'bo')
+    ax1.text(ii[-1], VV[-1],str(round(VV[-1],2)),color='b')
     ax1.set_xlabel('iteration') 
     ax1.set_ylabel('Volume fraction')
     ax1.set_xlim(0,ii[-1]+2)
@@ -34,7 +39,9 @@ def plotting(ii,CC,element_density,optimizer,option):
     fig.savefig(path)
     
     fig, ax2 = plt.subplots()
-    ax2.hist(element_density,bins=10)
+    number,bins,pat=ax2.hist(element_density,bins=10)
+    
+    ax2.text(0.25,max(number)+0.5,'Measure of discreteness: '+str(round(Mnd,2)))
     ax2.set_xlabel('volume fraction ') 
     ax2.set_ylabel('Number of elements')
 #ax.set_ylim(volume_frac-0.1,volume_frac+0.1)

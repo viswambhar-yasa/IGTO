@@ -1,3 +1,5 @@
+import sys
+import time
 TGREEN = '\033[32;1m'
 TYELLOW =  '\033[33;1m' 
 ENDC = '\033[m'
@@ -55,6 +57,13 @@ elif len(Input_list)==16:
     else:
         mesh_disp=False
         iterative_display=True
+    stdoutOrigin=sys.stdout 
+    log_file_name="Inputs_"+str(time.time())+".txt"
+    sys.stdout = open(log_file_name, "w")
+    print('[l ,h, w, nx, ny, nz, load, volume_fra, penal, rmin, E, v, density, BC_op, Ft_op, verbose')
+    print(Input_list)
+    sys.stdout.close()
+    sys.stdout=stdoutOrigin
 else: 
     raise ValueError('No enough aruguments')
 #print(l h w nx ny nz load volume_fra penal rmin E v density BC_op Ft_op verbose)

@@ -115,5 +115,22 @@ class BC_Switcher(object):
         load_nodes.append(load_nodes1)
         load_indicies.append(np.sort((dof*load_nodes1+1)))
         return fixed_indicies,load_indicies,fixed_nodes,load_nodes
+    
+    def number_5(self):
+        #ny and nz should be odd
+        if self.bc_disp:
+            width1=120
+            print('\n')
+            print('='*width1)
+            fmt='{:^'+str(width1)+'}'
+            TBLACK =  '\033[30;1;47m' # Green Text
+            ENDC = '\033[m'
+            print(TBLACK+fmt.format(' Cantilever beam with load along the center of the free end')+ENDC)
+        dof=3
+        fixed_nodes=np.array([index for index,j in enumerate(self.CONTROL_POINTS) if self.CONTROL_POINTS[index,0]==0])
+        fixed_indicies=np.sort(np.concatenate((fixed_nodes*dof,dof*fixed_nodes+1,fixed_nodes*dof+2)))
 
+        load_nodes=np.array([index for index,j in enumerate(self.CONTROL_POINTS) if self.CONTROL_POINTS[index,0]==self.length and self.CONTROL_POINTS[index,1]==self.height/2 and self.CONTROL_POINTS[index,2]==self.width/2] )
+        load_indicies=np.sort((dof*load_nodes))
+        return fixed_indicies,load_indicies,fixed_nodes,load_nodes
 

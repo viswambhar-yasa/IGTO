@@ -1110,7 +1110,7 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
         print('-'*width)
         print(TBLUE+'             Lower: %f3          Upper:%f3           Alpha:%f3           Beta:%f3 ' %(np.mean(Lower),np.mean(Upper),np.mean(alpha),np.mean(beta))+ENDC) 
         print('-'*width)
-        print(TGREEN+'     Newton_iter: %d      Line_search_ite:%d      residual:%f4      vol_constrain:%f6     vol:%f4' %(exit_i,l_iit,res,c0,np.mean(x))+ENDC)  
+        print(TGREEN+'     Newton_iter: %d      Line_search_ite:%d      residual:%f4      vol_constrain:%f6     vol:%f4' %(exit_i,l_iit,res,0,np.mean(x))+ENDC)  
         print('*'*width)
         print('#'*width)
     return x,Lower,Upper

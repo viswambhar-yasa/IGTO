@@ -271,7 +271,7 @@ def stress_strain_element_routine(X,Y,Z,weights,displacements,E,v,Uspan,Vspan,Ws
     gp_disp=np.zeros((nn,3))
     gp=0
     pts=np.array([X,Y,Z])
-
+    #Uspan=Vspan=Wspan=np.array([0.,0.5,1.0])
     u_index=knot_index(xdegree,Uspan[0],xknot_vector)
     v_index=knot_index(ydegree,Vspan[0],yknot_vector)
     w_index=knot_index(zdegree,Wspan[0],zknot_vector)
@@ -332,9 +332,9 @@ def stress_strain_element_routine(X,Y,Z,weights,displacements,E,v,Uspan,Vspan,Ws
                 gp_disp[gp,:]=np.matmul(R,displacements.T)
                 gp+=1
     M=stress_interploation_matrix()   
-    nodal_stress=np.matmul(M,gp_stress)
-    nodal_strain=np.matmul(M,gp_strain) 
-    return gp_strain,gp_stress,gp_disp,nodal_stress,nodal_strain
+    #nodal_stress=gp_stress
+    #nodal_strain=gp_strain 
+    return gp_strain,gp_stress,gp_disp
 
 def stress_interploation_matrix():
     a=(5+3*(3**(0.5)))/4

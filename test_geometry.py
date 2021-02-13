@@ -1,4 +1,5 @@
-from geometry import knot_index,bspline_basis,derbspline_basis,trilinear_der
+from test_preprocessing import Inputs
+from geometry import knot_index,bspline_basis,derbspline_basis,trilinear_der,controlpointassembly
 from numpy import array,array_equiv,sum,equal,round,ones,float,zeros,all
 import pytest
 
@@ -116,3 +117,141 @@ def test__trilinear_der_NETA_sum_equal_to_zero_true():
     DR_DXI,DR_DETA,DR_DNETA,R =trilinear_der(0.5,0.8,0.2,WEIGHTS,Xi_degree,Xi_knotvector,Eta_degree,Eta_knotvector,Neta_degree,Eta_knotvector)
     output=float(round(sum(DR_DNETA),10))
     assert(output==0) is True
+
+
+def test__single_element_Assembly():
+    length=1
+    height=1
+    width=1
+    nx=2
+    ny=2
+    nz=2
+
+
+    XI_DEGREE = 1
+    ETA_DEGREE = 1
+    NETA_DEGREE = 1
+
+    N = nx
+    P = ny
+    Q = nz
+
+    C = Inputs(length, height, width, N, P, Q, XI_DEGREE, ETA_DEGREE, NETA_DEGREE)
+
+    CONTROL_POINTS = C.crtpts_coordinates()
+
+    XI_SPAN, XI_KNOTCONNECTIVITY, XI_UNIKNOTS, nU = C.xi_knotspan()
+    ETA_SPAN, ETA_KNOTCONNECTIVITY, ETA_UNIKNOTS, nV = C.eta_knotspan()
+    NETA_SPAN, NETA_KNOTCONNECTIVITY, NETA_UNIKNOTS, nW = C.neta_knotspan()
+
+
+    element_indicies = controlpointassembly(N, P, Q, nU, nV, nW, XI_DEGREE, ETA_DEGREE, NETA_DEGREE, XI_KNOTCONNECTIVITY,
+                                            ETA_KNOTCONNECTIVITY, NETA_KNOTCONNECTIVITY)
+    
+    expected_output=array([[0, 1, 2, 3, 4, 5, 6, 7]])
+    number_of_elements=len(element_indicies[:,0])
+    assert (number_of_elements==1 and array_equiv(expected_output,element_indicies)) is True
+
+
+def test__element_Assembly_C0_continuity():
+    '''
+    back face
+    3--4--5
+    |  |  |
+    0--1--2
+
+    front face
+    9--10--11
+    |   |   |
+    6---7---8
+
+    element_1= 0,1,3,4,6,7,9,10
+    element_2=1,2,4,5,7,8,10,11
+    '''
+    length=1
+    height=1
+    width=1
+    nx=3
+    ny=2
+    nz=2
+
+
+    XI_DEGREE = 1
+    ETA_DEGREE = 1
+    NETA_DEGREE = 1
+
+    N = nx
+    P = ny
+    Q = nz
+
+    C = Inputs(length, height, width, N, P, Q, XI_DEGREE, ETA_DEGREE, NETA_DEGREE)
+
+    CONTROL_POINTS = C.crtpts_coordinates()
+
+
+    XI_SPAN, XI_KNOTCONNECTIVITY, XI_UNIKNOTS, nU = C.xi_knotspan()
+    ETA_SPAN, ETA_KNOTCONNECTIVITY, ETA_UNIKNOTS, nV = C.eta_knotspan()
+    NETA_SPAN, NETA_KNOTCONNECTIVITY, NETA_UNIKNOTS, nW = C.neta_knotspan()
+
+
+    element_indicies = controlpointassembly(N, P, Q, nU, nV, nW, XI_DEGREE, ETA_DEGREE, NETA_DEGREE, XI_KNOTCONNECTIVITY,
+                                            ETA_KNOTCONNECTIVITY, NETA_KNOTCONNECTIVITY)
+    
+    expected_output=array([[ 0,  1,  3,  4,  6,  7,  9, 10],
+                            [ 1,  2,  4,  5,  7,  8, 10, 11]])
+    number_of_elements=len(element_indicies[:,0])
+    no_nodes=len(element_indicies[0,:])
+    expected_nodes=(XI_DEGREE+1)*(ETA_DEGREE+1)*(NETA_DEGREE+1)
+    assert (number_of_elements==2 and no_nodes==expected_nodes and array_equiv(expected_output,element_indicies)) is True
+
+
+def test__single_element_Assembly_C1_continuity():
+    '''
+    BACK FACE
+    3--4--5
+    |     |
+    0--1--2
+
+    Front face
+    9--10--11
+    |       |
+    6---7---8
+
+    one element having 12 nodes
+    along x direction the element has C1 continuity
+    along y and z have C0 continuity
+    '''
+    length=1
+    height=1
+    width=1
+    nx=3
+    ny=2
+    nz=2
+
+
+    XI_DEGREE = 2
+    ETA_DEGREE = 1
+    NETA_DEGREE = 1
+
+    N = nx
+    P = ny
+    Q = nz
+
+    C = Inputs(length, height, width, N, P, Q, XI_DEGREE, ETA_DEGREE, NETA_DEGREE)
+
+    CONTROL_POINTS = C.crtpts_coordinates()
+
+
+    XI_SPAN, XI_KNOTCONNECTIVITY, XI_UNIKNOTS, nU = C.xi_knotspan()
+    ETA_SPAN, ETA_KNOTCONNECTIVITY, ETA_UNIKNOTS, nV = C.eta_knotspan()
+    NETA_SPAN, NETA_KNOTCONNECTIVITY, NETA_UNIKNOTS, nW = C.neta_knotspan()
+
+
+    element_indicies = controlpointassembly(N, P, Q, nU, nV, nW, XI_DEGREE, ETA_DEGREE, NETA_DEGREE, XI_KNOTCONNECTIVITY,
+                                            ETA_KNOTCONNECTIVITY, NETA_KNOTCONNECTIVITY)
+    
+    expected_output=array([[ 0,  1,  2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 ,10 ,11]])
+    number_of_elements=len(element_indicies[:,0])
+    no_nodes=len(element_indicies[0,:])
+    expected_nodes=(XI_DEGREE+1)*(ETA_DEGREE+1)*(NETA_DEGREE+1)
+    assert (number_of_elements==1 and no_nodes==expected_nodes and array_equiv(expected_output,element_indicies)) is True
