@@ -1,0 +1,22 @@
+\section{Introduction}
+	In plasticity model, plastic deformation depends on the internal state variables which are measurable variables like strain rate, temperature, stress and material variables. The relation between all the internal state variables is expressed using flow rule.
+	
+In general, flow rule is the resistance to the plasticity and expressed as the ratio of the plastic driving force to the flow resistance. During plastic deformation, the driving forces direct the internal slip mechanisms which causes shearing. A general power law flow rule representation equ.(\ref{power_law_equ})$^{\cite{chowdhury2017}}$ \par
+
+\begin{equation}\label{power_law_equ}
+\dot{\gamma}^{(\alpha)}=\dot{\gamma}_{0}\left|\frac{\tau^{\alpha}}{g^{\alpha}}\right|^{n} \operatorname{sgn}\left(\tau^{\alpha}\right)
+\end{equation}
+
+In equ.(\ref{power_law_equ}) $\dot{\gamma}^{(\alpha)}$ is slip rate of the slip system $\alpha$, $\tau^{\alpha}$ is the shear stress, $g^{\alpha}$ is the internal state variable which depends on temperature.
+
+Plasticity is mediated through dislocation. The basic types of dislocations are edge, screw and mixed dislocation. During plastic deformation, dislocation motion will occur in multiple slip system simultaneously. This lead to the interaction of dislocation with dislocations of other slip systems. This collective dislocation dynamics plays an important role in understanding the material response like fatigue, creep, yield.$^{\cite{Messerschmidt2010}}$ 
+
+The entanglement of different dislocation generate a complex stress field. These complex stress field creates a low energy barriers which act as obstacles for dislocation movement having long range interactions. This complex system of interaction leads to the formation of dislocation avalanches. Dislocation avalanches are the basic mechanism of plastic flow in solids at the nano-scale. Dislocation avalanches are also associated with strain bursts which is a sudden increase in strain rate.
+They follow power law distribution.
+$^{\cite{Papanikolaou_2017}}$
+
+A comprehensive overview on dislocation avalanche physics and the phenomena leading to strain bursts in crystal plasticity is discussed further.
+
+
+
+

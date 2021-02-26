@@ -1,0 +1,31 @@
+\begin{thebibliography}{1}
+
+\bibitem{lockyer2007controlling}
+P.~S. Lockyer.
+\newblock {\em Controlling the interpolation of NURBS curves and surfaces}.
+\newblock PhD thesis, University of Birmingham, 2007.
+
+\bibitem{NGUYEN201589}
+V.~P. Nguyen, C.~Anitescu, S.~P. Bordas, and T.~Rabczuk.
+\newblock Isogeometric analysis: An overview and computer implementation
+  aspects.
+\newblock {\em Mathematics and Computers in Simulation}, 117:89--116, 2015.
+
+\bibitem{Okruta2014ThreedimensionalTO}
+M.~Okruta.
+\newblock Three-dimensional topology optimization of statically loaded porous
+  and multi-phase structures.
+\newblock 2014.
+
+\bibitem{owens2009implementation}
+B.~C. OWENS.
+\newblock {\em IMPLEMENTATION OF B-SPLINES IN A CONVENTIONAL FINITE ELEMENT
+  FRAMEWORK}.
+\newblock PhD thesis, Texas A\&M University, 2009.
+
+\bibitem{10.5555/265261}
+L.~Piegl and W.~Tiller.
+\newblock {\em The NURBS Book (2nd Ed.)}.
+\newblock Springer-Verlag, Berlin, Heidelberg, 1997.
+
+\end{thebibliography}

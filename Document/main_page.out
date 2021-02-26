@@ -1,0 +1,35 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Advantages of IGA over standard FEM}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Topology optimization using IGA}{section.1}% 3
+\BOOKMARK [1][-]{section.2}{Basis Splines}{}% 4
+\BOOKMARK [2][-]{subsection.2.1}{Control points}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.2}{Degree of the B-spline}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.3}{Generation of Knot vector}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.4}{B-spline Basis function}{section.2}% 8
+\BOOKMARK [3][-]{subsubsection.2.4.1}{Properties of B-spline basis function}{subsection.2.4}% 9
+\BOOKMARK [3][-]{subsubsection.2.4.2}{Derivatives of B-spline functions}{subsection.2.4}% 10
+\BOOKMARK [1][-]{section.3}{NURBS \(Non-Uniform Rational B-splines\) }{}% 11
+\BOOKMARK [2][-]{subsection.3.1}{NURBS basis function}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.2}{NURBS derivative function}{section.3}% 13
+\BOOKMARK [2][-]{subsection.3.3}{NURBS volume}{section.3}% 14
+\BOOKMARK [3][-]{subsubsection.3.3.1}{Derivative of Trivariant basis function}{subsection.3.3}% 15
+\BOOKMARK [1][-]{section.4}{Background Theory}{}% 16
+\BOOKMARK [2][-]{subsection.4.1}{Constitutive equation and their weak form}{section.4}% 17
+\BOOKMARK [2][-]{subsection.4.2}{IGA Formulation}{section.4}% 18
+\BOOKMARK [2][-]{subsection.4.3}{Topology optimization using IGA}{section.4}% 19
+\BOOKMARK [3][-]{subsubsection.4.3.1}{Solid Isotropic Material with Penalization \(SIMP\) Method}{subsection.4.3}% 20
+\BOOKMARK [3][-]{subsubsection.4.3.2}{Minimum Compliance formulation}{subsection.4.3}% 21
+\BOOKMARK [3][-]{subsubsection.4.3.3}{Sensitivity}{subsection.4.3}% 22
+\BOOKMARK [3][-]{subsubsection.4.3.4}{Optimality criteria method}{subsection.4.3}% 23
+\BOOKMARK [3][-]{subsubsection.4.3.5}{Method of moving Asymptotes }{subsection.4.3}% 24
+\BOOKMARK [1][-]{section.5}{IGTO implementation}{}% 25
+\BOOKMARK [2][-]{subsection.5.1}{Relevant spaces}{section.5}% 26
+\BOOKMARK [2][-]{subsection.5.2}{Pre-processing}{section.5}% 27
+\BOOKMARK [3][-]{subsubsection.5.2.1}{Generation of NURBS parameters}{subsection.5.2}% 28
+\BOOKMARK [3][-]{subsubsection.5.2.2}{Assembly of Geometry}{subsection.5.2}% 29
+\BOOKMARK [3][-]{subsubsection.5.2.3}{Boundary conditions}{subsection.5.2}% 30
+\BOOKMARK [2][-]{subsection.5.3}{Processing}{section.5}% 31
+\BOOKMARK [3][-]{subsubsection.5.3.1}{Mapping relevant spaces}{subsection.5.3}% 32
+\BOOKMARK [3][-]{subsubsection.5.3.2}{Building global stiffness matrix}{subsection.5.3}% 33
+\BOOKMARK [3][-]{subsubsection.5.3.3}{Topology optimization}{subsection.5.3}% 34
+\BOOKMARK [2][-]{subsection.5.4}{Post-processing}{section.5}% 35

@@ -1,0 +1,306 @@
+@STRING{acmat = {Acta Materialia}}
+
+@STRING{acme = {Acta Mechanica}}
+
+@STRING{acmet = {Acta Metallurgica}}
+
+@STRING{acmetetmat = {Acta Metallurgica et Materialia}}
+
+@STRING{acnu = {Acta Numerica}}
+
+@STRING{actacrys = {Acta Crystallographica}}
+
+@STRING{aem = {Advanced Engineering Materials}}
+
+@STRING{afrmaa = {Archive for Rational Mechanics and Analysis}}
+
+@STRING{aiaajs = {AIAA Journal of Spacecraft}}
+
+@STRING{aiam = {Advances in Applied Mechanics}}
+
+@STRING{aip = {Advances in Physics}}
+
+@STRING{ajos = {AIAA Journal of Spacecraft}}
+
+@STRING{aoam = {Archive of Applied Mechanics}}
+
+@STRING{aom = {Archives of Mechanics}}
+
+@STRING{aoor = {Annals of Operations Research}}
+
+@STRING{aormaa = {Archive of Rational Mechanics and Analysis}}
+
+@STRING{athen = {Athena Scientific, Belmont}}
+
+@STRING{awpcim = {Addison--Wesley Publishing Company Inc., Massachusetts}}
+
+@STRING{azojomo = {AZo Journal of Materials Online}}
+
+@STRING{bauing = {Bauingenieur}}
+
+@STRING{bhvb = {Birkh\"auser Verlag, Boston}}
+
+@STRING{bhvbs = {Birkh\"auser Verlag, Basel, Stuttgart}}
+
+@STRING{bimuk = {Berichte des Instituts f\"ur Mechanik, Universit\"at Kassel}}
+
+@STRING{botams = {Bulletin of the American Mathematical Society}}
+
+@STRING{cas = {Computers \& Structures}}
+
+@STRING{cianm = {Communications in Applied Numerical Methods}}
+
+@STRING{cinme = {Communications in Numerical Methods in Engineering}}
+
+@STRING{cj = {Computer Journal}}
+
+@STRING{cjop = {Canadian Journal of Physics}}
+
+@STRING{cm = {Computational Mechanics}}
+
+@STRING{cmame = {Computer Methods in Applied Mechanics and Engineering}}
+
+@STRING{cmat = {Continuum Mechanics and Thermodynamics}}
+
+@STRING{cmes = {Computer Modeling in Engineering and Sciences}}
+
+@STRING{cms = {Computational Materials Science}}
+
+@STRING{cpc = {Computer Physics Communications}}
+
+@STRING{cpo = {Clarendon Press, Oxford}}
+
+@STRING{crcpbr = {CRC Press, Boca Raton}}
+
+@STRING{criac = {Critical Reviews in Analytical Chemistry}}
+
+@STRING{cupc = {Cambridge University Press, Cambridge}}
+
+@STRING{drm = {Diamonds and Related Materials}}
+
+@STRING{dup = {Dunot, Paris}}
+
+@STRING{ec = {Engineering Computations}}
+
+@STRING{ehc = {Ellis Horwood, Chichester}}
+
+@STRING{ejomas = {European Journal of Mechanics A / Solids}}
+
+@STRING{fsbmuh = {Forschungs-- und Seminarberichte aus dem Bereich der Mechanik, Universitï¿½
+	Hannover}}
+
+@STRING{hdvfm = {Harri--Deutsch--Verlag, Frankfurt/Main}}
+
+@STRING{ia = {Ingenieur Archiv}}
+
+@STRING{ijfnaamig = {International Journal for Numerical and Analytical Methods in Geomechanics}}
+
+@STRING{ijfp = {International Journal of Forming Processes}}
+
+@STRING{ijnme = {International Journal for Numerical Methods in Engineering}}
+
+@STRING{ijp = {International Journal of Plasticity}}
+
+@STRING{ijss = {International Journal of Solids and Structures}}
+
+@STRING{isonm = {International Series of Numerical Mathematics}}
+
+@STRING{jamss = {Journal of the Australian Mathematical Society}}
+
+@STRING{jdm = {Journal de M{\'e}canique}}
+
+@STRING{jimaa = {Journal of the Institute for Mathematics and Applications}}
+
+@STRING{jmps = {Journal of the Mechanics and Physics of Solids}}
+
+@STRING{jmpt = {Journal of Materials Processing Technology}}
+
+@STRING{jnm = {Journal of Nuclear Materials}}
+
+@STRING{joam = {Journal of Applied Mechanics}}
+
+@STRING{joap = {Journal of Applied Physics}}
+
+@STRING{joaps = {Journal of Applied Polymer Science}}
+
+@STRING{joem = {Journal of Engineering Materials and Technology}}
+
+@STRING{jops = {Journal of Polymer Science}}
+
+@STRING{jotams = {Journal of the Australian Mathematical Society}}
+
+@STRING{jotiom = {Journal of the Institute of Metals}}
+
+@STRING{jrnbs = {Journal Research National Bureau of Standards}}
+
+@STRING{jsg = {Journal of Structural Geology}}
+
+@STRING{jwsin = {John Wiley \& Sons Inc., New York}}
+
+@STRING{mechmat = {Mechanics of Materials}}
+
+@STRING{met = {Metallurgical Transactions}}
+
+@STRING{mghl = {McGraw--Hill, London}}
+
+@STRING{ml = {Materials Letters}}
+
+@STRING{mmt = {Materials and Metallurgical Transactions}}
+
+@STRING{mnpdn = {Martinus Nijhoff Publishers, Dordrecht, Netherlands}}
+
+@STRING{moc = {Mathematics of Computation}}
+
+@STRING{mp = {Mathematical Programming}}
+
+@STRING{mrc = {Mechanics Research Communications}}
+
+@STRING{mse = {Materials Science \& Engineering}}
+
+@STRING{msea = {Materials Science \& Engineering {A}}}
+
+@STRING{msf = {Materials Science Forum}}
+
+@STRING{msmse = {Modelling and Simulation in Materials Science and Engineering}}
+
+@STRING{mt = {Materials Transactions}}
+
+@STRING{nead = {Nuclear Engineering and Design}}
+
+@STRING{phinj = {Prentice--Hall Inc., New Jersey}}
+
+@STRING{phy = {Physica}}
+
+@STRING{piamam = {Proceedings in Applied Mathematics and Mechanics}}
+
+@STRING{pims = {Progress in Materials Science}}
+
+@STRING{pm = {The Philosophical Magazine}}
+
+@STRING{pma = {Philosophical Magazine A}}
+
+@STRING{potps = {Proceedings of the Physical Society}}
+
+@STRING{prsla = {Proceedings of the Royal Society London A}}
+
+@STRING{ptotrsla = {Philosophical Transactions of the Royal Society London A}}
+
+@STRING{qoam = {Quarterly of Applied Mathematics}}
+
+@STRING{ra = {Rheological Acta}}
+
+@STRING{rcat = {Rubber Chemistry and Technology}}
+
+@STRING{rdpa = {Revue de Physique Appliqu{\'e}e}}
+
+@STRING{siamco = {SIAM Journal for Control and Optimization}}
+
+@STRING{sm = {Scripta Materialia}}
+
+@STRING{smas = {Smart Materials and Structures}}
+
+@STRING{spv = {Springer--Verlag}}
+
+@STRING{spvb = {Springer--Verlag, Berlin}}
+
+@STRING{spvbh = {Springer--Verlag Berlin Heidelberg}}
+
+@STRING{spvwn = {Springer--Verlag, Wien, New York}}
+
+@STRING{sr = {SIAM Reviews}}
+
+@STRING{SRI = {Steel Research International}}
+
+@STRING{ssp = {Solid State Phenomena}}
+
+@STRING{strop = {Structural Optimization}}
+
+@STRING{tjocp = {The Journal of Chemical Physics}}
+
+@STRING{tota = {Transactions of the ASME}}
+
+@STRING{totfs = {Transactions of the Faraday Society}}
+
+@STRING{totmsoa = {Transactions of the Metallurgical Society of AIME}}
+
+@STRING{tpr = {The Physical Review}}
+
+@STRING{tvl = {Teubner--Verlag, Leipzig}}
+
+@STRING{tvs = {Teubner--Verlag, Stuttgart}}
+
+@STRING{vie = {Vieweg \& Sohn, Braunschweig}}
+
+@STRING{zamp = {Journal of Applied Mathematics and Physics (ZAMP)}}
+
+@STRING{zfamum = {Zeitschrift f{\"u}r angewandte Mathematik und Mechanik}}
+
+@STRING{zfm = {Zeitschrift f{\"u}r Metallkunde}}
+
+@STRING{zfp = {Zeitschrift f{\"u}r Physik}}
+
+
+@article{NGUYEN201589,
+title = {Isogeometric analysis: An overview and computer implementation aspects},
+journal = {Mathematics and Computers in Simulation},
+volume = {117},
+pages = {89-116},
+year = {2015},
+issn = {0378-4754},
+doi = {https://doi.org/10.1016/j.matcom.2015.05.008},
+url = {https://www.sciencedirect.com/science/article/pii/S0378475415001214},
+author = {Vinh Phu Nguyen and Cosmin Anitescu and Stéphane P.A. Bordas and Timon Rabczuk},
+keywords = {Isogeometric analysis, NURBS, Finite elements, CAD, Isogeometric collocation},
+abstract = {Isogeometric analysis (IGA) represents a recently developed technology in computational mechanics that offers the possibility of integrating methods for analysis and Computer Aided Design (CAD) into a single, unified process. The implications to practical engineering design scenarios are profound, since the time taken from design to analysis is greatly reduced, leading to dramatic gains in efficiency. In this manuscript, through a self-contained Matlab® implementation, we present an introduction to IGA applied to simple analysis problems and the related computer implementation aspects. Furthermore, implementation of the extended IGA which incorporates enrichment functions through the partition of unity method (PUM) is also presented, where several examples for both two-dimensional and three-dimensional fracture are illustrated. We also describe the use of IGA in the context of strong-form (collocation) formulations, which has been an area of research interest due to the potential for significant efficiency gains offered by these methods. The code which accompanies the present paper can be applied to one, two and three-dimensional problems for linear elasticity, linear elastic fracture mechanics, structural mechanics (beams/plates/shells including large displacements and rotations) and Poisson problems with or without enrichment. The Bézier extraction concept that allows the FE analysis to be performed efficiently on T-spline geometries is also incorporated. The article includes a summary of recent trends and developments within the field of IGA.}
+}
+
+
+@article{article,
+author = {Tavakkoli, Mehdi and Hassani, Behrooz and Ghasemnejad, Hossein},
+year = {2013},
+month = {01},
+pages = {},
+title = {Isogeometric topology optimization of structures by using MMA},
+volume = {3},
+journal = {INTERNATIONAL JOURNAL OF OPTIMIZATION IN CIVIL ENGINEERING}
+}
+
+@article{article,
+author = {Liu, Kai and Tovar, Andres},
+year = {2014},
+month = {12},
+pages = {},
+title = {An efficient 3D topology optimization code written in Matlab},
+volume = {50},
+journal = {Structural and Multidisciplinary Optimization},
+doi = {10.1007/s00158-014-1107-x}
+}
+
+@inproceedings{Okruta2014ThreedimensionalTO,
+  title={Three-dimensional topology optimization of statically loaded porous and multi-phase structures},
+  author={Matthew Okruta},
+  year={2014}
+}
+
+@phdthesis{lockyer2007controlling,
+  title={Controlling the interpolation of NURBS curves and surfaces},
+  author={Lockyer, Peter Stephen},
+  year={2007},
+  school={University of Birmingham}
+}
+
+@book{10.5555/265261,
+author = {Piegl, Les and Tiller, Wayne},
+title = {The NURBS Book (2nd Ed.)},
+year = {1997},
+isbn = {3540615458},
+publisher = {Springer-Verlag},
+address = {Berlin, Heidelberg}
+}
+
+@phdthesis{owens2009implementation,
+  title={IMPLEMENTATION OF B-SPLINES IN A CONVENTIONAL FINITE ELEMENT FRAMEWORK},
+  author={OWENS, BRIAN CHRISTOPHER},
+  year={2009},
+  school={Texas A\&M University}
+}
