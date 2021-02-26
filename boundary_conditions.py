@@ -1,5 +1,5 @@
 import numpy as np
-from test_preprocessing import Inputs
+from Preprocessing import Inputs
 class BC_Switcher(object):
 
     def __init__(self,CONTROL_POINTS,length,height,width,bc_disp):
@@ -51,7 +51,7 @@ class BC_Switcher(object):
         fixed_indicies2= np.sort(np.concatenate((dof*fixed_nodes2+1,fixed_nodes2*dof+2)))
         fixed_nodes=np.sort(np.concatenate((fixed_nodes1,fixed_nodes2)))
         fixed_indicies=np.sort(np.concatenate((fixed_indicies1,fixed_indicies2)))
-        load_nodes=np.array([index for index,j in enumerate(self.CONTROL_POINTS) if (self.CONTROL_POINTS[index,0]==self.length/2 and  self.CONTROL_POINTS[index,1]==self.height and self.CONTROL_POINTS[index,2]==self.width/2 )] )
+        load_nodes=np.array([index for index,j in enumerate(self.CONTROL_POINTS) if (self.CONTROL_POINTS[index,0]==self.length/2 and  self.CONTROL_POINTS[index,1]==0 and self.CONTROL_POINTS[index,2]==self.width/2 )] )
         load_indicies=np.sort((dof*load_nodes+1))
 
 

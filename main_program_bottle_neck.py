@@ -1,4 +1,4 @@
-from Preprocessing import *
+from inputs import *
 import matplotlib.pyplot as plt
 import time
 import os

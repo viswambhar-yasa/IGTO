@@ -1,5 +1,5 @@
 
-from test_preprocessing import *
+from Preprocessing import *
 from geometry import knot_connectivity, controlpointassembly
 from element_routine import assemble, element_routine, apply_BC,Compliance_matrix ,stress_strain_element_routine,gauss_quadrature
 from boundary_conditions import BC_Switcher
@@ -172,14 +172,12 @@ def test__rigid_body_translation_along_x():
 
 
 def test__rigid_body_rotation():
-    tol=1e-2
     length=1
     height=1
     width=1
     nx=3
     ny=3
     nz=3
-    load=-20
     Youngs_modulus=100000
     poission_ratio=0.3
     XI_DEGREE = 1
@@ -251,7 +249,7 @@ def test__rigid_body_rotation():
     
     U_disp=np.linalg.solve(reduced_k,reduced_F)
     #print(U_disp)
-    U_inner_node_exact=np.matmul(ctrl_pts[13,:],rotation_matrix)
+    U_inner_node_exact=New_control_points[13]
     output=np.all(abs(U_disp-U_inner_node_exact)<1e-5)
     o=0
     if output == True:

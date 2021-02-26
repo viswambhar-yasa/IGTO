@@ -49,5 +49,3 @@ line_search_Count=0
 line_search_ex_time=0
 Newton_method_Count=0
 Newton_method_ex_time=0
-element_density_slided1_Count=0
-element_density_slided1_ex_time=0

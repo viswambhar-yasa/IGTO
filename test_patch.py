@@ -1,4 +1,4 @@
-from test_preprocessing import *
+from Preprocessing import *
 from geometry import knot_connectivity, controlpointassembly
 from element_routine import assemble, element_routine, apply_BC,Compliance_matrix ,stress_strain_element_routine,gauss_quadrature
 from boundary_conditions import BC_Switcher
@@ -327,3 +327,86 @@ def test__patch_analytical_solution_higher_degree():
     if er:
         o=1
     assert (o==1) is True
+
+
+length=1
+height=1
+width=0.01
+nx=2
+ny=2
+nz=2
+Youngs_modulus=1500
+poission_ratio=0.30
+XI_DEGREE = 1
+ETA_DEGREE = 1
+NETA_DEGREE = 1
+N = nx
+P = ny
+Q = nz
+C = Inputs(length, height, width, N, P, Q, XI_DEGREE, ETA_DEGREE, NETA_DEGREE)
+CONTROL_POINTS=C.crtpts_coordinates()
+XI_KNOTVECTOR = C.xi_knotvector()
+ETA_KNOTVECTOR = C.eta_knotvector()
+NETA_KNOTVECTOR = C.neta_knotvector()
+XI_SPAN, XI_KNOTCONNECTIVITY, XI_UNIKNOTS, nU = C.xi_knotspan()
+ETA_SPAN, ETA_KNOTCONNECTIVITY, ETA_UNIKNOTS, nV = C.eta_knotspan()
+NETA_SPAN, NETA_KNOTCONNECTIVITY, NETA_UNIKNOTS, nW = C.neta_knotspan()
+ncp = N * P * Q
+dof = 3
+dofcp = ncp * dof
+nel = nU * nV * nW
+K_G = np.zeros((dofcp, dofcp))
+F_E = np.zeros(dofcp)
+U = np.zeros(dofcp)
+K_disp = False
+element_indicies = controlpointassembly(N, P, Q, nU, nV, nW, XI_DEGREE, ETA_DEGREE, NETA_DEGREE, XI_KNOTCONNECTIVITY,
+                                        ETA_KNOTCONNECTIVITY, NETA_KNOTCONNECTIVITY)
+span_index = knot_connectivity(N, P, Q, XI_KNOTCONNECTIVITY, ETA_KNOTCONNECTIVITY, NETA_KNOTCONNECTIVITY)
+for i in range(0, nel):
+    el_in = element_indicies[i, :]
+    sp_in = span_index[i, :]
+    X = CONTROL_POINTS[el_in, 0]
+    Y = CONTROL_POINTS[el_in, 1]
+    Z = CONTROL_POINTS[el_in, 2]
+    weights = CONTROL_POINTS[el_in, 3]
+    Uspan = XI_SPAN[sp_in[0], :]
+    Vspan = ETA_SPAN[sp_in[1], :]
+    Wspan = NETA_SPAN[sp_in[2], :]
+    K_E, NURBS, R,B = element_routine(X, Y, Z, weights, Youngs_modulus, poission_ratio, Uspan, Vspan, Wspan, XI_DEGREE,
+                                    XI_KNOTVECTOR, ETA_DEGREE, ETA_KNOTVECTOR, NETA_DEGREE, NETA_KNOTVECTOR)
+    K_G = assemble(K_G, K_E, el_in, ncp, K_disp)
+    K_disp = False
+fixed_nodes=[0,1,2,4,6,12,13]
+load_index=np.array([3])
+F_E[3*load_index]=0.001
+reduced_k=np.delete(np.delete(K_G, fixed_nodes, 0),fixed_nodes , 1)
+reduced_F = np.delete((F_E),fixed_nodes)
+U_disp=np.linalg.solve(reduced_k,reduced_F)
+for j in fixed_nodes:
+     U_disp = np.insert(U_disp, j, 0)
+print(U_disp.reshape(8,3))     
+nn=(XI_DEGREE+1)*(ETA_DEGREE+1)*(NETA_DEGREE+1)
+gauss_points_strains=np.zeros((nel,nn,6))
+gauss_point_stresses=np.zeros((nel,nn,6))
+gauss_point_disp=np.zeros((nel,nn,3))
+C=Compliance_matrix(Youngs_modulus,poission_ratio)
+for i in range(0, nel): 
+    el_in = element_indicies[i, :]
+    sp_in = span_index[i, :]
+    X = CONTROL_POINTS[el_in, 0]
+    Y = CONTROL_POINTS[el_in, 1]
+    Z = CONTROL_POINTS[el_in, 2]
+    weights = CONTROL_POINTS[el_in, 3]
+    Uspan = XI_SPAN[sp_in[0], :]
+    Vspan = ETA_SPAN[sp_in[1], :]
+    Wspan = NETA_SPAN[sp_in[2], :]
+    u_index=np.sort(np.concatenate((el_in*dof,dof*el_in+1,el_in*dof+2)))
+    U_el=U_disp[u_index].T
+    gauss_points_strains[i,:,:],gauss_point_stresses[i,:,:],gauss_point_disp[i,:,:] = stress_strain_element_routine(X, Y, Z, weights,U_el, Youngs_modulus, poission_ratio, Uspan, Vspan, Wspan, XI_DEGREE,
+                                    XI_KNOTVECTOR, ETA_DEGREE, ETA_KNOTVECTOR, NETA_DEGREE, NETA_KNOTVECTOR)                              
+stresses=gauss_point_stresses[0,:,:]
+sigma_x=stresses[:,0]
+sigma_y=stresses[:,1]
+sigma_z=stresses[:,2]
+constant_sigma=(np.all(abs(sigma_x-sigma_x[0])<1e-5) and np.all(abs(sigma_y-sigma_y[0])<1e-5) and np.all(abs(sigma_z-sigma_z[0])<1e-5))
+#print(stresses)

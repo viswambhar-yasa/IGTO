@@ -11,7 +11,7 @@ TBLUE = '\033[34;1m'
 ENDC = '\033[m' 
 
 main_program_start=time.time()
-for package in ['numpy', 'matplotlib', 'pyvista', 'pyEVTK']:
+for package in ['numpy', 'matplotlib', 'pyvista', 'pyEVTK','pytest']:
     try:
         dist = pkg_resources.get_distribution(package)
         print(TGREEN+'{} ({}) is installed'.format(dist.key, dist.version)+ENDC)
@@ -45,6 +45,7 @@ def Folder(path):
 Folder('./results/')
 
 if __name__ == "__main__":
+    
     from processing import *
 
 from plotting import *

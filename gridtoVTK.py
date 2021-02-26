@@ -1,5 +1,5 @@
 
-from test_preprocessing import Inputs
+from Preprocessing import Inputs
 import numpy as np
 
 def VTK(CONTROL_POINTS,element_density,nU,nV,nW,file_name):

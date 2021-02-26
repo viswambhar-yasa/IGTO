@@ -1,6 +1,6 @@
 import numpy as np
 import pytest
-from inputs import *
+#from inputs import *
 
 class Inputs():
     '''

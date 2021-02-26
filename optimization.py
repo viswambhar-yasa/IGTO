@@ -101,8 +101,8 @@ def optimality_criteria(dfun,dCon,initial_X,constrain,H=None,DH=None,beta=0.1,oc
         #Bey
         Be=((-dfun/(dCon*lamdba))**neta)**g
         X_new[:]= np.maximum(0.0,np.maximum(X-move,np.minimum(1.0,np.minimum(X+move,X*Be))))
-        #if H is not None:
-        #    X_new=np.matmul(H,X_new/DH)
+        if H is not None:
+            X_new=np.matmul(H,X_new/DH)
         #X_new=1-np.exp(-beta*X_filter)+X_filter*np.exp(-beta)
         update_condition=np.sum(X_new)
         #  bi-section algorthim updating lagaranian multiplier

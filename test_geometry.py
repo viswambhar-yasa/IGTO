@@ -1,4 +1,4 @@
-from test_preprocessing import Inputs
+from Preprocessing import Inputs
 from geometry import knot_index,bspline_basis,derbspline_basis,trilinear_der,controlpointassembly
 from numpy import array,array_equiv,sum,equal,round,ones,float,zeros,all
 import pytest
@@ -33,6 +33,20 @@ def test__Bspline_basis_sum_equal_to_one_true():
     knotindex=knot_index(degree,U,knotvector)
     output=sum(bspline_basis(knotindex,degree,U,knotvector))
     assert (int(output)==1) is True
+
+def test__Bspline_basis_all_values_positive_true():
+    '''
+    Values obtained for NURBS book
+    '''
+    knotvector=[0, 0, 0, 1, 2, 3, 4, 4, 5, 5, 5]
+    degree=2
+    U=5/3
+    knotindex=knot_index(degree,U,knotvector)
+    output=all(bspline_basis(knotindex,degree,U,knotvector)>=0)
+    o=0
+    if output:
+        o=1
+    assert (o==1) is True
 
 
 
@@ -205,7 +219,7 @@ def test__element_Assembly_C0_continuity():
     assert (number_of_elements==2 and no_nodes==expected_nodes and array_equiv(expected_output,element_indicies)) is True
 
 
-def test__single_element_Assembly_C1_continuity():
+def test__single_element_Assembly_C1_continuity_along_x():
     '''
     BACK FACE
     3--4--5
@@ -219,7 +233,7 @@ def test__single_element_Assembly_C1_continuity():
 
     one element having 12 nodes
     along x direction the element has C1 continuity
-    along y and z have C0 continuity
+    along y and z having C0 continuity
     '''
     length=1
     height=1

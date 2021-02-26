@@ -1,4 +1,4 @@
-from Preprocessing import *
+from inputs import *
 from geometry import knot_connectivity, controlpointassembly
 from element_routine import assemble, element_routine, apply_BC,Compliance_matrix ,stress_strain_element_routine,gauss_quadrature
 from boundary_conditions import BC_Switcher
@@ -279,22 +279,16 @@ while change > 0.01:
         dof_index = np.sort(np.concatenate((el_in * dof, dof * el_in + 1, dof * el_in + 2)))
         compliance += np.transpose(U[dof_index]) @ (density_basis[k] * K_E) @ U[dof_index]
         dcompliance[k] = np.transpose(U[dof_index]) @ (density_basis_dx[k] * K_E) @ U[dof_index]
-    # compliance+=np.transpose(U)@(K_G)@U
     dv = np.ones(nel)
-    # dcompliance=(1/np.maximum(1e-3,element_density)*DH)*np.matmul(H,(element_density*dcompliance))
-    # delement_density=beta*np.exp(-beta*element_density)+np.exp(-beta)
-    # dcompliance=np.matmul(H,(delement_density*dcompliance/DH))
-    # dcompliance=np.matmul(H,(dcompliance/DH))
-    # dv=np.matmul(H,dv/DH)
-    # print(dcompliance)
+
     element_density = np.round(element_density, 5)
     old_el_density = element_density
-    # np.append(X,element_density)
-    # element_density=np.matmul(H,element_density/DH)
+
     constrain = nel * volume_frac
     if optimizer == 'OC':
         
-        dcompliance = (1 / np.maximum(1e-3, element_density) * DH) * np.matmul(H, (element_density * dcompliance))
+        #dcompliance = (1 / np.maximum(1e-3, element_density) * DH) * np.matmul(H, (element_density * dcompliance))
+        dcompliance=np.matmul(H,(dcompliance/DH))
         dv = np.matmul(H, dv / DH)
         
         element_density_updated = optimality_criteria(dcompliance, dv, element_density, constrain, H, DH, beta, oc_disp,
@@ -305,17 +299,16 @@ while change > 0.01:
         dv = np.matmul(H, dv / DH)
 
         v = (np.sum(element_density) / nel) - volume_frac
-        # print(v)
 
         dv_dx = (dv / (volume_frac * nel))
-        # print(dcompliance)
-        # print(dv)
+
         dfun0 = dcompliance
         dcon = dv_dx
         f0 = compliance
         c0 = v
         element_density_updated, Lower, Upper = Moving_asymptoes(dfun0, dcon, f0, c0, element_density, E1, E2, Lower,
                                                                  Upper, loop, nel, 1, Xmin, Xmax, True)
+        
         E2 = E1.copy()
         E1 = element_density.copy()
         element_density = np.round(element_density_updated[:, 0], 4)
@@ -345,7 +338,8 @@ while change > 0.01:
     print('=' * width1)
     print('\n')
     CPS = CONTROL_POINTS[:, :-2]
-    if change<0.01 or (loop in [1,10,20,40,60,80,100,120,140,160,180,200,220,240,250]):
+    #if change<0.01 or (loop in [1,10,20,40,60,80,100,120,140,160,180,200,220,240,250]):
+    if True:
         ns=nU*10
         #deformation_plot(loop,CP,U,nx,ny,nz,element_density,optimizer)
         #element_density_slided(i,CP,nx,ny,nz,element_density,optimizer,ns,'z','xz')
