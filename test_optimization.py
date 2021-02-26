@@ -136,9 +136,6 @@ def test__MMA_literature_equation():
     dc0=dconstrains(x)
     #print(x,df0,dc0,f0,c0)
 
-
-    epsimin = 0.0000001
-
     xval = array([4,3,2])
     print(xval)
     nx=len(xval)
@@ -146,16 +143,15 @@ def test__MMA_literature_equation():
     xmin = zeros(nx)
     xmax = 5*ones(nx)
 
-
-
     L = xmin
     U = xmax
-    move = 1.0
 
     loop=0
     max_loop=50
     x1=xval
     x2=xval
+    l=0
+    all_values=[]
     while loop<=max_loop:
         vel=2
         nel=3
@@ -170,15 +166,17 @@ def test__MMA_literature_equation():
         x1 = xval.copy()
         x3=x.T
         xval=x3[0]
+        print(xval)
+        all_values.append(x3)
         #print(xold-xnew)
 
-
-        if abs(linalg.norm(x1-x3[0]))<0.0001:
-            f0=quad_function(x3[0])
-            df0=dfunction(x3[0])
-            c0=constrain(x3[0])
-            dc0=dconstrains(x3[0])
-            print(x3[0],df0,dc0,f0,c0)
+        l+=1
+        if abs(linalg.norm(x1-xval))<0.0001:
+            f0=quad_function(xval)
+            df0=dfunction(xval)
+            c0=constrain(xval)
+            dc0=dconstrains(xval)
+            print(x3,df0,dc0,f0,c0)
             break
     x_output=x3[0]
     print(x_output)
@@ -187,4 +185,4 @@ def test__MMA_literature_equation():
     o=0
     if error:
         o=1
-    assert (1==1) is True
+    assert (o==1) is True
