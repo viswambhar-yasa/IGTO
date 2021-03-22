@@ -1,31 +1,39 @@
+#AUTHOR : YASA VISWAMBHAR REDDY
+#MATRICULATION NUMBER : 65074
+#Personal Programming Project
+#---------------------------------------------------------------------------------------#
+#A python file where Iso-geometric analysis is performed along with Toplogy optimization
+# --------------------------------------------------------------------------------------# 
+
 import numpy as np
 import pytest
 
 def Knearestneighbours(rmin,nelx,nely,nelz):
     '''
-    
+
+    The code has been taken from An efficient 3D topology optimization code written in Matlab section
+    To perform sensitivity analysis, we require weight function.This functions provides the weight factor 
+
 
     Parameters
     ----------
-    rmin : TYPE
-        DESCRIPTION.
-    nelx : TYPE
-        DESCRIPTION.
-    nely : TYPE
-        DESCRIPTION.
-    nelz : TYPE
-        DESCRIPTION.
+    rmin : int
+        The minimum radius in which the elements are influenced.
+    nelx,nely,nelz : int
+        No of element in x ,y and z direction.
 
     Returns
     -------
-    H : TYPE
-        DESCRIPTION.
-    DH : TYPE
-        DESCRIPTION.
+    H : array
+        A 2d array containing the weight factor of each element.
+    DH : array
+        Sum of the weight factor (change in weight factors).
 
     '''
-    nel=nelx*nely*nelz
+    nel=nelx*nely*nelz #total number of elements
+    #initializing the dimensions of weight factor
     H=np.zeros((nel,nel))
+    #looped over element along x y and z 
     for i in range(nelz):
         for j in range(nely):
             for k in range(nelx):
@@ -41,55 +49,59 @@ def Knearestneighbours(rmin,nelx,nely,nelz):
                         for kk in range(kmin,kmax):
                             c= int(ii*nelx*nely+jj*nelx+kk)
                             distance=np.sqrt((i-ii)**2+(j-jj)**2+(k-kk)**2)
-                            H[r,c]=np.maximum(0,(rmin-distance))
+                            H[r,c]=np.maximum(0,(rmin-distance))        # based on equ.4.33
     H=np.array(H)
     DH=np.sum(H,1)
     return H,DH  
 
 
-def optimality_criteria(dfun,dCon,initial_X,constrain,H=None,DH=None,beta=0.1,oc_disp=True,g=1,tol=0.01,move=0.1,neta=0.5,initial_value=0,final_value=1e09):
+def optimality_criteria(dfun,dCon,initial_X,constrain,residual=None,H=None,DH=None,oc_disp=True,g=1,tol=0.01,move=0.1,neta=0.5,initial_value=0,final_value=1e09):
     '''
-    
+    Optimality criteria is a penality based method to solve constrain based probelem.
+
 
     Parameters
     ----------
-    dfun : TYPE
-        DESCRIPTION.
-    dCon : TYPE
-        DESCRIPTION.
-    initial_X : TYPE
-        DESCRIPTION.
-    constrain : TYPE
-        DESCRIPTION.
-    H : TYPE
-        DESCRIPTION.
-    DH : TYPE
-        DESCRIPTION.
-    beta : TYPE
-        DESCRIPTION.
-    oc_disp : TYPE, optional
-        DESCRIPTION. The default is True.
-    g : TYPE, optional
-        DESCRIPTION. The default is 1.
-    tol : TYPE, optional
-        DESCRIPTION. The default is 0.01.
-    move : TYPE, optional
-        DESCRIPTION. The default is 0.1.
-    neta : TYPE, optional
-        DESCRIPTION. The default is 0.5.
-    initial_value : TYPE, optional
-        DESCRIPTION. The default is 0.
+    dfun : array
+        derivatives of the function which are to be optimized.
+    dCon : array
+        derivatives of the constrains .
+    initial_X : array
+        initial set of values which are required to solve the problem.
+    constrain : array
+                set of constrains.
+    H : array
+        weight factor required for sensitivity analysis.
+    DH : array
+        change in weight factor.
+    oc_disp : bool, optional
+        If TRUE the values at each iteration is printed. The default is True.
+    g : float, optional
+        penality value to remove gray scale values. The default is 1.
+    tol : float, optional
+        Tolerance . The default is 0.01.
+    move : float, optional
+        the step which has to be taken while find the optimization. The default is 0.1.
+    neta : float, optional
+        The power of the constrained problem. The default is 0.5.
+    initial_value : int, optional
+        The initial range to find lagarian multiplier. The default is 0.
     final_value : TYPE, optional
-        DESCRIPTION. The default is 1e09.
+        The final range to find lagarian multiplier. The default is 1e09.
 
     Returns
     -------
-    X_new : TYPE
-        DESCRIPTION.
+    X_new : array 
+        The optimized values obtained after optimization.
+
+    Test case
+    ---------
+    test command -
+         
 
     '''
+    #initializing the values of optimized value
     X_new=np.zeros(len(initial_X))
-    #X_filter=np.zeros(len(initial_X))
     X=np.array(initial_X)
     i=0
     max_iteration=150
@@ -99,22 +111,32 @@ def optimality_criteria(dfun,dCon,initial_X,constrain,H=None,DH=None,beta=0.1,oc
         #lagarian multiplier
         lamdba=0.5*(initial_value+final_value)
         #Bey
-        Be=((-dfun/(dCon*lamdba))**neta)**g
-        X_new[:]= np.maximum(0.0,np.maximum(X-move,np.minimum(1.0,np.minimum(X+move,X*Be))))
+        Be=((-dfun/(dCon*lamdba))**neta)**g #based on equ. 4.38
+        X_new[:]= np.maximum(0.0,np.maximum(X-move,np.minimum(1.0,np.minimum(X+move,X*Be)))) #based on equ. 4.37
         if H is not None:
-            X_new=np.matmul(H,X_new/DH)
-        #X_new=1-np.exp(-beta*X_filter)+X_filter*np.exp(-beta)
-        update_condition=np.sum(X_new)
+            X_new=np.matmul(H,X_new/DH) #based on equ.4.32
         #  bi-section algorthim updating lagaranian multiplier
-        if update_condition>=constrain:
-            initial_value=lamdba    
+        #multiple exit conditions to improve the functionality of the OC
+        if residual is None:
+                update_condition=np.sum(X_new)
+                if update_condition>=constrain:
+                    initial_value=lamdba    
+                else:
+                    final_value=lamdba
         else:
-            final_value=lamdba
+            update_condition=residual+np.sum((dCon*(X_new-X)))
+            if update_condition>=0:
+                initial_value=lamdba    
+            else:
+                final_value=lamdba
+        
+        
         i=i+1
         TBLUE = '\033[34;1m'
         TRED='\033[31;1m'
         ENDC = '\033[m'
-        if convergence_criteria<=tol :#or (np.linalg.norm(abs(X_new-X_old)))>=1e-4:
+        #exit condition
+        if convergence_criteria<=tol :
             width=120
             if oc_disp:
                 print('-'*width)
@@ -123,7 +145,7 @@ def optimality_criteria(dfun,dCon,initial_X,constrain,H=None,DH=None,beta=0.1,oc
                 print('.'*width)
                 print(TBLUE+'     exit_iter: %d    gray_filter(g):%f    lamdba:%f12      tot_vol:%f4     max_volume:%f4' %(i,g,lamdba,update_condition,constrain)+ENDC)  
                 print('.'*width)
-            return X_new
+            return X_new,update_condition
         if i==(max_iteration-1):
             width=120
             if oc_disp:
@@ -134,221 +156,177 @@ def optimality_criteria(dfun,dCon,initial_X,constrain,H=None,DH=None,beta=0.1,oc
                 print('.'*width)
                 print(TBLUE+'     exit_iter: %d        lamdba:%f12        tot_vol:%f4       max_volume:%f4' %(i,lamdba,update_condition,constrain)+ENDC)  
                 print('*'*width)
-            return X_new
+            return X_new,update_condition
 
-#def Moving_asymptoes
-
-def Heavyside_filter(element_density,beta,ll=0,lh=1,tol=0.01,fil_disp=True):
-    be_element=np.zeros(len(element_density))
-    i=0
-    max_iteration=100
-    while i<max_iteration:
-        cv=(ll+lh)/2
-        be_element=(np.tanh((beta*cv))+np.tanh(beta*(element_density-cv))/(np.tanh((beta*cv))+np.tanh(beta*(1-cv))))
-        filtered_density=np.maximum(1e-3,be_element)
-        if sum(be_element)>sum(element_density):
-            ll=cv
-        else:
-            lh=cv
-        i+=1
-        #if abs((lh-ll))<1e-5:
-        if abs((lh-ll))<1e-5:
-            if fil_disp:
-                width=120
-                fmt='{:^'+str(width)+'}'
-                print(fmt.format('Heavyside Filter'))
-                print('*'*width)
-                print('         exit_iter: %d          n:%f12           vol:%f4           max_volume:%f4' %(i,cv,sum(be_element),sum(element_density)))  
-                print('.'*width)
-                return filtered_density
-
-#element_density=np.array([1,1,0,1,.5,1,0.2,1])
-#element_density=np.random.random((10,1))
-#beta=1
-#print(Heavyside_filter(element_density,beta,ll=0,lh=1,tol=0.01,fil_disp=True))
-#print(element_density)
 
 
 def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_disp,m=0.2,m_tol=0.1):
     '''
-    
+    Based on the MMA paper by Krister Svanberg whose formulation are used to build this function
+    MMA and GMMA by Krister Svanberg
+    Optimization and Systems Theory,
+    KTH, Stockholm, Sweden.
+    The equation are provided in the paper and are referred in this function accordingly.
+    This is the main function which performs active set strategy based constrained problem optimization (KKT condition are satisfied using Newton raphson)
 
     Parameters
     ----------
-    dfun0 : TYPE
-        DESCRIPTION.
-    dcon : TYPE
-        DESCRIPTION.
-    f0 : TYPE
-        DESCRIPTION.
-    c0 : TYPE
-        DESCRIPTION.
-    x0 : TYPE
-        DESCRIPTION.
-    x1 : TYPE
-        DESCRIPTION.
-    x2 : TYPE
-        DESCRIPTION.
-    L : TYPE
-        DESCRIPTION.
-    U : TYPE
-        DESCRIPTION.
-    loop : TYPE
-        DESCRIPTION.
-    nel : TYPE
-        DESCRIPTION.
-    vel : TYPE
-        DESCRIPTION.
-    Xmin : TYPE
-        DESCRIPTION.
-    Xmax : TYPE
-        DESCRIPTION.
-    ma_disp : TYPE
-        DESCRIPTION.
-    m : TYPE, optional
-        DESCRIPTION. The default is 0.2.
-    m_tol : TYPE, optional
-        DESCRIPTION. The default is 0.1.
+    dfun0 : array
+        Contains the derivatives of the function.
+    dcon : array
+        Contains the derivatives of the constrains.
+    f0 : array
+        inital value of the function for value x0.
+    c0 : array
+        initial values of the constraind for values x0.
+    x0 : array
+        Initial guess values and later the current iteration values of X.
+    x1 : array
+        X values from previous iteration (k-1).
+    x2 : array
+        X values from previous iteration (k-2).
+    L : array
+        Lower limit values.
+    U : array
+        Upper limit values.
+    loop : int
+        Current iteration number.
+    nel : int 
+        Number of variables in the function. [x1,x2,x3,...]
+    vel : int
+        Number of constrains.
+    Xmin : array
+        The minimum values of  X.
+    Xmax : array
+        The maximum value of X.
+    ma_disp : bool
+        If TRUE , prints the values.
+    m : float, optional
+        The length of the step movement. The default is 0.2.
+    m_tol : bool, optional
+        Tolerance for MMA. The default is 0.1.
 
     Returns
     -------
-    TYPE
-        DESCRIPTION.
+    x  : array
+            Optimized values of the array which satisfys KKT condition
+    Lower : array
+                The lower limit for the values of X
+    Upper : array
+            Upper limit for  the values of X
+
+    Test case
+    ---------
+    Test command -
+                pytest test_optimization.py::test__MMA_literature_equation
 
     '''
     
     
     def Asymptoes(loop=loop,x0=x0,x1=x1,x2=x2,n=nel,Xmin=Xmin,Xmax=Xmax,L=L,U=U,move_tol_low=0.01,move_tol_high=10):
         '''
-        
+        The lower and upper bound are calculated based on the X values in previous 2 iteration.
 
         Parameters
         ----------
-        loop : TYPE, optional
-            DESCRIPTION. The default is loop.
-        x0 : TYPE, optional
-            DESCRIPTION. The default is x0.
-        x1 : TYPE, optional
-            DESCRIPTION. The default is x1.
-        x2 : TYPE, optional
-            DESCRIPTION. The default is x2.
-        n : TYPE, optional
-            DESCRIPTION. The default is nel.
-        Xmin : TYPE, optional
-            DESCRIPTION. The default is Xmin.
-        Xmax : TYPE, optional
-            DESCRIPTION. The default is Xmax.
-        L : TYPE, optional
-            DESCRIPTION. The default is L.
-        U : TYPE, optional
-            DESCRIPTION. The default is U.
-        move_tol_low : TYPE, optional
-            DESCRIPTION. The default is 0.01.
-        move_tol_high : TYPE, optional
-            DESCRIPTION. The default is 10.
+        loop : int
+            The current number of the iteration.
+        x0,x1,x2 :array
+                The values at loop,loop-1 and loop-2 iterations
+        n : int
+            Number of variable in x 
+        Xmin,Xmax : array
+                    The minimum and maximum values of X 
+        L,U : array
+            The lower and upper bound of x obtained from previous iteration
+        move_tol_low : float, optional
+            tolerance for lower limit . The default is 0.01.
+        move_tol_high : int, optional
+            tolerance for upper limit . The default is 10.
 
         Returns
         -------
-        Lower : TYPE
-            DESCRIPTION.
-        Upper : TYPE
-            DESCRIPTION.
-        x0 : TYPE
-            DESCRIPTION.
+        lower_value : array
+            The Lower limit for the values of X[x1,x2,x3,...].
+        Upper : array
+            The Upper limit for the values of X[x1,x2,x3,...].
+        x0 : array
+            The initial values of X[x1,x2,x3,.....].
 
         '''
-        Lower=np.ones(n)
-        Upper=np.ones(n)
-        if loop<=2:
-            Lower=x0-0.5*(Xmax-Xmin)
-            Upper=x0+0.5*(Xmax-Xmin)
-            #print(Lower,Upper,x)
-        else:
-            '''
-            gamma=(x0-x1)*(x1-x2)
-            gamma[gamma<0]=0.7
-            gamma[gamma>0]=1.2
-            #gamma[gamma==0]=0
 
-            Lower=x0-0.5*gamma*(x1-L)
-            Upper=x0+0.5*gamma*(U-x2)
-        
-            Lower=np.maximum(Lower,x0-move_tol_high)
-            Lower=np.minimum(Lower,x0-move_tol_low)
-            Upper=np.maximum(Upper,x0+move_tol_low)
-            Upper=np.minimum(Upper,x0+move_tol_high)
-            '''
-            xval=x0
-            xold1=x1
-            xold2=x2
-            zzz = (xval-xold1)*(xold1-xold2)
+        lower_value=np.ones(n)
+        upper_value=np.ones(n)
+        #iteration less then 3
+        if loop<=2:
+            lower_value=x0-0.5*(Xmax-Xmin)  #based on equ. 3.11 MMA paper
+            upper_value=x0+0.5*(Xmax-Xmin)  #based on equ. 3.11 MMA paper
+            #print(Lower,Upper,x)
+            return lower_value,upper_value,x0
+        else: #iteration greater then 3
+            xval=x0  #current iteration value of x
+            xold1=x1 #pervious iteration value of x (k-1)
+            xold2=x2 #pervious iteration value of x (k-2)
+            zzz = (xval-xold1)*(xold1-xold2)  #based on equ. 3.13 MMA paper
             gamma = np.ones(nel)
-            gamma[np.where(zzz>0)] = 1.2
-            gamma[np.where(zzz<0)] = 0.7
-            #gamma[np.where(zzz==0)]= 0 
-            Lower = xval-gamma*(xold1-L)
+            gamma[np.where(zzz>0)] = 1.2      #based on equ. 3.13 MMA paper
+            gamma[np.where(zzz<0)] = 0.7      #based on equ. 3.13 MMA paper
+            lower_value = xval-gamma*(xold1-L) #based on equ. 3.12 MMA paper
             #print(Lower)
-            Upper = xval+gamma*(U-xold1)
+            upper_value = xval+gamma*(U-xold1) #based on equ. 3.12 MMA paper
             #print(Upper)
-            lowmin = xval-10*(Xmax-Xmin)
-            lowmax = xval-0.01*(Xmax-Xmin)
-            uppmin = xval+0.01*(Xmax-Xmin)
-            uppmax = xval+10*(Xmax-Xmin)
-            Lower = np.maximum(Lower,lowmin)
-            Lower = np.minimum(Lower,lowmax)
-            Upper = np.minimum(Upper,uppmax)
-            Upper = np.maximum(Upper,uppmin)
-        ##output as : [ 1.5  0.5 -0.5], [6.5 5.5 4.5], [4 3 2]
-        return Lower,Upper,x0
+            lmin = xval-move_tol_high*(Xmax-Xmin) #based on equ. 3.14 MMA paper
+            lmax = xval-move_tol_low*(Xmax-Xmin)  #based on equ. 3.14 MMA paper
+            umin = xval+move_tol_low*(Xmax-Xmin)  #based on equ. 3.14 MMA paper
+            umax = xval+move_tol_high*(Xmax-Xmin) #based on equ. 3.14 MMA paper
+            lower_value = np.maximum(lower_value,lmin)  #based on equ. 3.6 MMA paper
+            lower_value = np.minimum(lower_value,lmax)  #based on equ. 3.6 MMA paper
+            upper_value = np.minimum(upper_value,umax)  #based on equ. 3.7 MMA paper
+            upper_value = np.maximum(upper_value,umin)  #based on equ. 3.7 MMA paper
+            return lower_value,upper_value,x0
+            ##smaple output as : [ 1.5  0.5 -0.5], [6.5 5.5 4.5], [4 3 2]
+        
     
     def objective_constrains(x,Lower,Upper,dfun0=dfun0,f0=f0,Xmin=Xmin,Xmax=Xmax,tol=1e-5,tol1=0.001,tol2=1.001):
         '''
-        
+        Approximation of the function is built using function and it's derivatives p and q 
+        Based on equ. 4.2 MMA paper
 
         Parameters
         ----------
-        x : TYPE
-            DESCRIPTION.
-        Lower : TYPE
-            DESCRIPTION.
-        Upper : TYPE
-            DESCRIPTION.
-        dfun0 : TYPE, optional
-            DESCRIPTION. The default is dfun0.
-        f0 : TYPE, optional
-            DESCRIPTION. The default is f0.
-        Xmin : TYPE, optional
-            DESCRIPTION. The default is Xmin.
-        Xmax : TYPE, optional
-            DESCRIPTION. The default is Xmax.
-        tol : TYPE, optional
-            DESCRIPTION. The default is 1e-5.
-        tol1 : TYPE, optional
-            DESCRIPTION. The default is 0.001.
-        tol2 : TYPE, optional
-            DESCRIPTION. The default is 1.001.
+        x : array
+            The intial value of variables.
+        Lower,Upper : array
+            The lower and upper limit of the variables.
+        fo,dfun0 : array, optional
+                the function value and derivative of the function for initial values of variable
+        Xmin,Xmax : array, optional
+                        The maximum and minimum od the variables X
+        tol : float, optional
+            Tolerance for objective constrain. The default is 1e-5.
+        tol1,tol2 : float, optional
+                        Tolerance for objective constrain . The default is 0.001 and 1.001.
 
         Returns
         -------
-        p : TYPE
-            DESCRIPTION.
-        q : TYPE
-            DESCRIPTION.
-
+        p : array
+            function approximation equ. 4.2 in MMA paper.
+        q : array
+            function approximation equ. 4.2 in MMA paper
         '''
-        df_postive=np.maximum(dfun0,0)
-        df_negative=np.maximum(-dfun0,0)
+        df_postive=np.maximum(dfun0,0)   #Based on 4.3 in MMA paper # positive values of derivative function
+        df_negative=np.maximum(-dfun0,0) #Based on 4.3 in MMA paper #negative values of derivative function
         #print(df_postive)
-        Xd_inv=1/Xmax-Xmin
+        Xd_inv=1/Xmax-Xmin  
         UX=Upper-x
         
         LX=x-Lower
-        
-        p0=tol2*df_postive+tol1*df_negative+(tol*Xd_inv)
+        #
+        p0=tol2*df_postive+tol1*df_negative+(tol*Xd_inv) 
         #print('p0',p0)
-        p=np.array([(UX**2)*p0]).T
-        q0=tol1*df_postive+tol2*df_negative+(tol*Xd_inv)
-        q=np.array([(LX**2)*q0]).T
+        p=np.array([(UX**2)*p0]).T  #Based on equ, 4.3 in MMA paper
+        q0=tol1*df_postive+tol2*df_negative+(tol*Xd_inv) 
+        q=np.array([(LX**2)*q0]).T  #Based on 4.4 in MMA paper
 
         #print('p',p)
         #print('q',q)    
@@ -356,48 +334,43 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
 
     def Minimizer_constrains(x,Lower,Upper,dcon=dcon,m=vel,c0=c0,Xmin=Xmin,Xmax=Xmax,tol=1e-5,tol1=0.001,tol2=1.001):
         '''
-        
+        Approximation of the function is built using constrains and it's derivatives P and Q
+        Based on equ. 4.2 MMA paper
 
         Parameters
         ----------
-        x : TYPE
-            DESCRIPTION.
-        Lower : TYPE
-            DESCRIPTION.
-        Upper : TYPE
-            DESCRIPTION.
-        dcon : TYPE, optional
-            DESCRIPTION. The default is dcon.
-        m : TYPE, optional
-            DESCRIPTION. The default is vel.
-        c0 : TYPE, optional
-            DESCRIPTION. The default is c0.
-        Xmin : TYPE, optional
-            DESCRIPTION. The default is Xmin.
-        Xmax : TYPE, optional
-            DESCRIPTION. The default is Xmax.
-        tol : TYPE, optional
-            DESCRIPTION. The default is 1e-5.
-        tol1 : TYPE, optional
-            DESCRIPTION. The default is 0.001.
-        tol2 : TYPE, optional
-            DESCRIPTION. The default is 1.001.
-
+        x : array   
+            Optimized variable of the function [x1,x2,x3,....].
+        Lower,Upper : array
+            The lower and upper limit of the variable.
+        dcon : array, optional
+            The derivatives of the constrains. The default is dcon.
+        m : int, optional
+            Number of constrains. The default is vel.
+        c0 : array , optional
+            intial values of the compliance. The default is c0.
+        Xmin,Xmax : array, optional
+            The maximuum and minimum values of X. The default is Xmin.
+        tol : float, optional
+             tolerance for minimizing of constrains. The default is 1e-5.
+        tol1,tol2  : float, optional
+            Tolerance of objective constrain. The default is 0.001 and 1.001.
+        
         Returns
         -------
-        p : TYPE
-            DESCRIPTION.
-        q : TYPE
-            DESCRIPTION.
-        TYPE
-            DESCRIPTION.
+        p : array
+            Function approximation for constrains equ. 4.2 in MMA paper.
+        q : array
+            Function approximation for constrains equ. 4.2 in MMA paper.
+        rc: array
+            residual of the function based on equ. 4.5 in MMA paper
 
         '''
-        df_postive=np.maximum(dcon,0)
-        df_negative=np.maximum(-dcon,0)
+        df_postive=np.maximum(dcon,0)  #maximum of the constrains based on equ. 4.3 in MMA paper
+        df_negative=np.maximum(-dcon,0) #minimum of the constrains based on equ. 4.3 in MMA paper
         
         Xd_inv=np.array([1/Xmax-Xmin]).T
-        UX=np.array([Upper-x]).T
+        UX=np.array([Upper-x]).T 
         LX=np.array([x-Lower]).T
         
         tol_vector=tol*np.ones((m,1)).T
@@ -409,56 +382,42 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
         UX_matrix=np.diag(((Upper-x)**2),0)
         LX_matrix=np.diag(((x-Lower)**2),0)
         
-        p=(UX_matrix@p0.T).T
+        p=(UX_matrix@p0.T).T  #Based on equ, 4.3 in MMA paper
         #print('p',p)
         
         q0=tol1*df_postive+tol2*df_negative+tol_matrix
-        q=(LX_matrix@q0.T).T
+        q=(LX_matrix@q0.T).T #Based on equ, 4.4 in MMA paper
         #print('q',q)
         
-        pr=np.dot(p,(1/UX))
+        pr=np.dot(p,(1/UX)) 
         qr=np.dot(q,(1/LX))
-        rc= c0-(pr+qr).T #S remove .T
+        rc= c0-(pr+qr).T ##Based on equ, 4.5 in MMA paper
         #print('rc',rc.T)
         return p,q,rc.T
 
 
     def prime_dual(L,U,alpha,beta,p0,q0,pc,qc,a,b,c,d,n=nel,m=vel,epsimin=1e-7):
         '''
-        
+        This function is a active set strategy and solves constrained based non-linear problem. It is a gradient based method using Newton Raphson to solve KKT condition.
 
         Parameters
         ----------
-        L : TYPE
-            DESCRIPTION.
-        U : TYPE
-            DESCRIPTION.
-        alpha : TYPE
-            DESCRIPTION.
-        beta : TYPE
-            DESCRIPTION.
-        p0 : TYPE
-            DESCRIPTION.
-        q0 : TYPE
-            DESCRIPTION.
-        pc : TYPE
-            DESCRIPTION.
-        qc : TYPE
-            DESCRIPTION.
-        a : TYPE
-            DESCRIPTION.
-        b : TYPE
-            DESCRIPTION.
-        c : TYPE
-            DESCRIPTION.
-        d : TYPE
-            DESCRIPTION.
-        n : TYPE, optional
-            DESCRIPTION. The default is nel.
-        m : TYPE, optional
-            DESCRIPTION. The default is vel.
-        epsimin : TYPE, optional
-            DESCRIPTION. The default is 1e-7.
+        L,U : array
+            Lower and upper limits of the variables.
+        alpha,beta : array
+            Bound of the variables . Based on equ. 3.6 and 3.7 in MMA paper
+        p0,q0 : array
+            The approximation function of objectives based on equ. 3.3 and 3.4.
+        pc,qc : array
+            The approximation function of constraind based on equ. 3.3 and 3.4.
+        a,b,c,d : array
+            Non-negative lagragian multiplier.
+        n : int, optional
+            Number of variables. The default is nel.
+        m : int, optional
+            Number of constrains. The default is vel.
+        epsimin : float, optional
+            Tolerance value. The default is 1e-7.
 
         Returns
         -------
@@ -468,7 +427,7 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
         '''
         def initial_condition(alpha=alpha,beta=beta,o=n,k=m,c=c):
             '''
-            
+            For solving constrained based problem. The initial values are required 
 
             Parameters
             ----------

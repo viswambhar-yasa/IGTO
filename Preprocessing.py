@@ -1,10 +1,16 @@
 import numpy as np
 import pytest
-#from inputs import *
 
 class Inputs():
     '''
-    A geometry class which
+    A geometry class with NURBS parameter as the method
+    Methods:
+        crtpts_coordinates : generate control points along with weights 
+
+        knot_vector :generates knot vector based on control points generated from crtpts_coordinates and degree
+
+        knotconnect : other parameter required for assembly like span, unique knots.
+        
     '''
 
     def __init__(self, length=1, height=1, width=1, nx=1, ny=1, nz=1, xidegree=1, etadegree=1, netadegree=1):
@@ -23,7 +29,13 @@ class Inputs():
 
     def crtpts_coordinates(self):
         '''
-        A function which return the control point co-ordinates
+        A Method which return the control point co-ordinates
+
+
+        Test case
+        ------
+        Test command -  
+                        pytest test_Inputs.py::test__controlpoints_coordinates_true
         '''
         beam_coordinates = []
         index = 0
@@ -49,6 +61,11 @@ class Inputs():
         Returns
         -------
         KNOTVECTOR - an array containing knots based on control points
+
+        Test case
+        ------
+        test command - 
+                        pytest test_Inputs.py::test__knotvector_true
         '''
         size = n + degree + 1
         self.knotvector = np.zeros(size)
@@ -70,6 +87,7 @@ class Inputs():
         self.knotvector = self.knotvector / self.knotvector[-1]
         return self.knotvector
 
+    #knot vector are generated along xi, eta ,neta direction based on n - no of control points and degree of knotvector
     def xi_knotvector(self):
         self.xikntvtr = self.knot_vector(self.n, self.xidegree)
         return self.xikntvtr
@@ -84,6 +102,32 @@ class Inputs():
 
     def knotconnect(self, n, degree):
         '''
+        This function generates a parameters used to build the connectivity matrix
+         Parameters
+        ----------
+        n : int
+            length of the knot vector
+        degree : int
+            order of B-splines  0-constant, 1-linear, 2-quadratic, 3-cubic.
+
+        Returns
+        -------
+        span - span of each element generated based on degree and length of knotvector.
+                            Ex-[0,0,0.25,0.5,0.75,1,1,1]
+                                degree:2
+                                span: [[0,0.25,0.5],
+                                        [0.5,0.75,1]]
+        knotconnectivity - a 2d array containing the spans of all the elements number as index of poistion of knotvector
+                                knotconnectivity:[[0,1,2],
+                                                    [2,3,4]]
+        uniknots - an array of unique knots
+                            Ex-[0,0.25,0.5,0.75,1]
+        n - length of knot vector
+
+        Test case
+        ------
+        test command -
+                        pytest test_Inputs.py::test__knotconnect_span_true
         '''
         knot = self.knot_vector(n, degree)
         uniknots = np.unique(knot)
@@ -104,6 +148,7 @@ class Inputs():
         knotconnectivity = knotconnectivity.astype(int)
         return span, knotconnectivity, uniknots, n
 
+    # knot parameters for each knot vector xi, eta, neta are generated below
     def xi_knotspan(self):
         self.xi_span, self.xiknotconnectivity, self.xiuniknots, self.nXi = self.knotconnect(self.n, self.xidegree)
         return self.xi_span, self.xiknotconnectivity, self.xiuniknots, self.nXi
@@ -116,3 +161,4 @@ class Inputs():
         self.neta_span, self.netaknotconnectivity, self.netauniknots, self.nNeta = self.knotconnect(self.q,
                                                                                                     self.netadegree)
         return self.neta_span, self.netaknotconnectivity, self.netauniknots, self.nNeta
+

@@ -1,3 +1,11 @@
+#AUTHOR : YASA VISWAMBHAR REDDY
+#MATRICULATION NUMBER : 65074
+#Personal Programming Project
+#----------------------------------------------#
+#A python test file to check element_routine.py
+# command to run all test cases
+# pytest test_element_routine.py
+# ----------------------------------------------# 
 from Preprocessing import *
 from element_routine import gauss_quadrature,unittoparametric,jacobian,assemble,element_routine,apply_BC
 from numpy import array,array_equiv,zeros,linalg,sin,cos,radians,transpose,min,round
@@ -8,12 +16,32 @@ import pytest
 
 
 def test__gauss_quadrature_1point_true():
+    '''
+    UNIT TESTING
+    Aim: Numerical integration scheme is tested by performing gauss quadrature is performed and evaluating gauss points and weight for given sample points
+
+    Expected result : for 0 sample points along x,y and z direction 
+                        Gauss weight and points should be 2*2*2 and [0,0,0]
+    
+    Test command : pytest test_element_routine.py::test__gauss_quadrature_1point_true
+    
+    Remarks : test case passed successfully
+    '''
     gausspoints,weights=gauss_quadrature(0,0,0)
     assert( array_equiv(gausspoints,array([0.0,0.0,0.0])) and array_equiv(weights,array([8.0])) )is True
 
 def test__unit_to_parametric_space_true():
     '''
-    value calculated anaytically 
+    UNIT TESTING
+    Aim: To calculate jacobian between parametric space to unit space mapping, we need to solve equ.5.3 which depends on gauss quadrature and knots
+
+    Expected result : The values are calculated analytically for a given values
+                        knots : [0,0.2]
+                        gauss quadrature :-0.5773
+    
+    Test command : pytest test_element_routine.py::test__unit_to_parametric_space_true
+    
+    Remarks : test case passed successfully
 
     '''
     output=float(round(unittoparametric(-0.5773,[0,0.2]),5))
@@ -23,9 +51,19 @@ def test__unit_to_parametric_space_true():
 
 def test__Jacobian_patch_testing_rotation():
     '''
-    rotation of the jacbian matrix using Bunge convenstion should change the determinat as it is volume conserving
-    '''
+    SANITY CHECK
+    Section : 6.3.1
+    Aim : Jacobian is volume conserving and rotating Jacobian matrix should change it's value. 
+
+    Expected Output : The determinant of Jacobian should not change even after rotation.
     
+    Test command : pytest test element routine.py : : test Jacobian patch testing rotation.
+
+    Remarks : test case passed successfully
+    
+    (rotation of the jacbian matrix using Bunge convensions should change the determinat as it is volume conserving)
+    '''
+    #Inputs parameters
     X=unittoparametric(-0.5773,[0,1])
     E=unittoparametric(0.5773,[0,1])
     N=unittoparametric(-0.5773,[0,1])
@@ -44,10 +82,13 @@ def test__Jacobian_patch_testing_rotation():
     weigt=control_points[:,3]
     xdef=1
     XKV=[0, 0, 1, 1]
+    #Jacobian is calculated for the given input parameters
     jacobian1,N1,N2,N3,N4=jacobian(X,E,N,Uspa,Vspa,Wspa,xx,yy,zz,weigt,xdef,XKV,xdef,XKV,xdef,XKV)
     output=zeros(360)
+    #Rotation of jacobian is performed
     for i in range(0,360):
         a=radians(i)
+        #using Bunge conversions
         Q1=array([[cos(a),sin(a) ,0],[-sin(a),cos(a) ,0],[0,0,1]])
         Q2=array([[cos(a),0,-sin(a)],[0,1,0],[sin(a),0,cos(a)]])
         Q3=array([[cos(a),sin(a) ,0],[-sin(a),cos(a) ,0],[0,0,1]])
@@ -59,9 +100,17 @@ def test__Jacobian_patch_testing_rotation():
 
 def test__stiffness_matrix_singularity():
     '''
-    Stiffness matrix shold be positive definit
-
+    SANITY CHECK
+    Section -6.3.2
+    Aim : The stiffness matrix has to be positive definite.
+    
+    Expected Output : The eigenvalues of the global stiffness matrix should not be negative.
+    
+    Test command : pytest test_element_routine.py::test_stiffness_matrix_singularity
+    
+    Remarks : test case passed successfully
     '''
+    #Input parameters
     length=1
     height=1
     width=1
@@ -80,6 +129,7 @@ def test__stiffness_matrix_singularity():
     P = ny
     Q = nz
     
+    #Control point and knot vector are generate from given input parameters
     C = Inputs(length, height, width, N, P, Q, XI_DEGREE, ETA_DEGREE, NETA_DEGREE)
     
     CONTROL_POINTS = C.crtpts_coordinates()
@@ -101,13 +151,15 @@ def test__stiffness_matrix_singularity():
     K_G = np.zeros((dofcp, dofcp))
 
     K_disp = True
+    #the control point assembly is built
     element_indicies = controlpointassembly(N, P, Q, nU, nV, nW, XI_DEGREE, ETA_DEGREE, NETA_DEGREE, XI_KNOTCONNECTIVITY,
                                             ETA_KNOTCONNECTIVITY, NETA_KNOTCONNECTIVITY)
     span_index = knot_connectivity(N, P, Q, XI_KNOTCONNECTIVITY, ETA_KNOTCONNECTIVITY, NETA_KNOTCONNECTIVITY)
-
+    #looped over number of element
     for i in range(0, nel):
         el_in = element_indicies[i, :]
         sp_in = span_index[i, :]
+        #co-ordinates of control point in physical space
         X = CONTROL_POINTS[el_in, 0]
         Y = CONTROL_POINTS[el_in, 1]
         Z = CONTROL_POINTS[el_in, 2]
@@ -115,14 +167,16 @@ def test__stiffness_matrix_singularity():
         Uspan = XI_SPAN[sp_in[0], :]
         Vspan = ETA_SPAN[sp_in[1], :]
         Wspan = NETA_SPAN[sp_in[2], :]
-    
+        #Element stiffness matrix is calculated 
         K_E, NURBS, R,B = element_routine(X, Y, Z, weights, Youngs_modulus, poission_ratio, Uspan, Vspan, Wspan, XI_DEGREE,
                                         XI_KNOTVECTOR, ETA_DEGREE, ETA_KNOTVECTOR, NETA_DEGREE, NETA_KNOTVECTOR)
+        #Global stiffness matrix is assembled from element stiffness matrix 
         K_G = assemble(K_G, K_E, el_in, ncp, K_disp)
         K_disp = False
-    
+    # Eigen values of the global stiffness matrix are calculated
     eigen_values,eigen_vectors= linalg.eig(K_G)
     eigen_values=round(eigen_values,8)
+    #Checked for postitive eigen values
     assert (all(eigen_values>=0)) is True
 
 

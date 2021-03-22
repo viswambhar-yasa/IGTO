@@ -1,3 +1,10 @@
+#AUTHOR : YASA VISWAMBHAR REDDY
+#MATRICULATION NUMBER : 65074
+#Personal Programming Project
+#------------------------------------------------------------------------------------------------------------------#
+#PLOTTING - python code used to generate graphs for values obtained after topology optimization and  time analysis.
+#------------------------------------------------------------------------------------------------------------------#
+
 import matplotlib.pyplot as plt
 
 import numpy as np
@@ -12,6 +19,40 @@ def Folder(path):
         print('Error: Creating directory. ' + path)
       
 def plotting(ii,CC,VV,Mnd,element_density,optimizer,option):
+    '''
+    This function generates plots from the data obtained after toplogy optimization.
+
+    INPUTS :
+    -------
+        ii      :Arrat
+                 Contains the iteration numbers
+
+        CC       :Array
+                 Compliance at each iteration
+
+        VV       :Array
+                 Volume fraction at each iteration
+
+        Mnd     : int 
+                    Measure of discretness
+
+        element_density : array
+                            element density of each element obtained after optimization
+
+        optimizer  : str
+                        Name of the optimizer used in toplogy optimization 
+
+        option :int 
+                    Boundary condition used Ex-0 (Cantilever beam with load along the bottom edge of the free end) used in saving plots with that name
+
+
+    Returns 
+    ---------
+            3 graphs iteration VS compliance , iteratiion VS volume fraction and Measure of discretness(histogram of element density)
+
+
+    '''
+
     fig, ax = plt.subplots()
     ax.plot(ii,CC)
     ax.plot(ii[-1], CC[-1],'bo')
@@ -27,7 +68,7 @@ def plotting(ii,CC,VV,Mnd,element_density,optimizer,option):
 
     fig, ax1 = plt.subplots()
     ax1.plot(ii,VV)
-    ax.plot(ii[-1], VV[-1],'bo')
+    ax1.plot(ii[-1], VV[-1],'bo')
     ax1.text(ii[-1], VV[-1],str(round(VV[-1],2)),color='b')
     ax1.set_xlabel('iteration') 
     ax1.set_ylabel('Volume fraction')

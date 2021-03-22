@@ -1,3 +1,10 @@
+#AUTHOR : YASA VISWAMBHAR REDDY
+#MATRICULATION NUMBER : 65074
+#Personal Programming Project
+#--------------------------------------------------------------------------------------------------------------#
+#INPUTS - pyghon code used to generate inputs for the IGTO like co-ordinates, knot vectors based on user inputs 
+#--------------------------------------------------------------------------------------------------------------#
+
 import sys
 import time
 import numpy as np
@@ -33,6 +40,12 @@ class Inputs():
     def crtpts_coordinates(self):
         '''
         A Method which return the control point co-ordinates
+
+
+        Test case
+        ------
+        Test command -  
+                        pytest test_Inputs.py::test__controlpoints_coordinates_true
         '''
         beam_coordinates = []
         index = 0
@@ -58,6 +71,11 @@ class Inputs():
         Returns
         -------
         KNOTVECTOR - an array containing knots based on control points
+
+        Test case
+        ------
+        test command - 
+                        pytest test_Inputs.py::test__knotvector_true
         '''
         size = n + degree + 1
         self.knotvector = np.zeros(size)
@@ -79,6 +97,7 @@ class Inputs():
         self.knotvector = self.knotvector / self.knotvector[-1]
         return self.knotvector
 
+    #knot vector are generated along xi, eta ,neta direction based on n - no of control points and degree of knotvector
     def xi_knotvector(self):
         self.xikntvtr = self.knot_vector(self.n, self.xidegree)
         return self.xikntvtr
@@ -93,6 +112,32 @@ class Inputs():
 
     def knotconnect(self, n, degree):
         '''
+        This function generates a parameters used to build the connectivity matrix
+         Parameters
+        ----------
+        n : int
+            length of the knot vector
+        degree : int
+            order of B-splines  0-constant, 1-linear, 2-quadratic, 3-cubic.
+
+        Returns
+        -------
+        span - span of each element generated based on degree and length of knotvector.
+                            Ex-[0,0,0.25,0.5,0.75,1,1,1]
+                                degree:2
+                                span: [[0,0.25,0.5],
+                                        [0.5,0.75,1]]
+        knotconnectivity - a 2d array containing the spans of all the elements number as index of poistion of knotvector
+                                knotconnectivity:[[0,1,2],
+                                                    [2,3,4]]
+        uniknots - an array of unique knots
+                            Ex-[0,0.25,0.5,0.75,1]
+        n - length of knot vector
+
+        Test case
+        ------
+        test command -
+                        pytest test_Inputs.py::test__knotconnect_span_true
         '''
         knot = self.knot_vector(n, degree)
         uniknots = np.unique(knot)
@@ -113,6 +158,7 @@ class Inputs():
         knotconnectivity = knotconnectivity.astype(int)
         return span, knotconnectivity, uniknots, n
 
+    # knot parameters for each knot vector xi, eta, neta are generated below
     def xi_knotspan(self):
         self.xi_span, self.xiknotconnectivity, self.xiuniknots, self.nXi = self.knotconnect(self.n, self.xidegree)
         return self.xi_span, self.xiknotconnectivity, self.xiuniknots, self.nXi
@@ -131,30 +177,33 @@ TGREEN = '\033[32;1m'
 TYELLOW =  '\033[33;1m' 
 ENDC = '\033[m'
 print(TGREEN+'\n Press Enter for default values or Enter values accordingly \n'+ENDC)
-print('Ft_op=0 # OC, Ft_op=1 #MMA \n')
+print('OPTIMIZER : Ft_op=0 # OC, Ft_op=1 #MMA \n')
 print('BC_op=0 #c-c-c-c, BC_op=1 #s-s-s-s, BC_op=2 #c-c-c-c load at end ,BC_op=3 #c-c-c-c analytical ,BC_p=4 #c-c-c-c two forces \n')
 print(TYELLOW+ 'l h w nx ny nz load volume_fra penal rmin E v density BC_op Ft_op verbose' +ENDC)
+#inputs are accepted for user else default inputs are used to run the program.
 Inputs_array = input()
 Input_list=Inputs_array.split()
+
 if len(Input_list)==0:
-    length=8
-    height=5
+    # Defaults inputs parameters 
+    length=6
+    height=1
     width=1
     option=1
-    nx=15
-    ny=8
-    nz=3
+    nx=11
+    ny=11
+    nz=11
     density=7850
     volume_frac=0.2
-    penal=3.5
-    rmin=1.25
-    load=-100
-    mesh_disp=False
-    iterative_display=False
-    optimizer='OC'
-    Youngs_modulus=1500
-    poission_ratio=0.3
-
+    penal=10
+    rmin=1.5
+    load=-1000
+    mesh_disp=True
+    iterative_display=True
+    optimizer='MMA'
+    Youngs_modulus=100000
+    poission_ratio=0.30
+    
 elif len(Input_list)==16:    
     #print(inp)
     length=float(Input_list[0])
@@ -182,18 +231,39 @@ elif len(Input_list)==16:
         mesh_disp=False
         iterative_display=False
     else:
-        mesh_disp=False
+        mesh_disp=True
         iterative_display=True
+
+    # input parameters defined by user are stored in a text file for future reference 
+    # The input parameters are stored in log file folder based on timestamp    
     stdoutOrigin=sys.stdout 
-    log_file_name="Inputs_"+str(time.time())+".txt"
+    log_file_name="./log_files/Inputs_"+str(time.time())+".txt"
     sys.stdout = open(log_file_name, "w")
     print('[l ,h, w, nx, ny, nz, load, volume_fra, penal, rmin, E, v, density, BC_op, Ft_op, verbose')
     print(Input_list)
     sys.stdout.close()
     sys.stdout=stdoutOrigin
 else: 
-    raise ValueError('No enough aruguments')
+    raise ValueError('aruguments are not sufficient')
 #print(l h w nx ny nz load volume_fra penal rmin E v density BC_op Ft_op verbose)
-#48 12 1 13 11 3 -200 0.5 3.5 1.25 100000 0.3 7850 3 1 0 
-#12 3 4 13 3 9 -200 0.15 10 5 150000 0.35 7850 3 1 1 
-
+#48 12 1 13 11 3 -200 0.5 3.5 1.25 100000 0.3 7850 5 1 0 
+#8 5 1 35 25 3 -100 0.4 3 1.5 150000 0.35 7850 1 0 1 
+#60 20 4 31 21 8 -100 0.3 3 1.5 100000 0.3 7850 3 1 1
+#48 12 1 13 11 3 -10 0.7 3.5 2.25 150000 0.35 7850 5 1 0
+    #length=6
+    #height=1
+    #width=1
+    #option=1
+    #nx=11
+    #ny=11
+    #nz=11
+    #density=7850
+    #volume_frac=0.2
+    #penal=5
+    #rmin=1.5
+    #load=-100
+    #mesh_disp=False
+    #iterative_display=True
+    #optimizer='MMA'
+    #Youngs_modulus=100000
+    #poission_ratio=0.30

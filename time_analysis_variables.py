@@ -1,4 +1,4 @@
-
+# All time variable are declared in this file
 Folder_Count=0
 Folder_ex_time=0
 knot_index_Count=0
@@ -49,3 +49,5 @@ line_search_Count=0
 line_search_ex_time=0
 Newton_method_Count=0
 Newton_method_ex_time=0
+element_density_slided1_ex_time=0
+element_density_slided1_Count=0

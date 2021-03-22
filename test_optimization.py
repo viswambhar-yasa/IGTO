@@ -1,3 +1,11 @@
+#AUTHOR : YASA VISWAMBHAR REDDY
+#MATRICULATION NUMBER : 65074
+#Personal Programming Project
+#------------------------------------#
+#A python test file to check optimizers 
+# command to run all test cases
+# pytest test_optimization.py
+# -----------------------------------# 
 import pytest
 from optimization import optimality_criteria,Moving_asymptoes
 from numpy import array,round,array_equiv,linalg,equal,zeros,ones,all
@@ -5,6 +13,8 @@ from numpy import array,round,array_equiv,linalg,equal,zeros,ones,all
 
 def test__optimality_criteria_simple_function(): 
     '''
+
+    
     finding optimality conditions using penality method for constrains like the 
      sum(x0,x1,x2,x4,...)=1
      and 0<=x<=1
@@ -12,7 +22,7 @@ def test__optimality_criteria_simple_function():
     def fun(x):
         '''
         linear function
-        f=x1+x2-2=0
+        f(x1,x2)=x1+x2-2=0
         '''
         f=x[0]+x[1]-1
         return f
@@ -40,13 +50,14 @@ def test__optimality_criteria_simple_function():
     iteration=1
     x=initial_x
     xplot=zeros((51,len(initial_x)))
+    residual=0
     while iteration<50:
         iteration+=1
         xold=x
         df=dfun(x)
         dc=dcon(x)
         constrain=1
-        xlist=optimality_criteria(df,dc,x,constrain)
+        xlist,residual=optimality_criteria(df,dc,x,constrain)
         x=xlist
         xplot[iteration,:]=x
         if linalg.norm(x-xold)<1e-4:
@@ -84,17 +95,18 @@ def test__optimality_criteria_quadratic_function():
     iteration=1
     x=initial_x
     xplot=zeros((51,len(initial_x)))
+    residual=0
     while iteration<50:
         iteration+=1
         xold=x
         df=dfun(x)
         dc=dcon(x)
         constrain=1
-        xlist=optimality_criteria(df,dc,x,constrain)
+        xlist,residual=optimality_criteria(df,dc,x,constrain)
         x=xlist
 
         xplot[iteration,:]=x
-        print(xplot)
+        #print(xplot)
         if linalg.norm(x-xold)<1e-3:
             exit
     x_exact=array([0,1])
