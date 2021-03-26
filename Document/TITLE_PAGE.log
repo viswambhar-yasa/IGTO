@@ -1,0 +1,410 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7440 64-bit) (preloaded format=pdflatex 2020.5.25)  22 MAR 2021 17:36
+entering extended mode
+**./TITLE_PAGE.tex
+(TITLE_PAGE.tex
+LaTeX2e <2020-02-02> patch level 5
+L3 programming layer <2020-05-15>
+
+! LaTeX Error: Environment titlepage undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \begin{titlepage}
+                     
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.3     \begin{center}
+                      
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 3--3
+[] 
+ []
+
+
+Overfull \hbox (47.34975pt too wide) in paragraph at lines 4--4
+ \OT1/cmr/m/sc/10 Personal 
+ []
+
+
+Overfull \hbox (23.34982pt too wide) in paragraph at lines 4--4
+ \OT1/cmr/m/sc/10 Pro- 
+ []
+
+
+Overfull \hbox (29.81096pt too wide) in paragraph at lines 4--4
+ \OT1/cmr/m/sc/10 gram- 
+ []
+
+
+Overfull \hbox (23.03322pt too wide) in paragraph at lines 4--4
+ \OT1/cmr/m/sc/10 ming 
+ []
+
+
+Overfull \hbox (41.2164pt too wide) in paragraph at lines 4--4
+ \OT1/cmr/m/sc/10 Project 
+ []
+
+
+Overfull \hbox (25.88864pt too wide) in paragraph at lines 4--4
+ \OT1/cmr/m/sc/10 2020- 
+ []
+
+
+Overfull \hbox (11.05545pt too wide) in paragraph at lines 4--4
+ \OT1/cmr/m/sc/10 21 
+ []
+
+! Undefined control sequence.
+l.6     {\LARGE
+                \textsc{\mytitle}} %Title
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<recently read> \mytitle 
+                         
+l.6     {\LARGE \textsc{\mytitle}
+                                 } %Title
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (6143.99998pt too wide) in paragraph at lines 6--8
+ [] 
+ []
+
+! Undefined control sequence.
+l.11     \includegraphics
+                         [scale=0.6]{WBM_schwarz.png}\\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no [ in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no = in font nullfont!
+Missing character: There is no 0 in font nullfont!
+Missing character: There is no . in font nullfont!
+Missing character: There is no 6 in font nullfont!
+Missing character: There is no ] in font nullfont!
+Missing character: There is no W in font nullfont!
+Missing character: There is no B in font nullfont!
+Missing character: There is no M in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.11     \includegraphics[scale=0.6]{WBM_
+                                         schwarz.png}\\
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 11.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 11.
+! Extra }, or forgotten $.
+l.11 ...ncludegraphics[scale=0.6]{WBM_schwarz.png}
+                                                  \\
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.11 ...ludegraphics[scale=0.6]{WBM_schwarz.png}\\
+                                                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.11 ...ludegraphics[scale=0.6]{WBM_schwarz.png}\\
+                                                  
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.11 ...ludegraphics[scale=0.6]{WBM_schwarz.png}\\
+                                                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Overfull \hbox (55.89713pt too wide) in paragraph at lines 11--11
+ []$[]\OML/cmm/m/it/10 chwarz:png[]$ 
+ []
+
+! Undefined control sequence.
+l.13     {\large
+                 \textsc{\myauthor}}\\ % Name
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<recently read> \myauthor 
+                          
+l.13     {\large \textsc{\myauthor}
+                                   }\\ % Name
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (76.794pt too wide) in paragraph at lines 15--15
+ []\OT1/cmr/m/sc/10 Computational 
+ []
+
+
+Overfull \hbox (19.79984pt too wide) in paragraph at lines 15--15
+ \OT1/cmr/m/sc/10 Ma- 
+ []
+
+
+Overfull \hbox (15.26656pt too wide) in paragraph at lines 15--15
+ \OT1/cmr/m/sc/10 te- 
+ []
+
+
+Overfull \hbox (20.31102pt too wide) in paragraph at lines 15--15
+ \OT1/cmr/m/sc/10 rial 
+ []
+
+
+Overfull \hbox (18.82205pt too wide) in paragraph at lines 15--15
+ \OT1/cmr/m/sc/10 Sci- 
+ []
+
+
+Overfull \hbox (23.19987pt too wide) in paragraph at lines 15--15
+ \OT1/cmr/m/sc/10 ence 
+ []
+
+Missing character: There is no 6 in font nullfont!
+Missing character: There is no 5 in font nullfont!
+Missing character: There is no 0 in font nullfont!
+Missing character: There is no 7 in font nullfont!
+Missing character: There is no 4 in font nullfont!
+
+Overfull \hbox (54.08861pt too wide) in paragraph at lines 19--19
+ []\OT1/cmr/m/sc/10 Supervised 
+ []
+
+
+Overfull \hbox (12.13329pt too wide) in paragraph at lines 19--19
+ \OT1/cmr/m/sc/10 by 
+ []
+
+
+Overfull \hbox (21.28593pt too wide) in paragraph at lines 21--21
+ []\OT1/cmr/m/sc/10 Dr.- 
+ []
+
+
+Overfull \hbox (19.79428pt too wide) in paragraph at lines 21--21
+ \OT1/cmr/m/sc/10 Ing. 
+ []
+
+
+Overfull \hbox (25.82204pt too wide) in paragraph at lines 21--21
+ \OT1/cmr/m/sc/10 Mar- 
+ []
+
+
+Overfull \hbox (15.06659pt too wide) in paragraph at lines 21--21
+ \OT1/cmr/m/sc/10 tin 
+ []
+
+
+Overfull \hbox (29.4276pt too wide) in paragraph at lines 21--21
+ \OT1/cmr/m/sc/10 Aben- 
+ []
+
+
+Overfull \hbox (30.44432pt too wide) in paragraph at lines 21--21
+ \OT1/cmr/m/sc/10 droth 
+ []
+
+
+Overfull \hbox (52.03862pt too wide) in paragraph at lines 23--23
+ []\OT1/cmr/m/sc/10 Professor 
+ []
+
+
+Overfull \hbox (13.96655pt too wide) in paragraph at lines 23--23
+ \OT1/cmr/m/sc/10 In- 
+ []
+
+
+Overfull \hbox (35.96649pt too wide) in paragraph at lines 23--23
+ \OT1/cmr/m/sc/10 charge 
+ []
+
+
+Overfull \hbox (21.28593pt too wide) in paragraph at lines 25--25
+ []\OT1/cmr/m/sc/10 Dr.- 
+ []
+
+
+Overfull \hbox (16.59988pt too wide) in paragraph at lines 25--25
+ \OT1/cmr/m/sc/10 Ing 
+ []
+
+
+Overfull \hbox (26.20541pt too wide) in paragraph at lines 25--25
+ \OT1/cmr/m/sc/10 Arun 
+ []
+
+
+Overfull \hbox (42.77202pt too wide) in paragraph at lines 25--25
+ \OT1/cmr/m/sc/10 Prakash 
+ []
+
+
+Overfull \hbox (18.51106pt too wide) in paragraph at lines 25--25
+ \OT1/cmr/m/sc/10 and 
+ []
+
+
+Overfull \hbox (21.28593pt too wide) in paragraph at lines 25--25
+ \OT1/cmr/m/sc/10 Dr.- 
+ []
+
+
+Overfull \hbox (16.59988pt too wide) in paragraph at lines 25--25
+ \OT1/cmr/m/sc/10 Ing 
+ []
+
+
+Overfull \hbox (18.04987pt too wide) in paragraph at lines 25--25
+ \OT1/cmr/m/sc/10 Ha- 
+ []
+
+
+Overfull \hbox (13.95549pt too wide) in paragraph at lines 25--25
+ \OT1/cmr/m/sc/10 bil 
+ []
+
+
+Overfull \hbox (23.8915pt too wide) in paragraph at lines 25--25
+ \OT1/cmr/m/sc/10 Ger- 
+ []
+
+
+Overfull \hbox (16.62216pt too wide) in paragraph at lines 25--25
+ \OT1/cmr/m/sc/10 alf 
+ []
+
+
+Overfull \hbox (23.96094pt too wide) in paragraph at lines 25--25
+ \OT1/cmr/m/sc/10 Hut- 
+ []
+
+
+Overfull \hbox (17.51102pt too wide) in paragraph at lines 25--25
+ \OT1/cmr/m/sc/10 ter 
+ []
+
+
+! LaTeX Error: The font size command \normalsize is not defined:
+               there is probably something wrong with the class file.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.25 ...rakash and Dr.-Ing Habil Geralf Hutter}}\\
+                                                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[1{C:/Users/VISWAMBHAR YASA/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+! Undefined control sequence.
+l.27 	{\mydate
+              }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (8191.99998pt too wide) in paragraph at lines 29--30
+ [][] 
+ []
+
+
+! LaTeX Error: \begin{document} ended by \end{titlepage}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.32 \end{titlepage}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+)
+! Emergency stop.
+<*> ./TITLE_PAGE.tex
+                    
+*** (job aborted, no legal \end found)
+
+ 
+Here is how much of TeX's memory you used:
+ 29 strings out of 480799
+ 650 string characters out of 2891112
+ 240747 words of memory out of 3000000
+ 16132 multiletter control sequences out of 15000+200000
+ 532639 words of font info for 25 fonts, out of 3000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 18i,4n,15p,101b,159s stack positions out of 5000i,500n,10000p,200000b,50000s
+!  ==> Fatal error occurred, no output PDF file produced!

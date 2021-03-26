@@ -1,0 +1,43 @@
+=>PYTHONTEX#py#default#defaultverb#0#verbatim#####128#
+def knot_vector(self, n, degree):
+        '''
+        This function return knot vector based on the number of
+        control points and degree of B-spline
+        Parameters
+        ----------
+        control_points : int
+            number of points along with weights.
+        degree : int
+            order of B-splines  0-constant, 1-linear, 2-quadratic
+            ,3-cubic.
+
+        Returns
+        -------
+        knotvector - an array containing knots based on
+        			 control points
+        '''
+=>PYTHONTEX:SETTINGS#
+version=0.17
+outputdir=pythontex-files-main_page
+workingdir=.
+workingdirset=false
+gobble=none
+rerun=default
+hashdependencies=default
+makestderr=false
+stderrfilename=full
+keeptemps=none
+pyfuture=default
+pyconfuture=none
+pygments=true
+pygglobal=:GLOBAL||
+fvextfile=-1
+pyconbanner=none
+pyconfilename=stdin
+depythontex=false
+pygfamily=py|python3|
+pygfamily=pycon|pycon|
+pygfamily=sympy|python3|
+pygfamily=sympycon|pycon|
+pygfamily=pylab|python3|
+pygfamily=pylabcon|pycon|

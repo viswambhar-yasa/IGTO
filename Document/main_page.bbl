@@ -1,31 +1,48 @@
 \begin{thebibliography}{1}
 
-\bibitem{lockyer2007controlling}
-P.~S. Lockyer.
-\newblock {\em Controlling the interpolation of NURBS curves and surfaces}.
-\newblock PhD thesis, University of Birmingham, 2007.
-
 \bibitem{NGUYEN201589}
-V.~P. Nguyen, C.~Anitescu, S.~P. Bordas, and T.~Rabczuk.
-\newblock Isogeometric analysis: An overview and computer implementation
-  aspects.
-\newblock {\em Mathematics and Computers in Simulation}, 117:89--116, 2015.
+V.~P. Nguyen, C.~Anitescu, S.~P. Bordas, and T.~Rabczuk, ``Isogeometric
+  analysis: An overview and computer implementation aspects,'' {\em Mathematics
+  and Computers in Simulation}, vol.~117, pp.~89--116, 2015.
 
 \bibitem{Okruta2014ThreedimensionalTO}
-M.~Okruta.
-\newblock Three-dimensional topology optimization of statically loaded porous
-  and multi-phase structures.
-\newblock 2014.
+M.~Okruta, {\em Three-dimensional topology optimization of statically loaded
+  porous and multi-phase structures}.
+\newblock PhD thesis, University of Birmingham, 2014.
+
+\bibitem{lockyer2007controlling}
+P.~S. Lockyer, {\em Controlling the interpolation of NURBS curves and
+  surfaces}.
+\newblock PhD thesis, University of Birmingham, 2007.
+
+\bibitem{10.5555/265261}
+L.~Piegl and W.~Tiller, {\em The NURBS Book (2nd Ed.)}.
+\newblock Berlin, Heidelberg: Springer-Verlag, 1997.
 
 \bibitem{owens2009implementation}
-B.~C. OWENS.
-\newblock {\em IMPLEMENTATION OF B-SPLINES IN A CONVENTIONAL FINITE ELEMENT
+B.~C. OWENS, {\em IMPLEMENTATION OF B-SPLINES IN A CONVENTIONAL FINITE ELEMENT
   FRAMEWORK}.
 \newblock PhD thesis, Texas A\&M University, 2009.
 
-\bibitem{10.5555/265261}
-L.~Piegl and W.~Tiller.
-\newblock {\em The NURBS Book (2nd Ed.)}.
-\newblock Springer-Verlag, Berlin, Heidelberg, 1997.
+\bibitem{3dtopo}
+K.~Liu and A.~Tovar, ``An efficient 3d topology optimization code written in
+  matlab,'' {\em Structural and Multidisciplinary Optimization}, vol.~50, 12
+  2014.
+
+\bibitem{https://doi.org/10.1002/nme.1620240207}
+K.~Svanberg, ``The method of moving asymptotes—a new method for structural
+  optimization,'' {\em International Journal for Numerical Methods in
+  Engineering}, vol.~24, no.~2, pp.~359--373, 1987.
+
+\bibitem{patchtest}
+R.~L. Taylor, J.~C. Simo, O.~C. Zienkiewicz, and A.~C.~H. Chan, ``The patch
+  test—a condition for assessing fem convergence,'' {\em International
+  Journal for Numerical Methods in Engineering}, vol.~22, no.~1, pp.~39--62,
+  1986.
+
+\bibitem{ISOtop}
+M.~Tavakkoli, B.~Hassani, and H.~Ghasemnejad, ``Isogeometric topology
+  optimization of structures by using mma,'' {\em INTERNATIONAL JOURNAL OF
+  OPTIMIZATION IN CIVIL ENGINEERING}, vol.~3, 01 2013.
 
 \end{thebibliography}

@@ -1,38 +1,95 @@
 \babel@toc {english}{}
-\contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Advantages of IGA over standard FEM}{3}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Topology optimization using IGA}{3}{subsection.1.2}%
-\contentsline {section}{\numberline {2}Basis Splines}{4}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Control points}{4}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Degree of the B-spline}{5}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Generation of Knot vector}{5}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}B-spline Basis function}{7}{subsection.2.4}%
-\contentsline {subsubsection}{\numberline {2.4.1}Properties of B-spline basis function}{8}{subsubsection.2.4.1}%
-\contentsline {subsubsection}{\numberline {2.4.2}Derivatives of B-spline functions}{9}{subsubsection.2.4.2}%
-\contentsline {paragraph}{Properties of B-spline basis function}{10}{section*.8}%
-\contentsline {section}{\numberline {3}NURBS (Non-Uniform Rational B-splines) }{11}{section.3}%
-\contentsline {subsection}{\numberline {3.1}NURBS basis function}{11}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}NURBS derivative function}{12}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}NURBS volume}{13}{subsection.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.1}Derivative of Trivariant basis function}{14}{subsubsection.3.3.1}%
-\contentsline {section}{\numberline {4}Background Theory}{16}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Constitutive equation and their weak form}{16}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}IGA Formulation}{16}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Topology optimization using IGA}{18}{subsection.4.3}%
-\contentsline {subsubsection}{\numberline {4.3.1}Solid Isotropic Material with Penalization (SIMP) Method}{18}{subsubsection.4.3.1}%
-\contentsline {subsubsection}{\numberline {4.3.2}Minimum Compliance formulation}{19}{subsubsection.4.3.2}%
-\contentsline {subsubsection}{\numberline {4.3.3}Sensitivity}{20}{subsubsection.4.3.3}%
-\contentsline {subsubsection}{\numberline {4.3.4}Optimality criteria method}{21}{subsubsection.4.3.4}%
-\contentsline {subsubsection}{\numberline {4.3.5}Method of moving Asymptotes }{22}{subsubsection.4.3.5}%
-\contentsline {section}{\numberline {5}IGTO implementation}{24}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Relevant spaces}{24}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Pre-processing}{25}{subsection.5.2}%
-\contentsline {subsubsection}{\numberline {5.2.1}Generation of NURBS parameters}{25}{subsubsection.5.2.1}%
-\contentsline {subsubsection}{\numberline {5.2.2}Assembly of Geometry}{26}{subsubsection.5.2.2}%
-\contentsline {subsubsection}{\numberline {5.2.3}Boundary conditions}{29}{subsubsection.5.2.3}%
-\contentsline {subsection}{\numberline {5.3}Processing}{30}{subsection.5.3}%
-\contentsline {subsubsection}{\numberline {5.3.1}Mapping relevant spaces}{30}{subsubsection.5.3.1}%
-\contentsline {paragraph}{}{30}{section*.14}%
-\contentsline {subsubsection}{\numberline {5.3.2}Building global stiffness matrix}{31}{subsubsection.5.3.2}%
-\contentsline {subsubsection}{\numberline {5.3.3}Topology optimization}{32}{subsubsection.5.3.3}%
-\contentsline {subsection}{\numberline {5.4}Post-processing}{33}{subsection.5.4}%
+\contentsline {section}{\numberline {1}Introduction}{5}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Advantages of IGA over standard FEM}{5}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Topology optimization using IGA}{5}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Basis Splines}{6}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Control points}{6}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Degree of the B-spline}{7}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Generation of Knot vector}{7}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}B-spline Basis function}{9}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}Properties of B-spline basis function}{10}{subsubsection.2.4.1}%
+\contentsline {subsubsection}{\numberline {2.4.2}Derivatives of B-spline functions}{11}{subsubsection.2.4.2}%
+\contentsline {paragraph}{Properties of B-spline basis function derivatives}{11}{section*.8}%
+\contentsline {section}{\numberline {3}NURBS (Non-Uniform Rational B-splines) }{12}{section.3}%
+\contentsline {subsection}{\numberline {3.1}NURBS basis function}{13}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}NURBS derivative function}{13}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}NURBS volume}{14}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Derivative of Trivariant basis function}{15}{subsubsection.3.3.1}%
+\contentsline {section}{\numberline {4}Background Theory}{17}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Constitutive equation and their weak form}{17}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}IGA Formulation}{18}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Topology optimization using IGA}{19}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}Solid Isotropic Material with Penalization (SIMP) Method}{20}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}Minimum Compliance formulation}{20}{subsubsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.3}Sensitivity Analysis}{22}{subsubsection.4.3.3}%
+\contentsline {subsubsection}{\numberline {4.3.4}Optimality criteria method}{23}{subsubsection.4.3.4}%
+\contentsline {subsubsection}{\numberline {4.3.5}Method of moving Asymptotes }{25}{subsubsection.4.3.5}%
+\contentsline {section}{\numberline {5}IGTO implementation}{29}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Relevant spaces}{29}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Pre-processing}{30}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Generation of NURBS parameters}{30}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Assembly of Geometry}{31}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.3}Boundary conditions}{34}{subsubsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.3}Processing}{35}{subsection.5.3}%
+\contentsline {subsubsection}{\numberline {5.3.1}Mapping relevant spaces}{35}{subsubsection.5.3.1}%
+\contentsline {paragraph}{}{35}{section*.15}%
+\contentsline {subsubsection}{\numberline {5.3.2}Building global stiffness matrix}{37}{subsubsection.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.3.3}Topology optimization}{38}{subsubsection.5.3.3}%
+\contentsline {subsection}{\numberline {5.4}Post-processing}{40}{subsection.5.4}%
+\contentsline {subsubsection}{\numberline {5.4.1}Mapping displacements}{40}{subsubsection.5.4.1}%
+\contentsline {subsubsection}{\numberline {5.4.2}Mapping Strains and Stresses}{40}{subsubsection.5.4.2}%
+\contentsline {subsubsection}{\numberline {5.4.3}Mapping element densities (Topology optimization)}{41}{subsubsection.5.4.3}%
+\contentsline {subsection}{\numberline {5.5}Visualization}{41}{subsection.5.5}%
+\contentsline {subsubsection}{\numberline {5.5.1}VTK (Visualization Tool-kit)}{42}{subsubsection.5.5.1}%
+\contentsline {subsubsection}{\numberline {5.5.2}Visualization of deformed structure and topology}{43}{subsubsection.5.5.2}%
+\contentsline {section}{\numberline {6}Testing and Verification}{45}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Unit Testing}{46}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Functional testing}{47}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}Optimality Criterion (OC)}{47}{subsubsection.6.2.1}%
+\contentsline {paragraph}{Verification-1}{47}{section*.20}%
+\contentsline {paragraph}{Verification-2}{47}{section*.21}%
+\contentsline {subsubsection}{\numberline {6.2.2}Method of Moving Asymptotes (MMA)}{48}{subsubsection.6.2.2}%
+\contentsline {paragraph}{Verification}{48}{section*.22}%
+\contentsline {subsection}{\numberline {6.3}Sanity checks and Patch Testing}{48}{subsection.6.3}%
+\contentsline {subsubsection}{\numberline {6.3.1}Sanity check for Jacobian }{48}{subsubsection.6.3.1}%
+\contentsline {subsubsection}{\numberline {6.3.2}Sanity check for Stiffness matrix }{48}{subsubsection.6.3.2}%
+\contentsline {subsubsection}{\numberline {6.3.3}Eigenvalue Stiffness Test }{49}{subsubsection.6.3.3}%
+\contentsline {subsubsection}{\numberline {6.3.4}Rigid body Translation test }{49}{subsubsection.6.3.4}%
+\contentsline {subsubsection}{\numberline {6.3.5}Rigid body Rotation test }{49}{subsubsection.6.3.5}%
+\contentsline {subsubsection}{\numberline {6.3.6}Single element patch test }{50}{subsubsection.6.3.6}%
+\contentsline {subsubsection}{\numberline {6.3.7}Analytical solution Patch test}{50}{subsubsection.6.3.7}%
+\contentsline {subsubsection}{\numberline {6.3.8}Analytical solution Higher Order patch test}{50}{subsubsection.6.3.8}%
+\contentsline {section}{\numberline {7}User manual}{51}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Procedure to run the program}{51}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Procedure to run the test case}{53}{subsection.7.2}%
+\contentsline {section}{\numberline {8}Result validation and discussion}{55}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Validation test case-1}{55}{subsection.8.1}%
+\contentsline {subsubsection}{\numberline {8.1.1}Problem description}{55}{subsubsection.8.1.1}%
+\contentsline {subsubsection}{\numberline {8.1.2}Input parameters}{55}{subsubsection.8.1.2}%
+\contentsline {subsubsection}{\numberline {8.1.3}Problem solved using MMA optimizer}{55}{subsubsection.8.1.3}%
+\contentsline {subsubsection}{\numberline {8.1.4}Problem solved using OC optimizer}{59}{subsubsection.8.1.4}%
+\contentsline {subsubsection}{\numberline {8.1.5}Results discussion}{61}{subsubsection.8.1.5}%
+\contentsline {subsection}{\numberline {8.2}Validation test case-2}{62}{subsection.8.2}%
+\contentsline {subsubsection}{\numberline {8.2.1}Problem description}{62}{subsubsection.8.2.1}%
+\contentsline {subsubsection}{\numberline {8.2.2}Input parameters}{62}{subsubsection.8.2.2}%
+\contentsline {subsubsection}{\numberline {8.2.3}Problem solved using MMA optimizer}{62}{subsubsection.8.2.3}%
+\contentsline {subsubsection}{\numberline {8.2.4}Problem solved using OC optimizer}{65}{subsubsection.8.2.4}%
+\contentsline {subsubsection}{\numberline {8.2.5}Results discussion}{68}{subsubsection.8.2.5}%
+\contentsline {subsection}{\numberline {8.3}Validation test case-3}{69}{subsection.8.3}%
+\contentsline {subsubsection}{\numberline {8.3.1}Problem description}{69}{subsubsection.8.3.1}%
+\contentsline {subsubsection}{\numberline {8.3.2}Input parameters}{69}{subsubsection.8.3.2}%
+\contentsline {subsubsection}{\numberline {8.3.3}Problem solved using MMA optimizer}{69}{subsubsection.8.3.3}%
+\contentsline {subsubsection}{\numberline {8.3.4}Problem solved using OC optimizer}{72}{subsubsection.8.3.4}%
+\contentsline {subsubsection}{\numberline {8.3.5}Results discussion}{75}{subsubsection.8.3.5}%
+\contentsline {subsection}{\numberline {8.4}Influence of parameters on topology optimization}{76}{subsection.8.4}%
+\contentsline {subsubsection}{\numberline {8.4.1}Problem statement}{76}{subsubsection.8.4.1}%
+\contentsline {subsubsection}{\numberline {8.4.2}Penalization factor}{76}{subsubsection.8.4.2}%
+\contentsline {subsubsection}{\numberline {8.4.3}Minimum radius (rmin) factor}{78}{subsubsection.8.4.3}%
+\contentsline {subsubsection}{\numberline {8.4.4}Results discussion}{78}{subsubsection.8.4.4}%
+\contentsline {section}{\numberline {9}Time Analysis: Bottleneck in code}{80}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Problem description}{80}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Input parameters}{80}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Analysis and results discussion}{81}{subsection.9.3}%
+\contentsline {section}{\numberline {10}Milestones}{87}{section.10}%
+\contentsline {section}{\numberline {11}Conclusion}{87}{section.11}%
+\contentsline {section}{\numberline {12}GIT Log}{89}{section.12}%

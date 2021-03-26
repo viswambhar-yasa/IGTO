@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7440 64-bit) (preloaded format=pdflatex 2020.5.25)  26 FEB 2021 13:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7440 64-bit) (preloaded format=pdflatex 2020.5.25)  25 MAR 2021 22:37
 entering extended mode
 **./main_page.tex
 (main_page.tex
@@ -126,6 +126,35 @@ Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
 \multirow@dima=\skip53
 \bigstrutjot=\dimen146
 )
+("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/fancyvrb
+\fancyvrb.sty"
+Package: fancyvrb 2020/05/03 v3.6 verbatim text (tvz,hv)
+\FV@CodeLineNo=\count188
+\FV@InFile=\read2
+\FV@TabBox=\box47
+\c@FancyVerbLine=\count189
+\FV@StepNumber=\count190
+\FV@OutFile=\write3
+)
+("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics
+\color.sty"
+Package: color 2019/11/23 v1.2a Standard LaTeX Color (DPC)
+
+("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics
+-cfg\color.cfg"
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 147.
+)
+("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/float\fl
+oat.sty"
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count191
+\float@exts=\toks21
+\float@box=\box48
+\@float@everytoks=\toks22
+\@floatcapt=\box49
+)
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/geometry
 \geometry.sty"
 Package: geometry 2020/01/02 v5.9 Page Geometry
@@ -138,9 +167,9 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 iftex.sty"
 Package: iftex 2020/03/06 v1.0d TeX engine tests
 ))
-\Gm@cnth=\count188
-\Gm@cntv=\count189
-\c@Gm@tempcnt=\count190
+\Gm@cnth=\count192
+\Gm@cntv=\count193
+\c@Gm@tempcnt=\count194
 \Gm@bindingoffset=\dimen147
 \Gm@wd@mp=\dimen148
 \Gm@odd@mp=\dimen149
@@ -149,17 +178,25 @@ Package: iftex 2020/03/06 v1.0d TeX engine tests
 \Gm@layoutheight=\dimen152
 \Gm@layouthoffset=\dimen153
 \Gm@layoutvoffset=\dimen154
-\Gm@dimlist=\toks21
+\Gm@dimlist=\toks23
 
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/geometry
 \geometry.cfg"))
+("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/natbib\n
+atbib.sty"
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip54
+\bibsep=\skip55
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count195
+)
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/wrapfig\
 wrapfig.sty"
 \wrapoverhang=\dimen155
 \WF@size=\dimen156
-\c@WF@wrappedlines=\count191
-\WF@box=\box47
-\WF@everypar=\toks22
+\c@WF@wrappedlines=\count196
+\WF@box=\box50
+\WF@everypar=\toks24
 Package: wrapfig 2003/01/31  v 3.6
 )
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/blindtex
@@ -170,30 +207,30 @@ Package: blindtext 2012/01/06 V2.0 blindtext-Package
 pace.sty"
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 )
-\c@blindtext=\count192
-\c@Blindtext=\count193
-\c@blind@countparstart=\count194
-\blind@countxx=\count195
-\blindtext@numBlindtext=\count196
-\blind@countyy=\count197
-\c@blindlist=\count198
-\c@blindlistlevel=\count199
-\c@blindlist@level=\count266
-\blind@listitem=\count267
-\c@blind@listcount=\count268
-\c@blind@levelcount=\count269
-\blind@mathformula=\count270
-\blind@Mathformula=\count271
-\c@blind@randomcount=\count272
-\c@blind@randommax=\count273
-\c@blind@pangramcount=\count274
-\c@blind@pangrammax=\count275
+\c@blindtext=\count197
+\c@Blindtext=\count198
+\c@blind@countparstart=\count199
+\blind@countxx=\count266
+\blindtext@numBlindtext=\count267
+\blind@countyy=\count268
+\c@blindlist=\count269
+\c@blindlistlevel=\count270
+\c@blindlist@level=\count271
+\blind@listitem=\count272
+\c@blind@listcount=\count273
+\c@blind@levelcount=\count274
+\blind@mathformula=\count275
+\blind@Mathformula=\count276
+\c@blind@randomcount=\count277
+\c@blind@randommax=\count278
+\c@blind@pangramcount=\count279
+\c@blind@pangrammax=\count280
 )
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/index\in
 dex.sty"
 Package: index 2004/01/20 v4.2beta Improved index support (dmj)
 \@indexbox=\insert252
-\indexproofstyle=\toks23
+\indexproofstyle=\toks25
 
 
 LaTeX Warning: Command \markboth  has changed.
@@ -216,10 +253,10 @@ Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
 l\xkeyval.tex"
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/generic/xkeyva
 l\xkvutils.tex"
-\XKV@toks=\toks24
-\XKV@tempa@toks=\toks25
+\XKV@toks=\toks26
+\XKV@tempa@toks=\toks27
 )
-\XKV@depth=\count276
+\XKV@depth=\count281
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 ))
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\ift
@@ -239,8 +276,8 @@ basics and keyval usage)
 ipt\scrlfile.sty"
 Package: scrlfile 2020/04/19 v3.30 KOMA-Script package (loading files)
 ))
-\scr@dte@tocline@numberwidth=\skip54
-\scr@dte@tocline@numbox=\box48
+\scr@dte@tocline@numberwidth=\skip56
+\scr@dte@tocline@numbox=\box51
 )
 Package tocbasic Info: babel extension for `nlo' omitted
 (tocbasic)             because of missing \bbl@set@language on input line 179.
@@ -248,7 +285,7 @@ Package tocbasic Info: babel extension for `nls' omitted
 (tocbasic)             because of missing \bbl@set@language on input line 180.
 \nomlabelwidth=\dimen157
 \nom@tempdim=\dimen158
-\nomitemsep=\skip55
+\nomitemsep=\skip57
 )
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/subfig\s
 ubfig.sty"
@@ -271,23 +308,24 @@ Package caption3 Info: TeX engine: e-TeX on input line 61.
 \caption@hangindent=\dimen165
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count277
-\c@continuedfloat=\count278
+\c@caption@flags=\count282
+\c@continuedfloat=\count283
+Package caption Info: float package is loaded.
 Package caption Info: wrapfig package is loaded.
 )
-\c@KVtest=\count279
-\sf@farskip=\skip56
+\c@KVtest=\count284
+\sf@farskip=\skip58
 \sf@captopadj=\dimen166
-\sf@capskip=\skip57
-\sf@nearskip=\skip58
-\c@subfigure=\count280
-\c@subfigure@save=\count281
-\c@lofdepth=\count282
-\c@subtable=\count283
-\c@subtable@save=\count284
-\c@lotdepth=\count285
-\sf@top=\skip59
-\sf@bottom=\skip60
+\sf@capskip=\skip59
+\sf@nearskip=\skip60
+\c@subfigure=\count285
+\c@subfigure@save=\count286
+\c@lofdepth=\count287
+\c@subtable=\count288
+\c@subtable@save=\count289
+\c@lotdepth=\count290
+\sf@top=\skip61
+\sf@bottom=\skip62
 )
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/matlab-p
 rettifier\matlab-prettifier.sty"
@@ -307,6 +345,7 @@ Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 225.
+LaTeX Info: Redefining \color on input line 709.
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
 Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
 Package xcolor Info: Model `RGB' extended on input line 1364.
@@ -319,38 +358,38 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 )
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings
 \listings.sty"
-\lst@mode=\count286
-\lst@gtempboxa=\box49
-\lst@token=\toks26
-\lst@length=\count287
+\lst@mode=\count291
+\lst@gtempboxa=\box52
+\lst@token=\toks28
+\lst@length=\count292
 \lst@currlwidth=\dimen167
-\lst@column=\count288
-\lst@pos=\count289
+\lst@column=\count293
+\lst@pos=\count294
 \lst@lostspace=\dimen168
 \lst@width=\dimen169
-\lst@newlines=\count290
-\lst@lineno=\count291
+\lst@newlines=\count295
+\lst@lineno=\count296
 \lst@maxwidth=\dimen170
 
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings
 \lstmisc.sty"
 File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
-\c@lstnumber=\count292
-\lst@skipnumbers=\count293
-\lst@framebox=\box50
+\c@lstnumber=\count297
+\lst@skipnumbers=\count298
+\lst@framebox=\box53
 )
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings
 \listings.cfg"
 File: listings.cfg 2020/03/24 1.8d listings configuration
 ))
 Package: listings 2020/03/24 1.8d (Carsten Heinz)
-\netBracketCount@mlpr=\count294
-\blkLvl@mlpr=\count295
-\blkLvlAtClassdef@mlpr=\count296
-\emHeight@mlpr=\skip61
-\jayDepth@mlpr=\skip62
-\sectionRuleOffset@mlpr=\skip63
-\toks@mlpr=\toks27
+\netBracketCount@mlpr=\count299
+\blkLvl@mlpr=\count300
+\blkLvlAtClassdef@mlpr=\count301
+\emHeight@mlpr=\skip63
+\jayDepth@mlpr=\skip64
+\sectionRuleOffset@mlpr=\skip65
+\toks@mlpr=\toks29
 )
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/csvsimpl
 e\csvsimple.sty"
@@ -360,7 +399,7 @@ Package: csvsimple 2019/04/09 version 1.21 LaTeX CSV file processing
 ities\pgfrcs.sty"
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/ut
 ilities\pgfutil-common.tex"
-\pgfutil@everybye=\toks28
+\pgfutil@everybye=\toks30
 \pgfutil@tempdima=\dimen171
 \pgfutil@tempdimb=\dimen172
 
@@ -368,7 +407,7 @@ ilities\pgfutil-common.tex"
 ilities\pgfutil-common-lists.tex"))
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/ut
 ilities\pgfutil-latex.def"
-\pgfutil@abb=\box51
+\pgfutil@abb=\box54
 
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/ms\every
 shi.sty"
@@ -384,28 +423,28 @@ Package: pgfrcs 2020/01/08 v3.1.5b (3.1.5b)
 ities\pgfkeys.sty"
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/ut
 ilities\pgfkeys.code.tex"
-\pgfkeys@pathtoks=\toks29
-\pgfkeys@temptoks=\toks30
+\pgfkeys@pathtoks=\toks31
+\pgfkeys@temptoks=\toks32
 
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pgf/ut
 ilities\pgfkeysfiltered.code.tex"
-\pgfkeys@tmptoks=\toks31
+\pgfkeys@tmptoks=\toks33
 )))
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/etoolbox
 \etoolbox.sty"
 Package: etoolbox 2019/09/21 v2.5h e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count297
+\etb@tempcnta=\count302
 )
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/tools\sh
 ellesc.sty"
 Package: shellesc 2019/11/08 v1.0c unified shell escape interface for LaTeX
 Package shellesc Info: Restricted shell escape enabled on input line 77.
 )
-\csv@file=\read2
-\c@csvinputline=\count298
-\c@csvrow=\count299
-\c@csvcol=\count300
-\csv@out=\write3
+\csv@file=\read3
+\c@csvinputline=\count303
+\c@csvrow=\count304
+\c@csvcol=\count305
+\csv@out=\write4
 )
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/generic/babel\
 babel.sty"
@@ -414,15 +453,15 @@ Package: babel 2020/05/13 3.44 The Babel package
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/generic/babel\
 babel.def"
 File: babel.def 2020/05/13 3.44 Babel common definitions
-\babel@savecnt=\count301
+\babel@savecnt=\count306
 \U@D=\dimen173
 \l@babelnohyphens=\language78
 
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/generic/babel\
 txtbabel.def")
-\bbl@readstream=\read3
+\bbl@readstream=\read4
 )
-\bbl@dirlevel=\count302
+\bbl@dirlevel=\count307
 
 *************************************
 * Local config file bblopts.cfg used
@@ -493,8 +532,8 @@ s\kvoptions.sty"
 Package: kvoptions 2019/11/29 v3.13 Key value format for package options (HO)
 )
 \@linkdim=\dimen174
-\Hy@linkcounter=\count303
-\Hy@pagecounter=\count304
+\Hy@linkcounter=\count308
+\Hy@pagecounter=\count309
 
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref
 \pd1enc.def"
@@ -510,7 +549,7 @@ Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 ds\etexcmds.sty"
 Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 )
-\Hy@SavedSpaceFactor=\count305
+\Hy@SavedSpaceFactor=\count310
 Package hyperref Info: Hyper figures OFF on input line 4464.
 Package hyperref Info: Link nesting OFF on input line 4469.
 Package hyperref Info: Hyper index ON on input line 4472.
@@ -518,7 +557,7 @@ Package hyperref Info: Plain pages OFF on input line 4479.
 Package hyperref Info: Backreferencing OFF on input line 4484.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4717.
-\c@Hy@tempcnt=\count306
+\c@Hy@tempcnt=\count311
 
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/url\url.
 sty"
@@ -537,7 +576,7 @@ calc\bigintcalc.sty"
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count307
+\Fld@menulength=\count312
 \Field@Width=\dimen176
 \Fld@charsize=\dimen177
 Package hyperref Info: Hyper figures OFF on input line 6347.
@@ -554,9 +593,9 @@ LaTeX Info: Redefining \pageref on input line 6421.
 hi\atbegshi.sty"
 Package: atbegshi 2019/12/05 v1.19 At begin shipout hook (HO)
 )
-\Hy@abspage=\count308
-\c@Item=\count309
-\c@Hfootnote=\count310
+\Hy@abspage=\count313
+\c@Item=\count314
+\c@Hfootnote=\count315
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 
@@ -568,8 +607,8 @@ File: hpdftex.def 2020-05-15 v7.00e Hyperref driver for pdfTeX
 d\atveryend.sty"
 Package: atveryend 2019-12-11 v1.11 Hooks at the very end of document (HO)
 )
-\Fld@listcount=\count311
-\c@bookmark@seq@number=\count312
+\Fld@listcount=\count316
+\c@bookmark@seq@number=\count317
 
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/rerunfil
 echeck\rerunfilecheck.sty"
@@ -582,54 +621,65 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 86.
 )
-\Hy@SectionHShift=\skip64
+\Hy@SectionHShift=\skip66
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 26.
+Package hyperref Info: Option `colorlinks' set `true' on input line 29.
 
+("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/listings
+\lstlang1.sty"
+File: lstlang1.sty 2020/03/24 1.8d listings language file
+)
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3backen
 d\l3backend-pdfmode.def"
 File: l3backend-pdfmode.def 2020-05-05 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count313
-\l__pdf_internal_box=\box52
+\l__kernel_color_stack_int=\count318
+\l__pdf_internal_box=\box55
 )
 
 LaTeX Warning: Unused global option(s):
     [times].
 
-(main_page.aux)
+(main_page.aux
+
+LaTeX Warning: Label `fig:problem-1' multiply defined.
+
+
+LaTeX Warning: Label `fig:problem-1' multiply defined.
+
+)
 \openout1 = `main_page.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
 
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/context/base/m
 kii\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count314
+\scratchcounter=\count319
 \scratchdimen=\dimen178
-\scratchbox=\box53
-\nofMPsegments=\count315
-\nofMParguments=\count316
-\everyMPshowfont=\toks32
-\MPscratchCnt=\count317
+\scratchbox=\box56
+\nofMPsegments=\count320
+\nofMParguments=\count321
+\everyMPshowfont=\toks34
+\MPscratchCnt=\count322
 \MPscratchDim=\dimen179
-\MPnumerator=\count318
-\makeMPintoPDFobject=\count319
-\everyMPtoPDFconversion=\toks33
+\MPnumerator=\count323
+\makeMPintoPDFobject=\count324
+\everyMPtoPDFconversion=\toks35
 )
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/epstopdf
 -pkg\epstopdf-base.sty"
@@ -676,10 +726,10 @@ Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count320
+\c@lstlisting=\count325
 ABD: EveryShipout initializing macros
-\AtBeginShipoutBox=\box54
-Package hyperref Info: Link coloring ON on input line 38.
+\AtBeginShipoutBox=\box57
+Package hyperref Info: Link coloring ON on input line 65.
 
 ("C:\Users\VISWAMBHAR YASA\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref
 \nameref.sty"
@@ -693,17 +743,17 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 lestring\gettitlestring.sty"
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count321
+\c@section@level=\count326
 )
-LaTeX Info: Redefining \ref on input line 38.
-LaTeX Info: Redefining \pageref on input line 38.
-LaTeX Info: Redefining \nameref on input line 38.
+LaTeX Info: Redefining \ref on input line 65.
+LaTeX Info: Redefining \pageref on input line 65.
+LaTeX Info: Redefining \nameref on input line 65.
  (main_page.out) (main_page.out)
-\@outlinefile=\write4
-\openout4 = `main_page.out'.
+\@outlinefile=\write5
+\openout5 = `main_page.out'.
 
  (TITLE_PAGE.tex
-<WBM_schwarz.png, id=143, 511.4307pt x 142.3719pt>
+<WBM_schwarz.png, id=359, 511.4307pt x 142.3719pt>
 File: WBM_schwarz.png Graphic file (type png)
 <use WBM_schwarz.png>
 Package pdftex.def Info: WBM_schwarz.png  used on input line 11.
@@ -716,362 +766,944 @@ Package pdftex.def Info: WBM_schwarz.png  used on input line 11.
 ame identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.29 ...e {5.2}Pre-processing}{25}{subsection.5.2}
-                                                  % [1])
-\tf@toc=\write5
-\openout5 = `main_page.toc'.
+l.29 ...e {5.2}Pre-processing}{30}{subsection.5.2}
+                                                  % [1] [2] [3])
+\tf@toc=\write6
+\openout6 = `main_page.toc'.
 
- [2] [3]
-<Bsplines_figure1.png, id=211, 590.205pt x 325.81725pt>
+ [4] [5]
+<Bsplines_figure1.png, id=489, 590.205pt x 325.81725pt>
 File: Bsplines_figure1.png Graphic file (type png)
 <use Bsplines_figure1.png>
-Package pdftex.def Info: Bsplines_figure1.png  used on input line 88.
+Package pdftex.def Info: Bsplines_figure1.png  used on input line 112.
 (pdftex.def)             Requested size: 313.69025pt x 173.17448pt.
- [4 <./Bsplines_figure1.png>]
-<Bspline_curve_different_order.png, id=222, 385.44pt x 279.0425pt>
+
+[6 <./Bsplines_figure1.png>]
+<Bspline_curve_different_order.png, id=501, 385.44pt x 279.0425pt>
 File: Bspline_curve_different_order.png Graphic file (type png)
 <use Bspline_curve_different_order.png>
 Package pdftex.def Info: Bspline_curve_different_order.png  used on input line 
-102.
+126.
 (pdftex.def)             Requested size: 376.42575pt x 272.51453pt.
- [5 <./Bspline_curve_different_order.png>]
-<knot_vector_clamped_unclamped.png, id=233, 395.076pt x 163.812pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 139--140
+
+ []
+
+<knot_vector_clamped_unclamped.png, id=503, 395.076pt x 163.812pt>
 File: knot_vector_clamped_unclamped.png Graphic file (type png)
 <use knot_vector_clamped_unclamped.png>
 Package pdftex.def Info: knot_vector_clamped_unclamped.png  used on input line 
-120.
+144.
 (pdftex.def)             Requested size: 313.69025pt x 130.06993pt.
-
-Overfull \hbox (1.64653pt too wide) in paragraph at lines 144--144
-[]\OT1/cmtt/m/n/12 ------------------------------------------------------------
---------[] 
- []
-
-
-Overfull \hbox (1.64653pt too wide) in paragraph at lines 144--144
-[]\OT1/cmtt/m/n/12 ------------------------------------------------------------
---------[] 
- []
-
-<knot_vector_combined.png, id=237, 941.31676pt x 270.41025pt>
-File: knot_vector_combined.png Graphic file (type png)
-<use knot_vector_combined.png>
-Package pdftex.def Info: knot_vector_combined.png  used on input line 158.
-(pdftex.def)             Requested size: 418.25368pt x 120.14856pt.
-[6 <./knot_vector_clamped_unclamped.png>]
-<Bspline_basis_recussive.png, id=247, 252.945pt x 84.315pt>
-File: Bspline_basis_recussive.png Graphic file (type png)
-<use Bspline_basis_recussive.png>
-Package pdftex.def Info: Bspline_basis_recussive.png  used on input line 182.
-(pdftex.def)             Requested size: 313.69025pt x 104.56621pt.
- [7 <./knot_vector_combined.png> <./Bspline_basis_recussive.png>]
-Overfull \hbox (1.64653pt too wide) in paragraph at lines 218--218
-[]\OT1/cmtt/m/n/12 ------------------------------------------------------------
---------[] 
- []
-
-
-Overfull \hbox (1.64653pt too wide) in paragraph at lines 218--218
-[]\OT1/cmtt/m/n/12 ------------------------------------------------------------
---------[] 
- []
-
-[8]
-Overfull \hbox (13.99654pt too wide) in paragraph at lines 240--240
-[]\OT1/cmtt/m/n/12 (2) pytest test_geometry.py::test__Bspline_basis_sum_equal_t
-o_one_true[] 
- []
-
-
-Overfull \hbox (32.52155pt too wide) in paragraph at lines 240--240
-[]\OT1/cmtt/m/n/12 (3) pytest test_geometry.py::test__Bspline_basis_all_values_
-positive_true[] 
- []
-
-[9]
-<bspline_function_and_derivative_cubic.png, id=274, 264.38776pt x 276.43275pt>
-File: bspline_function_and_derivative_cubic.png Graphic file (type png)
-<use bspline_function_and_derivative_cubic.png>
-Package pdftex.def Info: bspline_function_and_derivative_cubic.png  used on inp
-ut line 282.
-(pdftex.def)             Requested size: 313.69025pt x 327.99312pt.
- [10 <./bspline_function_and_derivative_cubic.png>]
-Overfull \hbox (20.17154pt too wide) in paragraph at lines 304--304
-[]\OT1/cmtt/m/n/12 (5) pytest test_geometry.py::test__derbspline_basis_sum_equa
-l_zero_true[] 
- []
-
-<NURBS_combined_bspline.png, id=285, 629.9535pt x 222.23026pt>
-File: NURBS_combined_bspline.png Graphic file (type png)
-<use NURBS_combined_bspline.png>
-Package pdftex.def Info: NURBS_combined_bspline.png  used on input line 319.
-(pdftex.def)             Requested size: 418.25368pt x 147.55067pt.
-<NURBS_circle.png, id=286, 462.528pt x 346.896pt>
-File: NURBS_circle.png Graphic file (type png)
-<use NURBS_circle.png>
-Package pdftex.def Info: NURBS_circle.png  used on input line 335.
-(pdftex.def)             Requested size: 355.51817pt x 266.65022pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[11 <./NURBS_combined_bspline.png>] [12 <./NURBS_circle.png>]
-<NURBS_2D_surface.png, id=303, 238.491pt x 223.43475pt>
+[7 <./Bspline_curve_different_order.png>]
+<knot_vector_combined.png, id=517, 941.31676pt x 270.41025pt>
+File: knot_vector_combined.png Graphic file (type png)
+<use knot_vector_combined.png>
+Package pdftex.def Info: knot_vector_combined.png  used on input line 182.
+(pdftex.def)             Requested size: 418.25368pt x 120.14856pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[8 <./knot_vector_clamped_unclamped.png>]
+<Bspline_basis_recussive.png, id=548, 252.945pt x 84.315pt>
+File: Bspline_basis_recussive.png Graphic file (type png)
+<use Bspline_basis_recussive.png>
+Package pdftex.def Info: Bspline_basis_recussive.png  used on input line 206.
+(pdftex.def)             Requested size: 313.69025pt x 104.56621pt.
+ [9 <./knot_vector_combined.png> <./Bspline_basis_recussive.png>] [10]
+<bspline_function_and_derivative_cubic.png, id=601, 264.38776pt x 276.43275pt>
+File: bspline_function_and_derivative_cubic.png Graphic file (type png)
+<use bspline_function_and_derivative_cubic.png>
+Package pdftex.def Info: bspline_function_and_derivative_cubic.png  used on inp
+ut line 303.
+(pdftex.def)             Requested size: 313.69025pt x 327.99312pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[11] [12 <./bspline_function_and_derivative_cubic.png>]
+<NURBS_combined_bspline.png, id=652, 629.9535pt x 222.23026pt>
+File: NURBS_combined_bspline.png Graphic file (type png)
+<use NURBS_combined_bspline.png>
+Package pdftex.def Info: NURBS_combined_bspline.png  used on input line 340.
+(pdftex.def)             Requested size: 418.25368pt x 147.55067pt.
+<NURBS_circle.png, id=653, 462.528pt x 346.896pt>
+File: NURBS_circle.png Graphic file (type png)
+<use NURBS_circle.png>
+Package pdftex.def Info: NURBS_circle.png  used on input line 356.
+(pdftex.def)             Requested size: 355.51817pt x 266.65022pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[13 <./NURBS_combined_bspline.png>]
+<NURBS_2D_surface.png, id=662, 238.491pt x 223.43475pt>
 File: NURBS_2D_surface.png Graphic file (type png)
 <use NURBS_2D_surface.png>
-Package pdftex.def Info: NURBS_2D_surface.png  used on input line 365.
+Package pdftex.def Info: NURBS_2D_surface.png  used on input line 386.
 (pdftex.def)             Requested size: 313.69025pt x 293.91197pt.
- [13 <./NURBS_2D_surface.png>] [14]
-Overfull \hbox (51.04655pt too wide) in paragraph at lines 458--458
-[]\OT1/cmtt/m/n/12 (7) pytest test_geometry.py::test__trilinear_der_Basis_sum_e
-qual_to_one_true[] 
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[14 <./NURBS_circle.png>] [15 <./NURBS_2D_surface.png>]
+Overfull \hbox (9.90315pt too wide) in paragraph at lines 430--431
+[][][][][][][][][][][][][][][][][][][]  
  []
 
-
-Overfull \hbox (44.87155pt too wide) in paragraph at lines 458--458
-[]\OT1/cmtt/m/n/12 (8) pytest test_geometry.py::test__trilinear_der_Basis_less_
-than_zero_false[] 
- []
-
-
-Overfull \hbox (38.69655pt too wide) in paragraph at lines 458--458
-[]\OT1/cmtt/m/n/12 (9) pytest test_geometry.py::test__trilinear_der_XI_sum_equa
-l_to_zero_true[] 
- []
-
-
-Overfull \hbox (51.04655pt too wide) in paragraph at lines 458--458
-[]\OT1/cmtt/m/n/12 (10) pytest test_geometry.py::test__trilinear_der_ETA_sum_eq
-ual_to_zero_true[] 
- []
-
-
-Overfull \hbox (57.22156pt too wide) in paragraph at lines 458--458
-[]\OT1/cmtt/m/n/12 (11) pytest test_geometry.py::test__trilinear_der_NETA_sum_e
-qual_to_zero_true[] 
- []
-
-[15]
-Underfull \hbox (badness 10000) in paragraph at lines 467--469
+[16]
+Underfull \hbox (badness 10000) in paragraph at lines 475--477
 
  []
 
-
-Overfull \hbox (197.65675pt too wide) detected at line 509
+[17]
+Overfull \hbox (197.65675pt too wide) detected at line 517
 []\OT1/cmr/bx/n/12 R \OT1/cmr/m/n/12 = []
  []
 
-[16] [17] [18] [19]
-Overfull \hbox (13.99654pt too wide) in paragraph at lines 700--700
-[]\OT1/cmtt/m/n/12 ------------------------------------------------------------
-----------[] 
- []
-
-
-Overfull \hbox (7.82153pt too wide) in paragraph at lines 700--700
-[]    \OT1/cmtt/m/n/12 function used to generate weight factor from the given p
-arameters[] 
- []
-
-[20]
-Overfull \hbox (13.99654pt too wide) in paragraph at lines 700--700
-[]\OT1/cmtt/m/n/12 ------------------------------------------------------------
-----------[] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 718--720
+[18] [19] [20] [21] [22]
+Underfull \hbox (badness 10000) in paragraph at lines 723--725
 
  []
 
-[21]
-Overfull \hbox (13.99654pt too wide) in paragraph at lines 737--737
-[]\OT1/cmtt/m/n/12 ------------------------------------------------------------
-----------[] 
+
+Overfull \hbox (55.89265pt too wide) in paragraph at lines 734--735
+[][][][][][][][][][][][][][][][][][][][][][][]  
  []
 
 
-Overfull \hbox (13.99654pt too wide) in paragraph at lines 737--737
-[]\OT1/cmtt/m/n/12 pytest test_optimization.py::test__optimality_criteria_simpl
-e_function[] 
+Overfull \hbox (30.14397pt too wide) in paragraph at lines 735--736
+[][][][][][][][][][][][][][][][][][][][][][]  
+ []
+
+[23] [24]
+Overfull \hbox (2.58649pt too wide) in paragraph at lines 772--773
+\OT1/cmr/m/n/12 Test com-mand to check the im-ple-men-ta-tion of OC for sim-ple
+ func-tion and quadratic
  []
 
 
-Overfull \hbox (32.52155pt too wide) in paragraph at lines 737--737
-[]\OT1/cmtt/m/n/12 pytest test_optimization.py::test__optimality_criteria_quadr
-atic_function[] 
- []
-
-
-Overfull \hbox (13.99654pt too wide) in paragraph at lines 737--737
-[]\OT1/cmtt/m/n/12 ------------------------------------------------------------
-----------[] 
- []
-
-
-Overfull \hbox (6.8134pt too wide) detected at line 767
+Overfull \hbox (6.8134pt too wide) detected at line 809
 []\OML/cmm/m/it/12 p[] \OT1/cmr/m/n/12 = [][] []
  []
 
 
-Overfull \hbox (3.6329pt too wide) detected at line 770
+Overfull \hbox (3.6329pt too wide) detected at line 812
 []\OML/cmm/m/it/12 q[] \OT1/cmr/m/n/12 = [][] []
  []
 
-[22]
-Underfull \hbox (badness 10000) in paragraph at lines 806--808
+[25]
+Underfull \hbox (badness 10000) in paragraph at lines 848--849
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 816--818
+Underfull \hbox (badness 10000) in paragraph at lines 850--851
 
  []
 
-[23]
-Overfull \hbox (13.99654pt too wide) in paragraph at lines 825--825
-[]\OT1/cmtt/m/n/12 ------------------------------------------------------------
-----------[] 
- []
 
-
-Overfull \hbox (13.99654pt too wide) in paragraph at lines 825--825
-[]\OT1/cmtt/m/n/12 ------------------------------------------------------------
-----------[] 
- []
-
-<relevant_spaces.png, id=424, 289.08pt x 356.532pt>
-File: relevant_spaces.png Graphic file (type png)
-<use relevant_spaces.png>
-Package pdftex.def Info: relevant_spaces.png  used on input line 845.
-(pdftex.def)             Requested size: 188.21288pt x 232.1293pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[24] [25 <./relevant_spaces.png>]
-Overfull \hbox (20.17154pt too wide) in paragraph at lines 894--894
-[]        \OT1/cmtt/m/n/12 crtpts_coordinates : generate control points along w
-ith weights[] 
- []
-
-
-Overfull \hbox (7.82153pt too wide) in paragraph at lines 894--894
-[]    \OT1/cmtt/m/n/12 def __init__(self, length=1, height=1, width=1, nx=1, ny
-=1, nz=1,[] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 909--910
+Underfull \hbox (badness 10000) in paragraph at lines 862--863
 
  []
 
 [26]
-<element numbering.png, id=447, 322.20375pt x 184.89075pt>
+Underfull \hbox (badness 10000) in paragraph at lines 871--872
+
+ []
+
+[27] [28]
+<relevant_spaces.png, id=972, 289.08pt x 356.532pt>
+File: relevant_spaces.png Graphic file (type png)
+<use relevant_spaces.png>
+Package pdftex.def Info: relevant_spaces.png  used on input line 959.
+(pdftex.def)             Requested size: 188.21288pt x 232.1293pt.
+ [29 <./relevant_spaces.png>]
+<assembly_figure.png, id=983, 303.534pt x 223.43475pt>
+File: assembly_figure.png Graphic file (type png)
+<use assembly_figure.png>
+Package pdftex.def Info: assembly_figure.png  used on input line 987.
+(pdftex.def)             Requested size: 418.25368pt x 307.88002pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[30]
+Underfull \hbox (badness 10000) in paragraph at lines 1020--1021
+
+ []
+
+[31 <./assembly_figure.png>]
+<element numbering.png, id=1013, 322.20375pt x 184.89075pt>
 File: element numbering.png Graphic file (type png)
 <use element numbering.png>
-Package pdftex.def Info: element numbering.png  used on input line 926.
+Package pdftex.def Info: element numbering.png  used on input line 1031.
 (pdftex.def)             Requested size: 418.25368pt x 240.01654pt.
- [27 <./element numbering.png>]
-Overfull \hbox (1.64653pt too wide) in paragraph at lines 973--973
-[]                        \OT1/cmtt/m/n/12 for n in range(len(knotconnectivityU
-[k,:])):[] 
+ [32 <./element numbering.png>]
+Overfull \hbox (39.34172pt too wide) in paragraph at lines 1079--1080
+[][][][][][][][][][][][][][][][][][][][][][][][][][][]  
  []
 
-[28]
-Overfull \hbox (81.92157pt too wide) in paragraph at lines 986--986
-[]\OT1/cmtt/m/n/12 (16) pytest test_geometry.py::test__single_element_Assembly_
-C1_continuity_along_x[] 
+[33] [34] [35]
+Overfull \hbox (67.39003pt too wide) in paragraph at lines 1180--1181
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][]  
  []
 
-
-Overfull \hbox (20.17154pt too wide) in paragraph at lines 1018--1018
+[36]
+Overfull \hbox (20.17154pt too wide) in paragraph at lines 1232--1232
 []\OT1/cmtt/m/n/12 ------------------------------------------------------------
 -----------[] 
  []
 
-[29] [30]
-Overfull \hbox (20.17154pt too wide) in paragraph at lines 1070--1070
+[37]
+Overfull \hbox (20.17154pt too wide) in paragraph at lines 1252--1252
 []\OT1/cmtt/m/n/12 ------------------------------------------------------------
 -----------[] 
  []
 
-
-Overfull \hbox (26.34654pt too wide) in paragraph at lines 1070--1070
-[]\OT1/cmtt/m/n/12 (17) pytest test_element_routine.py::test__unit_to_parametri
-c_space_true[] 
- []
-
-
-Overfull \hbox (38.69655pt too wide) in paragraph at lines 1070--1070
-[]\OT1/cmtt/m/n/12 (18) pytest test_element_routine.py::test__Jacobian_patch_te
-sting_rotation[] 
- []
-
-
-Overfull \hbox (20.17154pt too wide) in paragraph at lines 1070--1070
-[]\OT1/cmtt/m/n/12 ------------------------------------------------------------
------------[] 
- []
-
-
-Overfull \hbox (20.17154pt too wide) in paragraph at lines 1083--1083
-[]\OT1/cmtt/m/n/12 ------------------------------------------------------------
------------[] 
- []
-
-[31]
-Overfull \hbox (20.17154pt too wide) in paragraph at lines 1102--1102
-[]\OT1/cmtt/m/n/12 ------------------------------------------------------------
------------[] 
- []
-
-
-Overfull \hbox (20.17154pt too wide) in paragraph at lines 1112--1112
-[]\OT1/cmtt/m/n/12 ------------------------------------------------------------
------------[] 
- []
-
-
-Overfull \hbox (20.17154pt too wide) in paragraph at lines 1112--1112
-[]\OT1/cmtt/m/n/12 (19) pytest test_element_routine.py::test__gauss_quadrature_
-1point_true[] 
- []
-
-
-Overfull \hbox (20.17154pt too wide) in paragraph at lines 1112--1112
-[]\OT1/cmtt/m/n/12 (20) pytest test_element_routine.py::test__stiffness_matrix_
-singularity[] 
- []
-
-
-Overfull \hbox (20.17154pt too wide) in paragraph at lines 1112--1112
-[]\OT1/cmtt/m/n/12 ------------------------------------------------------------
------------[] 
- []
-
-[32]
-<topology flowchart.png, id=494, 371.58826pt x 456.5055pt>
+<topology flowchart.png, id=1171, 371.58826pt x 456.5055pt>
 File: topology flowchart.png Graphic file (type png)
 <use topology flowchart.png>
-Package pdftex.def Info: topology flowchart.png  used on input line 1145.
+Package pdftex.def Info: topology flowchart.png  used on input line 1265.
 (pdftex.def)             Requested size: 271.86234pt x 334.0055pt.
- [33 <./topology flowchart.png>] (main_page.bbl) [34]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1173.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1173.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[38] [39 <./topology flowchart.png>] [40] [41] [42]
+Underfull \hbox (badness 10000) in paragraph at lines 1407--1408
+
+ []
+
+<paraview.png, id=1279, 1156.32pt x 650.43pt>
+File: paraview.png Graphic file (type png)
+<use paraview.png>
+Package pdftex.def Info: paraview.png  used on input line 1420.
+(pdftex.def)             Requested size: 313.69025pt x 176.4422pt.
+<paraview2.png, id=1280, 1155.1155pt x 664.28175pt>
+File: paraview2.png Graphic file (type png)
+<use paraview2.png>
+Package pdftex.def Info: paraview2.png  used on input line 1427.
+(pdftex.def)             Requested size: 313.69025pt x 180.39235pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[43 <./paraview.png>] [44 <./paraview2.png>]
+<list_of_tests.png, id=1317, 226.446pt x 501.072pt>
+File: list_of_tests.png Graphic file (type png)
+<use list_of_tests.png>
+Package pdftex.def Info: list_of_tests.png  used on input line 1486.
+(pdftex.def)             Requested size: 104.56342pt x 231.36754pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1483--1489
+
+ []
+
+[45] [46 <./list_of_tests.png>] [47]
+Overfull \hbox (48.76611pt too wide) in paragraph at lines 1573--1577
+\OT1/cmr/bx/n/12 Test com-mand $ [] [] $ \OT1/cmr/m/n/12 pytest test$[]$element
+$[]$routine.py $ [] []  [] [] $ test$[][]$Jacobian$[]$patch$[]$testing$[]$rotat
+ion.
+ []
+
+
+Overfull \hbox (20.74474pt too wide) in paragraph at lines 1579--1583
+\OT1/cmr/bx/n/12 Test com-mand $ [] [] $ \OT1/cmr/m/n/12 pytest test$[]$element
+$[]$routine.py $ [] []  [] [] $ test$[][]$stiffness$[]$matrix$[]$singularity
+ []
+
+[48]
+Overfull \hbox (6.24016pt too wide) in paragraph at lines 1586--1592
+\OT1/cmr/bx/n/12 Test com-mand $ [] [] $ \OT1/cmr/m/n/12 pytest test$[]$rigid$[
+]$body$[]$motion.py $ [] []  [] [] $ test$[][]$rigid$[]$body$[]$constrains
+ []
+
+
+Overfull \hbox (52.16911pt too wide) in paragraph at lines 1595--1600
+\OT1/cmr/bx/n/12 Test com-mand $ [] [] $ \OT1/cmr/m/n/12 pytest test$[]$rigid$[
+]$body$[]$motion.py $ [] []  [] [] $ test$[][]$rigid$[]$body$[]$translation$[]$
+along$[]$x
+ []
+
+
+Overfull \hbox (77.32089pt too wide) detected at line 1609
+[]\OT1/cmr/bx/n/12 R \OT1/cmr/m/n/12 = []
+ []
+
+[49]
+Overfull \hbox (5.39156pt too wide) in paragraph at lines 1619--1623
+\OT1/cmr/bx/n/12 Test com-mand $ [] [] $ \OT1/cmr/m/n/12 pytest test$[]$rigid$[
+]$body$[]$motion.py $ [] []  [] [] $ test$[][]$patch$[]$constant$[]$stress 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1625--1626
+
+ []
+
+
+Overfull \hbox (24.12608pt too wide) in paragraph at lines 1631--1637
+\OT1/cmr/bx/n/12 Test com-mand $ [] [] $ \OT1/cmr/m/n/12 pytest test$[]$rigid$[
+]$body$[]$motion.py $ [] []  [] [] $ test$[][]$patch$[]$analytical$[]$solution
+ []
+
+[50]
+<list_of_files.png, id=1403, 142.131pt x 328.22626pt>
+File: list_of_files.png Graphic file (type png)
+<use list_of_files.png>
+Package pdftex.def Info: list_of_files.png  used on input line 1660.
+(pdftex.def)             Requested size: 142.13063pt x 328.22545pt.
+<installed_lib.png, id=1404, 302.93175pt x 87.9285pt>
+File: installed_lib.png Graphic file (type png)
+<use installed_lib.png>
+Package pdftex.def Info: installed_lib.png  used on input line 1674.
+(pdftex.def)             Requested size: 302.931pt x 87.92827pt.
+ [51 <./list_of_files.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1707--1708
+
+ []
+
+[52 <./installed_lib.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1719--1720
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1726--1727
+
+ []
+
+[53] [54]
+<Problem-1.png, id=1480, 147.55125pt x 103.587pt>
+File: Problem-1.png Graphic file (type png)
+<use Problem-1.png>
+Package pdftex.def Info: Problem-1.png  used on input line 1763.
+(pdftex.def)             Requested size: 258.21402pt x 181.2768pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1774--1775
+
+ []
+
+[55 <./Problem-1.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1779--1782
+
+ []
+
+<analytical_1.png, id=1494, 134.30174pt x 82.50826pt>
+File: analytical_1.png Graphic file (type png)
+<use analytical_1.png>
+Package pdftex.def Info: analytical_1.png  used on input line 1787.
+(pdftex.def)             Requested size: 209.12683pt x 128.48068pt.
+<Numerical_result_MMA_01.png, id=1497, 1963.335pt x 1616.0375pt>
+File: Numerical_result_MMA_01.png Graphic file (type png)
+<use Numerical_result_MMA_01.png>
+Package pdftex.def Info: Numerical_result_MMA_01.png  used on input line 1794.
+(pdftex.def)             Requested size: 209.12683pt x 172.11783pt.
+<Numerical_result_full_MMA_01.jpg, id=1498, 1027.84pt x 770.88pt>
+File: Numerical_result_full_MMA_01.jpg Graphic file (type jpg)
+<use Numerical_result_full_MMA_01.jpg>
+Package pdftex.def Info: Numerical_result_full_MMA_01.jpg  used on input line 1
+804.
+(pdftex.def)             Requested size: 418.25368pt x 313.68678pt.
+<Compliance_chg_MMA_01.png, id=1499, 427.5975pt x 407.72325pt>
+File: Compliance_chg_MMA_01.png Graphic file (type png)
+<use Compliance_chg_MMA_01.png>
+Package pdftex.def Info: Compliance_chg_MMA_01.png  used on input line 1811.
+(pdftex.def)             Requested size: 355.51817pt x 338.99501pt.
+[56 <./analytical_1.png> <./Numerical_result_MMA_01.png (PNG copy)>]
+<MMA_01_discretness.png, id=1512, 433.62pt x 289.08pt>
+File: MMA_01_discretness.png Graphic file (type png)
+<use MMA_01_discretness.png>
+Package pdftex.def Info: MMA_01_discretness.png  used on input line 1821.
+(pdftex.def)             Requested size: 209.12683pt x 139.41846pt.
+<MMA_01_Volume_fractionVSiteration.png, id=1513, 433.62pt x 289.08pt>
+File: MMA_01_Volume_fractionVSiteration.png Graphic file (type png)
+<use MMA_01_Volume_fractionVSiteration.png>
+Package pdftex.def Info: MMA_01_Volume_fractionVSiteration.png  used on input l
+ine 1827.
+(pdftex.def)             Requested size: 209.12683pt x 139.41846pt.
+ [57 <./Numerical_result_full_MMA_01.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 1833--1834
+
+ []
+
+[58 <./Compliance_chg_MMA_01.png> <./MMA_01_discretness.png> <./MMA_01_Volume_f
+ractionVSiteration.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1838--1841
+
+ []
+
+<analytical_OC_1.png, id=1532, 143.3355pt x 84.91725pt>
+File: analytical_OC_1.png Graphic file (type png)
+<use analytical_OC_1.png>
+Package pdftex.def Info: analytical_OC_1.png  used on input line 1846.
+(pdftex.def)             Requested size: 209.12683pt x 123.9004pt.
+<Numerical_result_OC_01.png, id=1535, 1963.335pt x 1616.0375pt>
+File: Numerical_result_OC_01.png Graphic file (type png)
+<use Numerical_result_OC_01.png>
+Package pdftex.def Info: Numerical_result_OC_01.png  used on input line 1853.
+(pdftex.def)             Requested size: 209.12683pt x 172.11783pt.
+<OC_01_discretness.png, id=1536, 433.62pt x 289.08pt>
+File: OC_01_discretness.png Graphic file (type png)
+<use OC_01_discretness.png>
+Package pdftex.def Info: OC_01_discretness.png  used on input line 1863.
+(pdftex.def)             Requested size: 209.12683pt x 139.41846pt.
+<OC_01_Volume_fractionVSiteration.png, id=1537, 433.62pt x 289.08pt>
+File: OC_01_Volume_fractionVSiteration.png Graphic file (type png)
+<use OC_01_Volume_fractionVSiteration.png>
+Package pdftex.def Info: OC_01_Volume_fractionVSiteration.png  used on input li
+ne 1869.
+(pdftex.def)             Requested size: 209.12683pt x 139.41846pt.
+[59 <./analytical_OC_1.png> <./Numerical_result_OC_01.png (PNG copy)>]
+<Numerical_result_full_OC_01.jpg, id=1549, 1027.84pt x 770.88pt>
+File: Numerical_result_full_OC_01.jpg Graphic file (type jpg)
+<use Numerical_result_full_OC_01.jpg>
+Package pdftex.def Info: Numerical_result_full_OC_01.jpg  used on input line 18
+77.
+(pdftex.def)             Requested size: 418.25368pt x 313.68678pt.
+<Compliance_chg_OC_01.png, id=1550, 564.30824pt x 479.391pt>
+File: Compliance_chg_OC_01.png Graphic file (type png)
+<use Compliance_chg_OC_01.png>
+Package pdftex.def Info: Compliance_chg_OC_01.png  used on input line 1884.
+(pdftex.def)             Requested size: 418.25368pt x 355.32898pt.
+ [60 <./OC_01_discretness.png> <./OC_01_Volume_fractionVSiteration.png> <./Nume
+rical_result_full_OC_01.jpg>] [61 <./Compliance_chg_OC_01.png>]
+<Problem-2.png, id=1570, 390.258pt x 234.8775pt>
+File: Problem-2.png Graphic file (type png)
+<use Problem-2.png>
+Package pdftex.def Info: Problem-2.png  used on input line 1909.
+(pdftex.def)             Requested size: 195.12851pt x 117.43846pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1920--1921
+
+ []
+
+[62 <./Problem-2.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1925--1928
+
+ []
+
+<analytical_OC_2.png, id=1584, 253.54726pt x 163.812pt>
+File: analytical_OC_2.png Graphic file (type png)
+<use analytical_OC_2.png>
+Package pdftex.def Info: analytical_OC_2.png  used on input line 1933.
+(pdftex.def)             Requested size: 209.12683pt x 135.11905pt.
+<Numerical_result_MMA_02.png, id=1587, 1963.335pt x 1616.0375pt>
+File: Numerical_result_MMA_02.png Graphic file (type png)
+<use Numerical_result_MMA_02.png>
+Package pdftex.def Info: Numerical_result_MMA_02.png  used on input line 1940.
+(pdftex.def)             Requested size: 209.12683pt x 172.11783pt.
+<MMA_02_discretness.png, id=1588, 433.62pt x 289.08pt>
+File: MMA_02_discretness.png Graphic file (type png)
+<use MMA_02_discretness.png>
+Package pdftex.def Info: MMA_02_discretness.png  used on input line 1950.
+(pdftex.def)             Requested size: 209.12683pt x 139.41846pt.
+<MMA_02_Volume_fractionVSiteration.png, id=1589, 433.62pt x 289.08pt>
+File: MMA_02_Volume_fractionVSiteration.png Graphic file (type png)
+<use MMA_02_Volume_fractionVSiteration.png>
+Package pdftex.def Info: MMA_02_Volume_fractionVSiteration.png  used on input l
+ine 1956.
+(pdftex.def)             Requested size: 209.12683pt x 139.41846pt.
+[63 <./analytical_OC_2.png> <./Numerical_result_MMA_02.png (PNG copy)>]
+<Numerical_result_full_MMA_02.jpg, id=1601, 1027.84pt x 770.88pt>
+File: Numerical_result_full_MMA_02.jpg Graphic file (type jpg)
+<use Numerical_result_full_MMA_02.jpg>
+Package pdftex.def Info: Numerical_result_full_MMA_02.jpg  used on input line 1
+964.
+(pdftex.def)             Requested size: 418.25368pt x 313.68678pt.
+<Compliance_chg_MMA_02.png, id=1602, 364.36125pt x 372.1905pt>
+File: Compliance_chg_MMA_02.png Graphic file (type png)
+<use Compliance_chg_MMA_02.png>
+Package pdftex.def Info: Compliance_chg_MMA_02.png  used on input line 1971.
+(pdftex.def)             Requested size: 418.25368pt x 427.25475pt.
+
+[64 <./MMA_02_discretness.png> <./MMA_02_Volume_fractionVSiteration.png> <./Num
+erical_result_full_MMA_02.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 1979--1980
+
+ []
+
+[65 <./Compliance_chg_MMA_02.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1984--1987
+
+ []
+
+File: analytical_OC_2.png Graphic file (type png)
+<use analytical_OC_2.png>
+Package pdftex.def Info: analytical_OC_2.png  used on input line 1992.
+(pdftex.def)             Requested size: 209.12683pt x 135.11905pt.
+<Numerical_result_OC_02.png, id=1624, 1963.335pt x 1616.0375pt>
+File: Numerical_result_OC_02.png Graphic file (type png)
+<use Numerical_result_OC_02.png>
+Package pdftex.def Info: Numerical_result_OC_02.png  used on input line 1999.
+(pdftex.def)             Requested size: 209.12683pt x 172.11783pt.
+<OC_02_discretness.png, id=1625, 433.62pt x 289.08pt>
+File: OC_02_discretness.png Graphic file (type png)
+<use OC_02_discretness.png>
+Package pdftex.def Info: OC_02_discretness.png  used on input line 2009.
+(pdftex.def)             Requested size: 209.12683pt x 139.41846pt.
+<OC_02_Volume_fractionVSiteration.png, id=1626, 433.62pt x 289.08pt>
+File: OC_02_Volume_fractionVSiteration.png Graphic file (type png)
+<use OC_02_Volume_fractionVSiteration.png>
+Package pdftex.def Info: OC_02_Volume_fractionVSiteration.png  used on input li
+ne 2015.
+(pdftex.def)             Requested size: 209.12683pt x 139.41846pt.
+[66 <./Numerical_result_OC_02.png (PNG copy)>]
+<Numerical_result_full_OC_02.jpg, id=1637, 1027.84pt x 770.88pt>
+File: Numerical_result_full_OC_02.jpg Graphic file (type jpg)
+<use Numerical_result_full_OC_02.jpg>
+Package pdftex.def Info: Numerical_result_full_OC_02.jpg  used on input line 20
+23.
+(pdftex.def)             Requested size: 418.25368pt x 313.68678pt.
+<Compliance_chg_OC_02.png, id=1638, 451.6875pt x 413.74574pt>
+File: Compliance_chg_OC_02.png Graphic file (type png)
+<use Compliance_chg_OC_02.png>
+Package pdftex.def Info: Compliance_chg_OC_02.png  used on input line 2030.
+(pdftex.def)             Requested size: 418.25368pt x 383.14444pt.
+ [67 <./OC_02_discretness.png> <./OC_02_Volume_fractionVSiteration.png> <./Nume
+rical_result_full_OC_02.jpg>]
+[68 <./Compliance_chg_OC_02.png>]
+<Problem-3.png, id=1655, 380.01974pt x 266.79675pt>
+File: Problem-3.png Graphic file (type png)
+<use Problem-3.png>
+Package pdftex.def Info: Problem-3.png  used on input line 2054.
+(pdftex.def)             Requested size: 190.0094pt x 133.39804pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 2065--2066
+
+ []
+
+[69 <./Problem-3.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 2070--2073
+
+ []
+
+<analytical_3.png, id=1669, 218.0145pt x 98.16675pt>
+File: analytical_3.png Graphic file (type png)
+<use analytical_3.png>
+Package pdftex.def Info: analytical_3.png  used on input line 2078.
+(pdftex.def)             Requested size: 209.12683pt x 94.17009pt.
+<Numerical_result_MMA_03.png, id=1672, 1963.335pt x 1616.0375pt>
+File: Numerical_result_MMA_03.png Graphic file (type png)
+<use Numerical_result_MMA_03.png>
+Package pdftex.def Info: Numerical_result_MMA_03.png  used on input line 2085.
+(pdftex.def)             Requested size: 209.12683pt x 172.11783pt.
+<MMA_03_discretness.png, id=1673, 433.62pt x 289.08pt>
+File: MMA_03_discretness.png Graphic file (type png)
+<use MMA_03_discretness.png>
+Package pdftex.def Info: MMA_03_discretness.png  used on input line 2095.
+(pdftex.def)             Requested size: 209.12683pt x 139.41846pt.
+<MMA_03_Volume_fractionVSiteration.png, id=1674, 433.62pt x 289.08pt>
+File: MMA_03_Volume_fractionVSiteration.png Graphic file (type png)
+<use MMA_03_Volume_fractionVSiteration.png>
+Package pdftex.def Info: MMA_03_Volume_fractionVSiteration.png  used on input l
+ine 2101.
+(pdftex.def)             Requested size: 209.12683pt x 139.41846pt.
+[70 <./analytical_3.png> <./Numerical_result_MMA_03.png (PNG copy)>]
+<Numerical_result_full_MMA_03.jpg, id=1686, 1027.84pt x 770.88pt>
+File: Numerical_result_full_MMA_03.jpg Graphic file (type jpg)
+<use Numerical_result_full_MMA_03.jpg>
+Package pdftex.def Info: Numerical_result_full_MMA_03.jpg  used on input line 2
+109.
+(pdftex.def)             Requested size: 418.25368pt x 313.68678pt.
+<Compliance_chg_MMA_03.png, id=1687, 522.15076pt x 467.346pt>
+File: Compliance_chg_MMA_03.png Graphic file (type png)
+<use Compliance_chg_MMA_03.png>
+Package pdftex.def Info: Compliance_chg_MMA_03.png  used on input line 2116.
+(pdftex.def)             Requested size: 418.25368pt x 374.36934pt.
+ [71 <./MMA_03_discretness.png> <./MMA_03_Volume_fractionVSiteration.png> <./Nu
+merical_result_full_MMA_03.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 2124--2125
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2129--2132
+
+ []
+
+[72 <./Compliance_chg_MMA_03.png>]
+File: analytical_3.png Graphic file (type png)
+<use analytical_3.png>
+Package pdftex.def Info: analytical_3.png  used on input line 2137.
+(pdftex.def)             Requested size: 209.12683pt x 94.17009pt.
+<Numerical_result_OC_03.png, id=1712, 1963.335pt x 1616.0375pt>
+File: Numerical_result_OC_03.png Graphic file (type png)
+<use Numerical_result_OC_03.png>
+Package pdftex.def Info: Numerical_result_OC_03.png  used on input line 2144.
+(pdftex.def)             Requested size: 209.12683pt x 172.11783pt.
+<OC_03_discretness.png, id=1713, 433.62pt x 289.08pt>
+File: OC_03_discretness.png Graphic file (type png)
+<use OC_03_discretness.png>
+Package pdftex.def Info: OC_03_discretness.png  used on input line 2154.
+(pdftex.def)             Requested size: 209.12683pt x 139.41846pt.
+<OC_03_Volume_fractionVSiteration.png, id=1714, 433.62pt x 289.08pt>
+File: OC_03_Volume_fractionVSiteration.png Graphic file (type png)
+<use OC_03_Volume_fractionVSiteration.png>
+Package pdftex.def Info: OC_03_Volume_fractionVSiteration.png  used on input li
+ne 2160.
+(pdftex.def)             Requested size: 209.12683pt x 139.41846pt.
+<Numerical_result_full_OC_03.jpg, id=1715, 1027.84pt x 770.88pt>
+File: Numerical_result_full_OC_03.jpg Graphic file (type jpg)
+<use Numerical_result_full_OC_03.jpg>
+Package pdftex.def Info: Numerical_result_full_OC_03.jpg  used on input line 21
+68.
+(pdftex.def)             Requested size: 418.25368pt x 313.68678pt.
+<Compliance_chg_OC_03.png, id=1716, 460.72125pt x 377.61075pt>
+File: Compliance_chg_OC_03.png Graphic file (type png)
+<use Compliance_chg_OC_03.png>
+Package pdftex.def Info: Compliance_chg_OC_03.png  used on input line 2175.
+(pdftex.def)             Requested size: 418.25368pt x 342.80237pt.
+ [73 <./Numerical_result_OC_03.png (PNG copy)> <./OC_03_discretness.png> <./OC_
+03_Volume_fractionVSiteration.png>] [74 <./Numerical_result_full_OC_03.jpg>] [7
+5 <./Compliance_chg_OC_03.png>]
+File: Problem-1.png Graphic file (type png)
+<use Problem-1.png>
+Package pdftex.def Info: Problem-1.png  used on input line 2199.
+(pdftex.def)             Requested size: 258.21402pt x 181.2768pt.
+<penal_5.png, id=1742, 304.7385pt x 212.59425pt>
+File: penal_5.png Graphic file (type png)
+<use penal_5.png>
+Package pdftex.def Info: penal_5.png  used on input line 2219.
+(pdftex.def)             Requested size: 152.36887pt x 106.29686pt.
+<MMA_discretness_penal_5.png, id=1743, 433.62pt x 289.08pt>
+File: MMA_discretness_penal_5.png Graphic file (type png)
+<use MMA_discretness_penal_5.png>
+Package pdftex.def Info: MMA_discretness_penal_5.png  used on input line 2219.
+(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+<penal_10.png, id=1744, 311.36325pt x 204.765pt>
+File: penal_10.png Graphic file (type png)
+<use penal_10.png>
+Package pdftex.def Info: penal_10.png  used on input line 2221.
+(pdftex.def)             Requested size: 155.68124pt x 102.38223pt.
+<MMA_discretness_penal_10.png, id=1745, 433.62pt x 289.08pt>
+File: MMA_discretness_penal_10.png Graphic file (type png)
+<use MMA_discretness_penal_10.png>
+Package pdftex.def Info: MMA_discretness_penal_10.png  used on input line 2221.
+
+(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+<penal_20.png, id=1746, 299.31825pt x 205.9695pt>
+File: penal_20.png Graphic file (type png)
+<use penal_20.png>
+Package pdftex.def Info: penal_20.png  used on input line 2223.
+(pdftex.def)             Requested size: 149.65875pt x 102.98448pt.
+<MMA_discretness_penal_20.png, id=1747, 433.62pt x 289.08pt>
+File: MMA_discretness_penal_20.png Graphic file (type png)
+<use MMA_discretness_penal_20.png>
+Package pdftex.def Info: MMA_discretness_penal_20.png  used on input line 2223.
+
+(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+<penal_30.png, id=1748, 293.29575pt x 205.9695pt>
+File: penal_30.png Graphic file (type png)
+<use penal_30.png>
+Package pdftex.def Info: penal_30.png  used on input line 2225.
+(pdftex.def)             Requested size: 146.6475pt x 102.98448pt.
+<MMA_discretness_penal_30.png, id=1749, 433.62pt x 289.08pt>
+File: MMA_discretness_penal_30.png Graphic file (type png)
+<use MMA_discretness_penal_30.png>
+Package pdftex.def Info: MMA_discretness_penal_30.png  used on input line 2225.
+
+(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+ [76]
+Overfull \vbox (44.98955pt too high) has occurred while \output is active []
+
+
+[77 <./penal_5.png> <./MMA_discretness_penal_5.png> <./penal_10.png> <./MMA_dis
+cretness_penal_10.png> <./penal_20.png> <./MMA_discretness_penal_20.png> <./pen
+al_30.png> <./MMA_discretness_penal_30.png>]
+<rmin_2.png, id=1775, 296.307pt x 202.95825pt>
+File: rmin_2.png Graphic file (type png)
+<use rmin_2.png>
+Package pdftex.def Info: rmin_2.png  used on input line 2255.
+(pdftex.def)             Requested size: 148.15314pt x 101.47887pt.
+<MMA_ComplianceVSiteration_rmin_2.png, id=1776, 433.62pt x 289.08pt>
+File: MMA_ComplianceVSiteration_rmin_2.png Graphic file (type png)
+<use MMA_ComplianceVSiteration_rmin_2.png>
+Package pdftex.def Info: MMA_ComplianceVSiteration_rmin_2.png  used on input li
+ne 2255.
+(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+<rmin_5.png, id=1777, 299.31825pt x 205.9695pt>
+File: rmin_5.png Graphic file (type png)
+<use rmin_5.png>
+Package pdftex.def Info: rmin_5.png  used on input line 2257.
+(pdftex.def)             Requested size: 149.65875pt x 102.98448pt.
+<MMA_ComplianceVSiteration_rmin_5.png, id=1778, 433.62pt x 289.08pt>
+File: MMA_ComplianceVSiteration_rmin_5.png Graphic file (type png)
+<use MMA_ComplianceVSiteration_rmin_5.png>
+Package pdftex.def Info: MMA_ComplianceVSiteration_rmin_5.png  used on input li
+ne 2257.
+(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+<rmin_8.png, id=1779, 296.307pt x 199.947pt>
+File: rmin_8.png Graphic file (type png)
+<use rmin_8.png>
+Package pdftex.def Info: rmin_8.png  used on input line 2259.
+(pdftex.def)             Requested size: 148.15314pt x 99.97325pt.
+<MMA_ComplianceVSiteration_rmin_8.png, id=1780, 433.62pt x 289.08pt>
+File: MMA_ComplianceVSiteration_rmin_8.png Graphic file (type png)
+<use MMA_ComplianceVSiteration_rmin_8.png>
+Package pdftex.def Info: MMA_ComplianceVSiteration_rmin_8.png  used on input li
+ne 2259.
+(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+<rmin_15.png, id=1781, 292.09125pt x 202.95825pt>
+File: rmin_15.png Graphic file (type png)
+<use rmin_15.png>
+Package pdftex.def Info: rmin_15.png  used on input line 2261.
+(pdftex.def)             Requested size: 146.04526pt x 101.47887pt.
+<MMA_ComplianceVSiteration_rmin_15.png, id=1782, 433.62pt x 289.08pt>
+File: MMA_ComplianceVSiteration_rmin_15.png Graphic file (type png)
+<use MMA_ComplianceVSiteration_rmin_15.png>
+Package pdftex.def Info: MMA_ComplianceVSiteration_rmin_15.png  used on input l
+ine 2261.
+(pdftex.def)             Requested size: 173.44492pt x 115.62994pt.
+ [78]
+Overfull \vbox (44.98955pt too high) has occurred while \output is active []
+
+
+[79 <./rmin_2.png> <./MMA_ComplianceVSiteration_rmin_2.png> <./rmin_5.png> <./M
+MA_ComplianceVSiteration_rmin_5.png> <./rmin_8.png> <./MMA_ComplianceVSiteratio
+n_rmin_8.png> <./rmin_15.png> <./MMA_ComplianceVSiteration_rmin_15.png>]
+Overfull \hbox (33.4179pt too wide) in paragraph at lines 2271--2272
+\OT1/cmr/m/n/12 bot-tle-necks in IGTO. The time anal-y-sis is per-formed in \OT
+1/cmr/bx/n/12 main$[]$program$[]$bottle$[]$neck.py
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2271--2272
+
+ []
+
+File: Problem-1.png Graphic file (type png)
+<use Problem-1.png>
+Package pdftex.def Info: Problem-1.png  used on input line 2277.
+(pdftex.def)             Requested size: 258.21402pt x 181.2768pt.
+[80]
+<time_analysis_pie_chart.png, id=1816, 246.9225pt x 171.039pt>
+File: time_analysis_pie_chart.png Graphic file (type png)
+<use time_analysis_pie_chart.png>
+Package pdftex.def Info: time_analysis_pie_chart.png  used on input line 2297.
+(pdftex.def)             Requested size: 246.92188pt x 171.03857pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 2293--2300
+
+ []
+
+[81 <./time_analysis_pie_chart.png>] [82] [83] [84] [85] [86]
+Overfull \hbox (8.79675pt too wide) in paragraph at lines 2457--2486
+ [] 
+ []
+
+[87] [88]
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+
+Overfull \hbox (51.04655pt too wide) in paragraph at lines 2694--2694
+[]    \OT1/cmtt/m/n/12 Merge branch 'main' of https://github.com/viswambhar-yas
+a/IGTO into main[] 
+ []
+
+
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+[89]
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+[90]
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+[91]
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+
+Overfull \hbox (51.04655pt too wide) in paragraph at lines 2694--2694
+[]    \OT1/cmtt/m/n/12 Merge branch 'main' of https://github.com/viswambhar-yas
+a/IGTO into main[] 
+ []
+
+
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+[92]
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+
+Overfull \hbox (7.82153pt too wide) in paragraph at lines 2694--2694
+[]    \OT1/cmtt/m/n/12 added Bsplin efunctions and it's derivatives along with 
+testcases[] 
+ []
+
+
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+
+Overfull \hbox (44.87155pt too wide) in paragraph at lines 2694--2694
+[]\OT1/cmtt/m/n/12 Author: viswambhar-yasa <58439259+viswambhar-yasa@users.nore
+ply.github.com>[] 
+ []
+
+[93] (main_page.bbl) [94]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2714.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2714.
  (main_page.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1173.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1173.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2714.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2714.
 
 Package rerunfilecheck Info: File `main_page.out' has not changed.
-(rerunfilecheck)             Checksum: DB30204DF8FB2766054BBFFAD2930D9A;2668.
+(rerunfilecheck)             Checksum: 1BD81ABBAE294EA27B4813D2B92EE10E;6983.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 13469 strings out of 480799
- 226772 string characters out of 2891112
- 557816 words of memory out of 3000000
- 29028 multiletter control sequences out of 15000+200000
- 541783 words of font info for 56 fonts, out of 3000000 for 9000
+ 16362 strings out of 480799
+ 271086 string characters out of 2891112
+ 831381 words of memory out of 3000000
+ 30909 multiletter control sequences out of 15000+200000
+ 542251 words of font info for 58 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 67i,10n,117p,804b,578s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 67i,13n,117p,1121b,2103s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\VISWAMBHAR YASA\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/
 ec/dpi600\tcrm1200.pk><C:/Users/VISWAMBHAR YASA/AppData/Local/Programs/MiKTeX 2
 .9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/VISWAMBHAR YASA/AppData/
@@ -1092,10 +1724,11 @@ s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/VISWAMBHAR YAS
 A/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C
 :/Users/VISWAMBHAR YASA/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/am
 sfonts/cm/cmti12.pfb><C:/Users/VISWAMBHAR YASA/AppData/Local/Programs/MiKTeX 2.
-9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on main_page.pdf (35 pages, 778196 bytes).
+9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/VISWAMBHAR YASA/AppData/L
+ocal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on main_page.pdf (95 pages, 52110873 bytes).
 PDF statistics:
- 597 PDF objects out of 1000 (max. 8388607)
- 176 named destinations out of 1000 (max. 500000)
- 346 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2313 PDF objects out of 2487 (max. 8388607)
+ 1106 named destinations out of 1200 (max. 500000)
+ 1078 words of extra memory for PDF output out of 10000 (max. 10000000)
 

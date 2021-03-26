@@ -19,7 +19,7 @@
 \BOOKMARK [2][-]{subsection.4.3}{Topology optimization using IGA}{section.4}% 19
 \BOOKMARK [3][-]{subsubsection.4.3.1}{Solid Isotropic Material with Penalization \(SIMP\) Method}{subsection.4.3}% 20
 \BOOKMARK [3][-]{subsubsection.4.3.2}{Minimum Compliance formulation}{subsection.4.3}% 21
-\BOOKMARK [3][-]{subsubsection.4.3.3}{Sensitivity}{subsection.4.3}% 22
+\BOOKMARK [3][-]{subsubsection.4.3.3}{Sensitivity Analysis}{subsection.4.3}% 22
 \BOOKMARK [3][-]{subsubsection.4.3.4}{Optimality criteria method}{subsection.4.3}% 23
 \BOOKMARK [3][-]{subsubsection.4.3.5}{Method of moving Asymptotes }{subsection.4.3}% 24
 \BOOKMARK [1][-]{section.5}{IGTO implementation}{}% 25
@@ -33,3 +33,57 @@
 \BOOKMARK [3][-]{subsubsection.5.3.2}{Building global stiffness matrix}{subsection.5.3}% 33
 \BOOKMARK [3][-]{subsubsection.5.3.3}{Topology optimization}{subsection.5.3}% 34
 \BOOKMARK [2][-]{subsection.5.4}{Post-processing}{section.5}% 35
+\BOOKMARK [3][-]{subsubsection.5.4.1}{Mapping displacements}{subsection.5.4}% 36
+\BOOKMARK [3][-]{subsubsection.5.4.2}{Mapping Strains and Stresses}{subsection.5.4}% 37
+\BOOKMARK [3][-]{subsubsection.5.4.3}{Mapping element densities \(Topology optimization\)}{subsection.5.4}% 38
+\BOOKMARK [2][-]{subsection.5.5}{Visualization}{section.5}% 39
+\BOOKMARK [3][-]{subsubsection.5.5.1}{VTK \(Visualization Tool-kit\)}{subsection.5.5}% 40
+\BOOKMARK [3][-]{subsubsection.5.5.2}{Visualization of deformed structure and topology}{subsection.5.5}% 41
+\BOOKMARK [1][-]{section.6}{Testing and Verification}{}% 42
+\BOOKMARK [2][-]{subsection.6.1}{Unit Testing}{section.6}% 43
+\BOOKMARK [2][-]{subsection.6.2}{Functional testing}{section.6}% 44
+\BOOKMARK [3][-]{subsubsection.6.2.1}{Optimality Criterion \(OC\)}{subsection.6.2}% 45
+\BOOKMARK [3][-]{subsubsection.6.2.2}{Method of Moving Asymptotes \(MMA\)}{subsection.6.2}% 46
+\BOOKMARK [2][-]{subsection.6.3}{Sanity checks and Patch Testing}{section.6}% 47
+\BOOKMARK [3][-]{subsubsection.6.3.1}{Sanity check for Jacobian }{subsection.6.3}% 48
+\BOOKMARK [3][-]{subsubsection.6.3.2}{Sanity check for Stiffness matrix }{subsection.6.3}% 49
+\BOOKMARK [3][-]{subsubsection.6.3.3}{Eigenvalue Stiffness Test }{subsection.6.3}% 50
+\BOOKMARK [3][-]{subsubsection.6.3.4}{Rigid body Translation test }{subsection.6.3}% 51
+\BOOKMARK [3][-]{subsubsection.6.3.5}{Rigid body Rotation test }{subsection.6.3}% 52
+\BOOKMARK [3][-]{subsubsection.6.3.6}{Single element patch test }{subsection.6.3}% 53
+\BOOKMARK [3][-]{subsubsection.6.3.7}{Analytical solution Patch test}{subsection.6.3}% 54
+\BOOKMARK [3][-]{subsubsection.6.3.8}{Analytical solution Higher Order patch test}{subsection.6.3}% 55
+\BOOKMARK [1][-]{section.7}{User manual}{}% 56
+\BOOKMARK [2][-]{subsection.7.1}{Procedure to run the program}{section.7}% 57
+\BOOKMARK [2][-]{subsection.7.2}{Procedure to run the test case}{section.7}% 58
+\BOOKMARK [1][-]{section.8}{Result validation and discussion}{}% 59
+\BOOKMARK [2][-]{subsection.8.1}{Validation test case-1}{section.8}% 60
+\BOOKMARK [3][-]{subsubsection.8.1.1}{Problem description}{subsection.8.1}% 61
+\BOOKMARK [3][-]{subsubsection.8.1.2}{Input parameters}{subsection.8.1}% 62
+\BOOKMARK [3][-]{subsubsection.8.1.3}{Problem solved using MMA optimizer}{subsection.8.1}% 63
+\BOOKMARK [3][-]{subsubsection.8.1.4}{Problem solved using OC optimizer}{subsection.8.1}% 64
+\BOOKMARK [3][-]{subsubsection.8.1.5}{Results discussion}{subsection.8.1}% 65
+\BOOKMARK [2][-]{subsection.8.2}{Validation test case-2}{section.8}% 66
+\BOOKMARK [3][-]{subsubsection.8.2.1}{Problem description}{subsection.8.2}% 67
+\BOOKMARK [3][-]{subsubsection.8.2.2}{Input parameters}{subsection.8.2}% 68
+\BOOKMARK [3][-]{subsubsection.8.2.3}{Problem solved using MMA optimizer}{subsection.8.2}% 69
+\BOOKMARK [3][-]{subsubsection.8.2.4}{Problem solved using OC optimizer}{subsection.8.2}% 70
+\BOOKMARK [3][-]{subsubsection.8.2.5}{Results discussion}{subsection.8.2}% 71
+\BOOKMARK [2][-]{subsection.8.3}{Validation test case-3}{section.8}% 72
+\BOOKMARK [3][-]{subsubsection.8.3.1}{Problem description}{subsection.8.3}% 73
+\BOOKMARK [3][-]{subsubsection.8.3.2}{Input parameters}{subsection.8.3}% 74
+\BOOKMARK [3][-]{subsubsection.8.3.3}{Problem solved using MMA optimizer}{subsection.8.3}% 75
+\BOOKMARK [3][-]{subsubsection.8.3.4}{Problem solved using OC optimizer}{subsection.8.3}% 76
+\BOOKMARK [3][-]{subsubsection.8.3.5}{Results discussion}{subsection.8.3}% 77
+\BOOKMARK [2][-]{subsection.8.4}{Influence of parameters on topology optimization}{section.8}% 78
+\BOOKMARK [3][-]{subsubsection.8.4.1}{Problem statement}{subsection.8.4}% 79
+\BOOKMARK [3][-]{subsubsection.8.4.2}{Penalization factor}{subsection.8.4}% 80
+\BOOKMARK [3][-]{subsubsection.8.4.3}{Minimum radius \(rmin\) factor}{subsection.8.4}% 81
+\BOOKMARK [3][-]{subsubsection.8.4.4}{Results discussion}{subsection.8.4}% 82
+\BOOKMARK [1][-]{section.9}{Time Analysis: Bottleneck in code}{}% 83
+\BOOKMARK [2][-]{subsection.9.1}{Problem description}{section.9}% 84
+\BOOKMARK [2][-]{subsection.9.2}{Input parameters}{section.9}% 85
+\BOOKMARK [2][-]{subsection.9.3}{Analysis and results discussion}{section.9}% 86
+\BOOKMARK [1][-]{section.10}{Milestones}{}% 87
+\BOOKMARK [1][-]{section.11}{Conclusion}{}% 88
+\BOOKMARK [1][-]{section.12}{GIT Log}{}% 89

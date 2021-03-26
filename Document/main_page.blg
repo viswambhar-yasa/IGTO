@@ -1,50 +1,48 @@
 This is BibTeX, Version 0.99d
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main_page.aux
-Reallocating 'name_of_file' (item size: 1) to 6 items.
-The style file: abbrv.bst
 Reallocating 'name_of_file' (item size: 1) to 10 items.
+Reallocating 'name_of_file' (item size: 1) to 7 items.
+The style file: ieeetr.bst
 Database file #1: reference.bib
-Warning--empty booktitle in Okruta2014ThreedimensionalTO
-You've used 5 entries,
-            2118 wiz_defined-function locations,
-            764 strings with 8827 characters,
-and the built_in function-call counts, 1270 in all, are:
-= -- 119
-> -- 57
+You've used 9 entries,
+            1876 wiz_defined-function locations,
+            532 strings with 4934 characters,
+and the built_in function-call counts, 1802 in all, are:
+= -- 180
+> -- 71
 < -- 0
-+ -- 24
-- -- 18
-* -- 71
-:= -- 237
-add.period$ -- 15
-call.type$ -- 5
-change.case$ -- 21
++ -- 28
+- -- 19
+* -- 123
+:= -- 288
+add.period$ -- 13
+call.type$ -- 9
+change.case$ -- 5
 chr.to.int$ -- 0
-cite$ -- 6
-duplicate$ -- 54
-empty$ -- 102
-format.name$ -- 18
-if$ -- 255
+cite$ -- 9
+duplicate$ -- 93
+empty$ -- 169
+format.name$ -- 19
+if$ -- 431
 int.to.chr$ -- 0
-int.to.str$ -- 5
-missing$ -- 4
-newline$ -- 28
-num.names$ -- 10
-pop$ -- 28
+int.to.str$ -- 9
+missing$ -- 7
+newline$ -- 34
+num.names$ -- 9
+pop$ -- 20
 preamble$ -- 1
-purify$ -- 19
+purify$ -- 0
 quote$ -- 0
-skip$ -- 33
+skip$ -- 49
 stack$ -- 0
-substring$ -- 44
-swap$ -- 5
+substring$ -- 71
+swap$ -- 29
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 18
-warning$ -- 1
-while$ -- 11
-width$ -- 6
-write$ -- 55
-(There was 1 warning)
+type$ -- 0
+warning$ -- 0
+while$ -- 15
+width$ -- 10
+write$ -- 91

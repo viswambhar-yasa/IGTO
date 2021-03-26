@@ -1,0 +1,9 @@
+\begin{Acknowledgment}
+
+    \begin{center}
+    \textsc{Acknowledgement}\\
+    \vspace*{0.5 cm}
+    {\LARGE \textsc{\mytitle}} %Title 
+    \vspace{0.025\textheight}
+    \rule{0.75\textwidth}{0.45pt}\\
+    \vspace*{1 cm}
