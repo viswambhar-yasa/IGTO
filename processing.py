@@ -403,8 +403,8 @@ print('\n                               Final Compliance with optimization      
 
 #VTK file is genetated
 VTK(CONTROL_POINTS,element_density,nU,nV,nW,"Cantilever_beam")
-
-
+#element density are stored in txt format
+np.savetxt("element_density.txt", element_density) 
 #element_density_vis(loop, CPS, nx, ny, nz, element_density,optimizer)
 #element_density_slided(i,CP,nx,ny,nz,element_density,optimizer,ns,'z','xz',False)
 

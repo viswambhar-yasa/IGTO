@@ -421,8 +421,14 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
 
         Returns
         -------
-        TYPE
-            DESCRIPTION.
+        x : array
+            The value of variable obtained after primal dual method
+        ii1: int
+            Number of iterations taken by newton method to solve the problem
+        l_ii1: int
+            Total number of iterations taken by newton method to solve the problem
+        res : array
+            residual obtained from solving KKT conditions.
 
         '''
         def initial_condition(alpha=alpha,beta=beta,o=n,k=m,c=c):
@@ -431,132 +437,90 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
 
             Parameters
             ----------
-            alpha : TYPE, optional
-                DESCRIPTION. The default is alpha.
-            beta : TYPE, optional
-                DESCRIPTION. The default is beta.
-            o : TYPE, optional
-                DESCRIPTION. The default is n.
-            k : TYPE, optional
-                DESCRIPTION. The default is m.
-            c : TYPE, optional
-                DESCRIPTION. The default is c.
+            alpha,beta :array
+               Bound of the variables . Based on equ. 3.6 and 3.7 in MMA paper
+            o : int
+                number of variables 
+            k : int
+                Number of constrains
+            c : array, optional
+                Non-negative Lagrangian multiplier
 
             Returns
             -------
-            x : TYPE
-                DESCRIPTION.
-            y : TYPE
-                DESCRIPTION.
-            z : TYPE
-                DESCRIPTION.
-            epsi : TYPE
-                DESCRIPTION.
-            lamda : TYPE
-                DESCRIPTION.
-            s : TYPE
-                DESCRIPTION.
-            Zee : TYPE
-                DESCRIPTION.
-            eta : TYPE
-                DESCRIPTION.
-            neta : TYPE
-                DESCRIPTION.
-            nu : TYPE
-                DESCRIPTION.
-            variable_vector : TYPE
-                DESCRIPTION.
-            minimizer_vector : TYPE
-                DESCRIPTION.
+            x,y,z : array
+                The values of lagrangian function variables based on equ. 5.6 in MMA paper
 
+            epsi,lamda,s : array
+                weight parameters in lagrangian function.
+            Zee,eta,neta,nu : array
+                Non-negative lagrangian multiplier in equ. 5.6 in MMA paper.
+            variable_vector,minimizer_vector : array
+                initial value vector for weights(variables) and Lagrangian multilpier(constrains) initialized with 1.
             '''
-            x=np.array([0.5*(alpha+beta)]).T
-            y=np.ones((k,1))
+            #the initial condition are obtained from MMA paper section 5.1
+            x=np.array([0.5*(alpha+beta)]).T  #for variables
+            y=np.ones((k,1)) # for constrains
             z=np.array([[1.0]])
             #print(o,k)
-            variable_vector=np.ones((o,1))
-            minimizer_vector=np.ones((k,1))
+            #initial values for weight and Lagrangian multipler
+            variable_vector=np.ones((o,1)) # based on number of variables
+            minimizer_vector=np.ones((k,1)) #based on number of constrains
+            #weight parameter in equ. 5.6 in MMA paper
             epsi=1
             lamda=minimizer_vector
             s=minimizer_vector
+            #Non-negative Lagrangian multipler 
             Zee=z
             eta=np.maximum(1,1/(x-np.array([alpha]).T))
             neta=np.maximum(1,1/(((np.array([beta]).T)-x)))
             nu=np.maximum(lamda,c*0.5)
             return x,y,z,epsi,lamda,s,Zee,eta,neta,nu,variable_vector,minimizer_vector
     
-        x,y,z,epsi,lamda,s,Zeta,eta,neta,nu,variable_vector,minimizer_vector=initial_condition()
+        x,y,z,epsi,lamda,s,Zeta,eta,neta,nu,variable_vector,minimizer_vector=initial_condition() #intial condition are initialized
         #print('initial_condition',initial_condition())
         def optimal_condtition(x,y,z,lamda,s,Zeta,eta,neta,nu,epsi,o='o',U=U,L=L,p0=p0,q0=q0,pc=pc,qc=qc,b=b,variable_vector=variable_vector,minimizer_vector=minimizer_vector):
             '''
-            
+            this function calculates KKT conditions.
 
             Parameters
             ----------
-            x : TYPE
-                DESCRIPTION.
-            y : TYPE
-                DESCRIPTION.
-            z : TYPE
-                DESCRIPTION.
-            lamda : TYPE
-                DESCRIPTION.
-            s : TYPE
-                DESCRIPTION.
-            Zeta : TYPE
-                DESCRIPTION.
-            eta : TYPE
-                DESCRIPTION.
-            neta : TYPE
-                DESCRIPTION.
-            nu : TYPE
-                DESCRIPTION.
-            epsi : TYPE
-                DESCRIPTION.
-            o : TYPE, optional
-                DESCRIPTION. The default is 'o'.
-            U : TYPE, optional
-                DESCRIPTION. The default is U.
-            L : TYPE, optional
-                DESCRIPTION. The default is L.
-            p0 : TYPE, optional
-                DESCRIPTION. The default is p0.
-            q0 : TYPE, optional
-                DESCRIPTION. The default is q0.
-            pc : TYPE, optional
-                DESCRIPTION. The default is pc.
-            qc : TYPE, optional
-                DESCRIPTION. The default is qc.
-            b : TYPE, optional
-                DESCRIPTION. The default is b.
-            variable_vector : TYPE, optional
-                DESCRIPTION. The default is variable_vector.
-            minimizer_vector : TYPE, optional
-                DESCRIPTION. The default is minimizer_vector.
-
+            x,y,z : array
+                 The values of lagrangian function variables based on equ. 5.6 in MMA paper
+            epsi,lamda,s : array
+                weight parameters in lagrangian function.
+            Zee,eta,neta,nu : array
+                Non-negative lagrangian multiplier in equ. 5.6 in MMA paper.
+            L,U : array
+            Lower and upper limits of the variables.
+            p0,q0 : array
+                The approximation function of objectives based on equ. 3.3 and 3.4.
+            pc,qc : array
+                The approximation function of constraind based on equ. 3.3 and 3.4.
+            b: array
+                    residual of approximate function equ. 3.2 in MMA paper.
+            variable_vector,minimizer_vector : array
+                initial value vector for weights(variables) and Lagrangian multilpier(constrains) initialized with 1.
             Returns
             -------
-            residumax : TYPE
-                DESCRIPTION.
-            residunorm : TYPE
-                DESCRIPTION.
+            residumax : array
+                The maximum residual obtained after solving conditions 5.7 in MMA paper.
+            residunorm : array
+                Norm of the residuals obtained after solving conditions 5.7 in MMA paper.
 
             '''
-            #5.5
+            # based on equ. 5.5 in MMA paper
             UX=np.array([U]).T-x
             LX=x-np.array([L]).T
             #print(pc.T*lamda)
             plamda=p0+np.dot(pc.T,lamda)
                 #print('plamda',plamda)
             qlamda=q0+np.dot(qc.T,lamda)
-                #5.4
             g=np.dot(pc,(1/(UX)))+np.dot(qc,(1/(LX)))
-            dphi_dx=(plamda/UX**2)-(qlamda/LX**2)
+            dphi_dx=(plamda/UX**2)-(qlamda/LX**2) #Based on equ. 5.4 in MMA paper
             #print('g',g)
             #print('dphi_dx',dphi_dx)
             #optimality conditions 5.7
-            #print('eta',eta)
-            #print('neta',neta)
             dl_dx=dphi_dx-eta+neta
             #print('dl_dx',dl_dx)
             dl_dy=c+d*y-lamda-nu
@@ -572,7 +536,7 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
             #print('z',z)
             #print(np.dot(a.T,z))
 
-            
+            #residual are calculated based on equ. 5.7 in MMA paper
             r1=g-np.dot(a,z)-y+s-b
             #print('r1',r1)
             r2=(eta*(x-np.array([alpha]).T))-epsi*variable_vector 
@@ -597,126 +561,63 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
         
         def line_search(w,dw,x,y,z,lamda,eta,neta,nu,Zeta,s,dx,dy,dz,dlamda,deta,dneta,dnu,dZeta,ds,resi_norm,epsi,p0=p0,q0=q0,pc=pc,qc=qc,U=U,L=L,alpha=alpha,beta=beta,variable_vector=variable_vector,minimizer_vector=minimizer_vector):
             '''
-            
+            Newton line search algorthim built based on setion 5.4 in MMA paper. Used to solve Newton raphson but find the correct step size and calculating KKT condition 
 
             Parameters
             ----------
-            w : TYPE
-                DESCRIPTION.
-            dw : TYPE
-                DESCRIPTION.
-            x : TYPE
-                DESCRIPTION.
-            y : TYPE
-                DESCRIPTION.
-            z : TYPE
-                DESCRIPTION.
-            lamda : TYPE
-                DESCRIPTION.
-            eta : TYPE
-                DESCRIPTION.
-            neta : TYPE
-                DESCRIPTION.
-            nu : TYPE
-                DESCRIPTION.
-            Zeta : TYPE
-                DESCRIPTION.
-            s : TYPE
-                DESCRIPTION.
-            dx : TYPE
-                DESCRIPTION.
-            dy : TYPE
-                DESCRIPTION.
-            dz : TYPE
-                DESCRIPTION.
-            dlamda : TYPE
-                DESCRIPTION.
-            deta : TYPE
-                DESCRIPTION.
-            dneta : TYPE
-                DESCRIPTION.
-            dnu : TYPE
-                DESCRIPTION.
-            dZeta : TYPE
-                DESCRIPTION.
-            ds : TYPE
-                DESCRIPTION.
-            resi_norm : TYPE
-                DESCRIPTION.
-            epsi : TYPE
-                DESCRIPTION.
-            p0 : TYPE, optional
-                DESCRIPTION. The default is p0.
-            q0 : TYPE, optional
-                DESCRIPTION. The default is q0.
-            pc : TYPE, optional
-                DESCRIPTION. The default is pc.
-            qc : TYPE, optional
-                DESCRIPTION. The default is qc.
-            U : TYPE, optional
-                DESCRIPTION. The default is U.
-            L : TYPE, optional
-                DESCRIPTION. The default is L.
-            alpha : TYPE, optional
-                DESCRIPTION. The default is alpha.
-            beta : TYPE, optional
-                DESCRIPTION. The default is beta.
-            variable_vector : TYPE, optional
-                DESCRIPTION. The default is variable_vector.
-            minimizer_vector : TYPE, optional
-                DESCRIPTION. The default is minimizer_vector.
+            w,dw : array
+                The values of variables like weight parameters and non-negative lagrangian multipltier and it changes calculated from solving linear equations.
+            x,y,z : array
+                 The values of lagrangian function variables based on equ. 5.6 in MMA paper
+            epsi,lamda,s : array
+                weight parameters in lagrangian function.
+            Zee,eta,neta,nu : array
+                Non-negative lagrangian multiplier in equ. 5.6 in MMA paper.
+            L,U : array
+            Lower and upper limits of the variables.
+            p0,q0 : array
+                The approximation function of objectives based on equ. 3.3 and 3.4.
+            pc,qc : array
+                The approximation function of constraind based on equ. 3.3 and 3.4.
+            b: array
+                    residual of approximate function equ. 3.2 in MMA paper.
+            variable_vector,minimizer_vector : array
+                initial value vector for weights(variables) and Lagrangian multilpier(constrains) initialized with 1.
+            dx,dy,dz,dlamda,dneta,dzeta,ds : array
+                obtained from equ. 5.12 and 5.13 in MMA paper.
+            resi_norm : float
+                Previous iteration's residual.
+            epsi : float 
+                maximum Tolerance.
 
             Returns
             -------
-            newx : TYPE
-                DESCRIPTION.
-            newy : TYPE
-                DESCRIPTION.
-            newz : TYPE
-                DESCRIPTION.
-            newlam : TYPE
-                DESCRIPTION.
-            neweta : TYPE
-                DESCRIPTION.
-            newneta : TYPE
-                DESCRIPTION.
-            newnu : TYPE
-                DESCRIPTION.
-            newZeta : TYPE
-                DESCRIPTION.
-            new_s : TYPE
-                DESCRIPTION.
-            new_residualmax : TYPE
-                DESCRIPTION.
-            new_residunorm : TYPE
-                DESCRIPTION.
-            it : TYPE
-                DESCRIPTION.
+            newx,newy,newlam,neweta,newnu,new_s,newZeta : TYPE
+                Updated values after newton line search which satisfy KKT conditions.
+
+            new_residualmax : int
+                Max of the residuals obtained from optimal conditions function.
+            new_residunorm : int
+                Norm of residuals.
+            it : int
+                Number of iteration taken by line search to obtain optimal conditions.
 
             '''
             #calculating initial step step
             #dw=np.maximum(dw,1e-5)
             #print(dw)
-            '''
-            step_size=np.max(-1.01*(dw/w))
-            #print(step_size)
-            DL=np.max(-1.01*(dx/(x-np.array([alpha]).T)))
-            DU=np.max(1.01*(dx/(np.array([beta]).T)-x))
-            step_range=max(DL,DU)
-            a=1/max(1.0,max(step_size,step_range))
-            '''
-            stepxx = -1.01*dw/w
-            #out = -1.01*np.ones( (8) )  #preinit
-            #stepxx=-1.01*np.divide(dw, w, out=np.zeros_like(dw), where=w!=0)
-            stmxx = np.max(stepxx) 
-            stepalfa =-1.01*(dx/(x-np.array([alpha]).T))
-            stmalfa = np.max(stepalfa)
-            stepbeta = 1.01*(dx/((np.array([beta]).T)-x))
-            stmbeta = np.max(stepbeta)
-            stmalbe = max(stmalfa,stmbeta)
-            stmalbexx = max(stmalbe,stmxx)
-            stminv = max(stmalbexx,1.0)
-            a = 1.0/stminv
+            #step size is caculated based on section 5.4 in MMA paper
+            size = -1.01*dw/w
+
+            max_size = np.max(size) 
+            stepa =-1.01*(dx/(x-np.array([alpha]).T))
+            max_stepa = np.max(stepa)
+            stepb = 1.01*(dx/((np.array([beta]).T)-x))
+            max_stepb = np.max(stepb)
+            max_step = max(max_stepa,max_stepb)
+            final_step = max(max_step,max_size)
+            step_size = max(final_step,1.0)
+            a = 1.0/step_size
             #print('a',a)
             it=0
             max_iteration=200
@@ -730,133 +631,83 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
                 newnu = nu+a*dnu
                 newZeta = Zeta+a*dZeta
                 new_s = s+a*ds
-                #np.set_printoptions(precision=4)
-                #print('x,y,z',newx,newy,newz)
-                #print('\n lamda',newlam)
-                #print('\n neweta',neweta)
-                #print('\n newneta',newneta)
-                #print('\n newnu',newnu)
-                #print('\n newZeta',newZeta)
-                #print('\n new_s',new_s)
             
                 #print('lam,eta,neta,nu,Zeta,s',x,y,z,lamda,s,Zeta,eta,neta,nu)
+                #KKT condition are checked and residuals are calculated
                 new_residualmax,new_residunorm=optimal_condtition(newx,newy,newz,newlam,new_s,newZeta,neweta,newneta,newnu,epsi)
                 it+=1
                 
                 
                 #print('line_residual',[new_residualmax,new_residunorm])
-                if new_residunorm <(2*resi_norm):
+                if new_residunorm <(2*resi_norm): #exit condition (if norm of residual is less then 2* initial norm of residual)
                       return newx,newy,newz,newlam,neweta,newneta,newnu,newZeta,new_s,new_residualmax,new_residunorm,it 
-                a=a*0.5
-                #print('a1',a)
+                a=a*0.5 #change in step size if the solution doesnot converge.
+
             
         
         def Newton_method(U,L,x,y,z,alpha,beta,p0,q0,pc,qc,epsi,lamda,s,Zeta,eta,neta,nu,residumax,residunorm,variable_vector=variable_vector,minimizer_vector=minimizer_vector):
             '''
-            
+            Gradient based method where newton line search is employed to find the optimal search direction and step
+            A system of linear equation are build based on equ. 5.11, 5.12, 5.13 in MMA paper.
 
             Parameters
             ----------
-            U : TYPE
-                DESCRIPTION.
-            L : TYPE
-                DESCRIPTION.
-            x : TYPE
-                DESCRIPTION.
-            y : TYPE
-                DESCRIPTION.
-            z : TYPE
-                DESCRIPTION.
-            alpha : TYPE
-                DESCRIPTION.
-            beta : TYPE
-                DESCRIPTION.
-            p0 : TYPE
-                DESCRIPTION.
-            q0 : TYPE
-                DESCRIPTION.
-            pc : TYPE
-                DESCRIPTION.
-            qc : TYPE
-                DESCRIPTION.
-            epsi : TYPE
-                DESCRIPTION.
-            lamda : TYPE
-                DESCRIPTION.
-            s : TYPE
-                DESCRIPTION.
-            Zeta : TYPE
-                DESCRIPTION.
-            eta : TYPE
-                DESCRIPTION.
-            neta : TYPE
-                DESCRIPTION.
-            nu : TYPE
-                DESCRIPTION.
-            residumax : TYPE
-                DESCRIPTION.
-            residunorm : TYPE
-                DESCRIPTION.
-            variable_vector : TYPE, optional
-                DESCRIPTION. The default is variable_vector.
-            minimizer_vector : TYPE, optional
-                DESCRIPTION. The default is minimizer_vector.
-
+            L,U : array
+            Lower and upper limits of the variables.
+            x,y,z : array
+                 The values of lagrangian function variables based on equ. 5.6 in MMA paper
+            alpha,beta : array
+                Bound of the variables . Based on equ. 3.6 and 3.7 in MMA paper
+            p0,q0 : array
+                The approximation function of objectives based on equ. 3.3 and 3.4.
+            pc,qc : array
+                The approximation function of constraind based on equ. 3.3 and 3.4.
+            epsi,lamda,s : array
+                weight parameters in lagrangian function.
+            Zee,eta,neta,nu : array
+                Non-negative lagrangian multiplier in equ. 5.6 in MMA paper.
+            residumax : array
+                The maximum residual obtained after solving KKT conditions 5.7 in MMA paper.
+            residunorm : array
+                Norm of the residuals obtained after solving KKT conditions 5.7 in MMA paper.
+            
+            b: array
+                    residual of approximate function equ 3.2 .
+            variable_vector,minimizer_vector : array
+                initial value vector for weights(variables) and Lagrangian multilpier(constrains) initialized with 1.
             Returns
             -------
-            TYPE
-                DESCRIPTION.
-
+            x,y,z,lamda,eta,neta,nu,Zeta,s: array
+                Updated values of variable, weights and lagrangian multiplier obtained after newton raphson
+            iteration: int
+                Number of iteration taken by Newton_raphson to achieve optimal conditons
+            l_ii: 
+              Total Number of iteration taken by newton line search to achieve optimal conditons
+            
             '''
             def linear_system_assembly(Dx,Dy,Dlamda,delx,dely,delz,dellamda,G,a,z,Zeta,variable_vector=variable_vector,minimizer_vector=minimizer_vector):
                 '''
-                
+                This function builts a system of linear equation based on matrix 5.14 
 
                 Parameters
                 ----------
-                Dx : TYPE
-                    DESCRIPTION.
-                Dy : TYPE
-                    DESCRIPTION.
-                Dlamda : TYPE
-                    DESCRIPTION.
-                delx : TYPE
-                    DESCRIPTION.
-                dely : TYPE
-                    DESCRIPTION.
-                delz : TYPE
-                    DESCRIPTION.
-                dellamda : TYPE
-                    DESCRIPTION.
-                G : TYPE
-                    DESCRIPTION.
-                a : TYPE
-                    DESCRIPTION.
-                z : TYPE
-                    DESCRIPTION.
-                Zeta : TYPE
-                    DESCRIPTION.
-                variable_vector : TYPE, optional
-                    DESCRIPTION. The default is variable_vector.
-                minimizer_vector : TYPE, optional
-                    DESCRIPTION. The default is minimizer_vector.
+                Dx,Dy,Dlamda,delx,dely,delz,dellamda : TYPE
+                    Values required to build linear equation based on equ. 5.14.
+                G,a,z,Zeta : array
+                    Values required to build linear equation based on equ. 5.12,5.11
+                variable_vector,minimizer_vector : array
+                    initial value vector for weights(variables) and Lagrangian multilpier(constrains) initialized with 1.
 
                 Returns
                 -------
-                dx : TYPE
-                    DESCRIPTION.
-                dy : TYPE
-                    DESCRIPTION.
-                dz : TYPE
-                    DESCRIPTION.
-                dlamda : TYPE
-                    DESCRIPTION.
-
+                dx,dy,dz,dlamda : array
+                    The solution of system of linear equation.
                 '''
                 Dx_inv=1/Dx
                 Dy_inv=1/Dy
                 Dlamda_y=Dlamda+Dy_inv
                 dellamda_y=dellamda+Dy_inv*dely
+                #Building system of linear equation 5.20 in MMA paper
                 if len(variable_vector)>len(minimizer_vector):
                     ###
                     A11=np.asarray(np.diag(Dlamda_y.flatten(),0) \
@@ -874,32 +725,29 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
                 
                     B=np.concatenate((B1,B2),axis=0)
                     #print('B',B)
+                    #solving system of eqautions
                     X=np.linalg.solve(A,B)
+                    #obtaining results
                     dlamda=X[:len(minimizer_vector)]
                     dz=X[len(minimizer_vector):len(minimizer_vector)+1]
                     dx=-(Dx_inv*np.dot(G.T,dlamda))-Dx_inv*delx
                     dy=(Dy_inv*dlamda)-(Dy_inv*dely)
                     
                     return dx,dy,dz,dlamda
-            residnorm=residunorm        
+            #start of Newton Raphson method        
+            residnorm=residunorm  #residual from previous iteration      
             iteration=0
             l_ii=0
-            max_iteration=250
+            max_iteration=250 
+            #exit conditions
             while iteration<max_iteration:
                 iteration+=1
                 UX=np.array([U]).T-x
                 LX=x-np.array([L]).T
-                #print('x',x)
-                #print('\n U',np.array([U]).T)
-                #print('\n UX',UX)
-                #print('\n UX',UX**3)
-                #print('\n UX_INV',1/UX)
-                #print('\n UX_INV2',(1/(UX**2)))
-                #print('\n UX_INV3',(1/(UX**3)))
                 plamda=p0+np.dot(pc.T,lamda)
                 #print('plamda',plamda)
                 qlamda=q0+np.dot(qc.T,lamda)
-                #5.4
+                ## based on equ. 5.4
                 g=np.dot(pc,(1/(UX)))+np.dot(qc,(1/(LX)))
                 dphi_dx=(plamda/UX**2)-(qlamda/LX**2)
                 dphi_dxdx=(2*plamda/UX**3)+(2*qlamda/LX**3)
@@ -908,7 +756,7 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
                 #print('dphi_dxdx',dphi_dxdx)
                 #dphi_dxdx=2*plamda.T*(1/((U-x)**3))+2*qlamda.T*(1/((x-L)**3))
                 #print('dphi_dxdx',dphi_dxdx)
-                   
+                ##based on equ. 5.12   
                 Dx=dphi_dxdx+(eta/(x-np.array([alpha]).T))+(neta/(np.array([beta]).T-x))
                 Dy=d+nu/y
                 Dlamda=s/lamda
@@ -916,6 +764,7 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
                 #print('Dy',Dy)
                 #print('Dlamda',Dlamda)
                 #print('dphi_dx',dphi_dx)
+                ##Based on equ. 5.13 in MMA paper
                 delx=dphi_dx-(1/(x-np.array([alpha]).T))*epsi*variable_vector+(1/(np.array([beta]).T-x))*epsi*variable_vector
                 dely=c+d*y-lamda-(epsi*minimizer_vector)/y
                 delz=a0-np.dot(lamda.T,a)-epsi/z
@@ -935,11 +784,12 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
                 diag_qij=inv_LX[0,:]
                 pij=(np.diag(diag_pij,0).dot(pc.T)).T
                 qij=(np.diag(diag_qij,0).dot(qc.T)).T
-                G=pij-qij
+                G=pij-qij #based on equ. 5.11
                 #print('G',G)
-                
+                ## A system of linear equation is built 5.14 and solution is obtained which is search direction
                 dx,dy,dz,dlamda=linear_system_assembly(Dx,Dy,Dlamda,delx,dely,delz,dellamda,G,a,z,Zeta)
                 #print('dx',dx,'dy',dy,'dz',dz,'dlamda',dlamda)
+                ##Non-negative lagrangian multipler are calculated based on equ. 5.13
                 AlphaX=x-np.array([alpha]).T
                 BetaX=np.array([beta]).T-x
                 deta=-((eta*dx)/AlphaX)-eta+((epsi*variable_vector)/AlphaX)
@@ -948,12 +798,10 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
                 dnu=-(nu*dy/y)-nu+(epsi*minimizer_vector/y)
                 dZeta=-((Zeta/z)*dz)-Zeta+(epsi/z)
                 ds=-((s*dlamda)/lamda)-s+epsi*minimizer_vector/lamda
-                
+                ##The equation is built based on section 5.3 in MMA paper
                 w=np.concatenate((y,z,lamda,eta,neta,nu,s,Zeta),axis=0)
                 dw=np.concatenate((dy,dz,dlamda,deta,dneta,dnu,ds,dZeta),axis=0)
-                #lline search 
-                #print('w',np.round(w.T))
-                #print('dw',np.round(dw.T))
+                ##Inputs for newton line search 
                 oldx=x
                 oldy=y
                 oldz=z
@@ -963,8 +811,10 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
                 oldnu=nu
                 oldZeta=Zeta
                 olds=s
+                #Newton line search algorthim is built and search direction and pervious iteration values are the input
                 new_x,new_y,new_z,new_lamda,new_eta,new_neta,new_nu,new_Zeta,new_s,new_residualmax,new_residunorm,ii2=line_search(w,dw,x,y,z,lamda,eta,neta,nu,Zeta,s,dx,dy,dz,dlamda,deta,dneta,dnu,dZeta,ds,residnorm,epsi)
                 l_ii+=ii2
+                #updating variables , weight parameters, lagrangian multipler,residuals from results obtained from newton linea search
                 x=new_x
                 y=new_y
                 z=new_z
@@ -976,6 +826,7 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
                 s=new_s
                 residumax=new_residualmax
                 residnorm=new_residunorm
+                #calculating the change
                 xx1=oldx-x
                 xx2=oldy-y
                 xx3=oldz-z
@@ -985,24 +836,26 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
                 xx7=oldnu-nu
                 xx8=oldZeta-Zeta
                 xx9=olds-s
+
                 exit_cond=np.concatenate((xx1,xx2,xx3,xx4,xx5,xx6,xx7,xx8,xx9),axis=0)
                 if iteration>=max_iteration:
                     print('line_search',exit_cond.T)
                     print('w',w.T)
                     print('dw',dw.T)
                 #print('line residumax:',[residumax,residnorm])
+                ##Newton raphson would exit when the maximum residual is less than given tolerance 
                 if residumax<0.9*epsi :#or np.linalg.norm(abs(exit_cond))<1e-4:
+
                     #print(x,y,z,lamda,eta,neta,nu,Zeta,s)
                     
                     return x,y,z,lamda,eta,neta,nu,Zeta,s,iteration,l_ii
         
-                
-               
-
         ii1=0
         l_ii1=0
-        while epsi> epsimin:
+        #start of prime dual method
+        while epsi> epsimin: #exit condition
             #print('x',x)
+            #KKT conditions are calculated
             residual_max,residunorm=optimal_condtition(x,y,z,lamda,s,Zeta,eta,neta,nu,epsi)
             #print('outerresidual:',[residual_max,residunorm])
             oldx=x
@@ -1014,9 +867,11 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
             oldnu=nu
             oldZeta=Zeta
             olds=s
+            #Newton-Raphson is performed
             x,y,z,lamda,eta,neta,nu,Zeta,s,ii1,l_ii=Newton_method(Upper,Lower,x,y,z,alpha,beta,p0,q0,pc,qc,epsi,lamda,s,Zeta,eta,neta,nu,residual_max,residunorm)
             ii1+=ii1
             l_ii1+=l_ii
+            #change is calculated
             xx1=oldx-x
             xx2=oldy-y
             xx3=oldz-z
@@ -1042,16 +897,12 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
     #calculating alpha and beta
     alpha=np.maximum(Xmin,np.maximum((Lower+m_tol*(x-Lower)),(x-m*(Xmax-Xmin))))
     beta=np.minimum(Xmax,np.minimum((Upper-m_tol*(Upper-x)),(x+m*(Xmax-Xmin))))
-    #x=Newton_Method(dfun0,f0,x,Lower,Upper,alpha,beta)
     #calculating dervivative of objective and constrains 
     p0,q0=objective_constrains(x,Lower,Upper)
     pc,qc,rc=Minimizer_constrains(x,Lower,Upper)
-    b=-rc
-    #print(L,U)
-    #print(p0,q0,r0)
-    #print(pc,qc,b)
-    #print(a,b,c,d)
+    b=-rc #residual of approximate function
     #print(Lower,Upper,alpha,beta,p0,q0,pc,qc,a,b,c,d)
+    ##constrained based problem is solved using a gradient based active set strategy method 
     x,exit_i,l_iit,res=prime_dual(Lower,Upper,alpha,beta,p0,q0,pc,qc,a,b,c,d)
     #print(x)
     

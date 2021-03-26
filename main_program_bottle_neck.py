@@ -1,3 +1,13 @@
+#AUTHOR : YASA VISWAMBHAR REDDY
+#MATRICULATION NUMBER : 65074
+#Personal Programming Project
+#--------------------------------------------------------------------------#
+#BOTTLE NECKS - Python file used for time analysis 
+#--------------------------------------------------------------------------#
+# NO commenting is done as all function used in IGTO are placed in a single file to perform time analysis
+#each function as two global variables
+#1- to calculate number of times the function was called
+#2- to calculate the time taken by the function
 from inputs import *
 import matplotlib.pyplot as plt
 import time
@@ -11,52 +21,22 @@ from time_analysis_variables import *
 from plotting import time_analysis_plotting
 
 def Folder(path): 
-
-    '''
-    
-
-    Parameter
-    ----------
-    path : TYPE
-        DESCRIPTION.
-
-    Returns
-    -------
-    None.
-
-    '''
     global Folder_Count
     global Folder_ex_time
     start = time.time()
-
-    
     try:
         if not os.path.exists(path):
             os.makedirs(path)
     except OSError:
         print('Error: Creating directory. ' + path)
-
-
     stop = time.time()
     execution_time = stop - start
     Folder_Count+=1
     Folder_ex_time+=execution_time
 
-def knot_index(degree,U,knotvector):
-    '''
-    This function return the knot span or the index of the region in which the value(U) lies in knotvector
-    INPUTS :
-        Degree      :int
-                order of B-splines  0-constant, 1-linear, 2-quadratic, 3-cubic
-        U           - int
-                The value whose index has to be found ex-0.75
-        knotvector  -  array or list
-                list of knot values. Ex- [0,0,0,0.5,1,1,1]
-    Returns :
-        index : integer
-                The position of the value U in knotvector
 
-    '''
+def knot_index(degree,U,knotvector):
+
     global knot_index_Count
     global knot_index_ex_time
     start = time.time()
@@ -69,7 +49,6 @@ def knot_index(degree,U,knotvector):
                   knot_index_ex_time+= stop - start
                   knot_index_Count+=1  
                   return i
-
     else:   
 
         if degree>0:
@@ -95,28 +74,7 @@ def knot_index(degree,U,knotvector):
 
 
 def bspline_basis(knot_index,degree,U,knotvector):
-    '''
-    modified version based on Algorthim 2.2 THE NURBS book pg70
 
-    Parameters
-    ----------
-    knotindex : int 
-        DESCRIPTION. The default is ''.
-
-    degree : int
-        order of B-splines  0-constant, 1-linear, 2-quadratic, 3-cubic
-    U : int
-            The value whose basis are to be found
-    knotvector : array or list
-            list of knot values.
-    Returns
-    -------
-    Basis array of dimension degree+1
-        It contains non-zero cox de boor based basis function
-            Ex= if degree=2 and knotindex=4 
-            basis=[N 2_0, N 3_1, N 4_2]
-
-    '''
     global bspline_basis_Count
     global bspline_basis_ex_time
     start = time.time()
@@ -162,28 +120,7 @@ def bspline_basis(knot_index,degree,U,knotvector):
 
 
 def derbspline_basis(knot_index,degree,U,knotvector):
-    '''
-     Modified version based on the alogorithm A2.3 in NURBS Book page no.72
-    Parameters
-    ----------
-    knot_index : integer
-                The position of the value U in knotvector
-    degree : int
-        order of B-splines  0-constant, 1-linear, 2-quadratic, 3-cubic
-    U : int
-            The value whose basis are to be found
-    knotvector : array or list
-            list of knot values.
 
-    Returns
-    -------
-    Array 
-        Derivatives of Basis array of dimension degree+1
-        It contains non-zero cox de boor based basis function
-            Ex= if degree=2 and knotindex=4 
-            der_basis=[N' 2_0, N' 3_1, N' 4_2].
-
-    '''
     global derbspline_basis_Count
     global derbspline_basis_ex_time
     start = time.time()
@@ -223,37 +160,7 @@ def derbspline_basis(knot_index,degree,U,knotvector):
 
 
 def trilinear_der(Ux,Uy,Uz,weights,xdegree,xknotvector,ydegree,yknotvector,zdegree,zknotvector):
-    '''
-    
 
-    Parameters
-    ----------
-    Ux : TYPE
-        DESCRIPTION.
-    Uy : TYPE
-        DESCRIPTION.
-    Uz : TYPE
-        DESCRIPTION.
-    weights : TYPE
-        DESCRIPTION.
-    xdegree : TYPE, optional
-        DESCRIPTION. The default is XI_DEGREE.
-    xknotvector : TYPE, optional
-        DESCRIPTION. The default is XI_KNOTVECTOR.
-    ydegree : TYPE, optional
-        DESCRIPTION. The default is ETA_DEGREE.
-    yknotvector : TYPE, optional
-        DESCRIPTION. The default is ETA_KNOTVECTOR.
-    zdegree : TYPE, optional
-        DESCRIPTION. The default is ETA_DEGREE.
-    zknotvector : TYPE, optional
-        DESCRIPTION. The default is ETA_KNOTVECTOR.
-
-    Returns
-    -------
-    None.
-
-    '''
     global trilinear_der_Count
     global trilinear_der_ex_time
     start = time.time()
@@ -319,24 +226,6 @@ def trilinear_der(Ux,Uy,Uz,weights,xdegree,xknotvector,ydegree,yknotvector,zdegr
 
 
 def elementorder(numx,numy,numz):
-    '''
-    
-
-    Parameters
-    ----------
-    numx : TYPE
-        DESCRIPTION.
-    numy : TYPE
-        DESCRIPTION.
-    numz : TYPE
-        DESCRIPTION.
-
-    Returns
-    -------
-    el_order : TYPE
-        DESCRIPTION.
-
-    '''
     index=0
     el_order=np.zeros((numx,numz,numy))
     for i in range(numz):
@@ -346,64 +235,10 @@ def elementorder(numx,numy,numz):
                 index+=1
     return el_order
 
-def elementorder1(numx,numy,numz):
-    '''
-    
-
-    Parameters
-    ----------
-    numx : TYPE
-        DESCRIPTION.
-    numy : TYPE
-        DESCRIPTION.
-    numz : TYPE
-        DESCRIPTION.
-
-    Returns
-    -------
-    el_order : TYPE
-        DESCRIPTION.
-
-    '''
-    index=0
-    el_order=np.zeros((numx,numz,numy))
-    for k in range(numz):
-        for j in range(numy):
-            for i in range(numx):
-                el_order[i,k,j]=index
-                index+=1
-    return el_order
-
-#print(elementorder1(2,2,2))
 
 
 def knot_connectivity(n,p,q,knotconnectivityU,knotconnectivityV,knotconnectivityW):
-    '''
-    
 
-    Parameters
-    ----------
-    element : TYPE
-        DESCRIPTION.
-    n : TYPE, optional
-        DESCRIPTION. The default is N.
-    p : TYPE, optional
-        DESCRIPTION. The default is P.
-    q : TYPE, optional
-        DESCRIPTION. The default is Q.
-    knotconnectivityU : TYPE, optional
-        DESCRIPTION. The default is XI_KNOTCONNECTIVITY.
-    knotconnectivityV : TYPE, optional
-        DESCRIPTION. The default is ETA_KNOTCONNECTIVITY.
-    knotconnectivityW : TYPE, optional
-        DESCRIPTION. The default is NETA_KNOTCONNECTIVITY.
-
-    Returns
-    -------
-    TYPE
-        DESCRIPTION.
-
-    '''
     index=np.zeros((n*p*q,3))
     count=0
     for k in range(len(knotconnectivityW)):
@@ -415,18 +250,8 @@ def knot_connectivity(n,p,q,knotconnectivityU,knotconnectivityV,knotconnectivity
     return  index
 
 
-def controlpointassembly(n,p,q,nU,nV,nW,xdegree,ydegree,zdegree,knotconnectivityU,knotconnectivityV,knotconnectivityW):#modigy this 
-    '''
-    for 2 elements
-    
-    front face numbering
-    3-4-5
-    0-1-2
+def controlpointassembly(n,p,q,nU,nV,nW,xdegree,ydegree,zdegree,knotconnectivityU,knotconnectivityV,knotconnectivityW):
 
-    back face numbering
-    9-10-11
-    6-7-8
-    '''
     elements_assembly=np.zeros(((nU*nV*nW),(xdegree+1)*(ydegree+1)*(zdegree+1)))
     elements_order=elementorder(n,p,q)
     a=0 
@@ -443,25 +268,9 @@ def controlpointassembly(n,p,q,nU,nV,nW,xdegree,ydegree,zdegree,knotconnectivity
     elements_assembly=elements_assembly.astype(int)
     return elements_assembly
 
+
 def gauss_quadrature(p,q,r):
-    '''
-    
 
-    Parameters
-    ----------
-    p : TYPE
-        DESCRIPTION.
-    q : TYPE
-        DESCRIPTION.
-    r : TYPE
-        DESCRIPTION.
-
-    Returns
-    -------
-    list
-        DESCRIPTION.
-
-    '''
     global gauss_quadrature_Count
     global gauss_quadrature_ex_time
     start = time.time()
@@ -500,22 +309,6 @@ def gauss_quadrature(p,q,r):
 
 
 def unittoparametric(gauss_point,span):
-    '''
-    
-
-    Parameters
-    ----------
-    gauss_point : TYPE
-        DESCRIPTION.
-    span : TYPE
-        DESCRIPTION.
-
-    Returns
-    -------
-    TYPE
-        DESCRIPTION.
-
-    '''
     global unittoparametric_Count
     global unittoparametric_ex_time
     start = time.time()
@@ -529,52 +322,7 @@ def unittoparametric(gauss_point,span):
 
 
 def jacobian(Xi,Eta,Nta,Uspan,Vspan,Wspan,X,Y,Z,weights,xdegree,xknot_vector,ydegree,yknot_vector,zdegree,zknot_vector):
-    '''
-    
 
-    Parameters
-    ----------
-    Xi : TYPE
-        DESCRIPTION.
-    Eta : TYPE
-        DESCRIPTION.
-    Nta : TYPE
-        DESCRIPTION.
-    Uspan : TYPE
-        DESCRIPTION.
-    Vspan : TYPE
-        DESCRIPTION.
-    Wspan : TYPE
-        DESCRIPTION.
-    X : TYPE
-        DESCRIPTION.
-    Y : TYPE
-        DESCRIPTION.
-    Z : TYPE
-        DESCRIPTION.
-     : TYPE
-        DESCRIPTION.
-    weights : TYPE
-        DESCRIPTION.
-    xdegree : TYPE, optional
-        DESCRIPTION. The default is XI_DEGREE.
-    xknot_vector : TYPE, optional
-        DESCRIPTION. The default is XI_KNOTVECTOR.
-    ydegree : TYPE, optional
-        DESCRIPTION. The default is ETA_DEGREE.
-    yknot_vector : TYPE, optional
-        DESCRIPTION. The default is ETA_KNOTVECTOR.
-    zdegree : TYPE, optional
-        DESCRIPTION. The default is NETA_DEGREE.
-    zknot_vector : TYPE, optional
-        DESCRIPTION. The default is NETA_KNOTVECTOR.
-
-    Returns
-    -------
-    list
-        DESCRIPTION.
-
-    '''
     global jacobian_Count
     global jacobian_ex_time
     start = time.time()
@@ -627,38 +375,7 @@ def jacobian(Xi,Eta,Nta,Uspan,Vspan,Wspan,X,Y,Z,weights,xdegree,xknot_vector,yde
 
 
 def strain_displacement(Xi,Eta,Neta,jacobian1,det_jacobian1,DR_DXi,nurbs,nn):
-    '''
-    
 
-    Parameters
-    ----------
-    Xi : TYPE
-        DESCRIPTION.
-    Eta : TYPE
-        DESCRIPTION.
-    Neta : TYPE
-        DESCRIPTION.
-    jacobian1 : TYPE
-        DESCRIPTION.
-    det_jacobian1 : TYPE
-        DESCRIPTION.
-    DR_DXi : TYPE
-        DESCRIPTION.
-    NURBS : TYPE
-        DESCRIPTION.
-
-    Raises
-    ------
-    Exception
-        DESCRIPTION.
-
-    Returns
-    -------
-    B : TYPE
-        DESCRIPTION.
-    R : TYPE
-        DESCRIPTION.
-    '''
     global strain_displacement_Count
     global strain_displacement_ex_time
     start = time.time()
@@ -692,22 +409,7 @@ def strain_displacement(Xi,Eta,Neta,jacobian1,det_jacobian1,DR_DXi,nurbs,nn):
     return B,R
 
 def Compliance_matrix(E=100000,v=0.3):
-    '''
-    
 
-    Parameters
-    ----------
-    E : TYPE
-        DESCRIPTION.
-    v : TYPE
-        DESCRIPTION.
-
-    Returns
-    -------
-    TYPE
-        DESCRIPTION.
-
-    '''
     global Compliance_matrix_Count
     global Compliance_matrix_ex_time
     start = time.time()
@@ -722,11 +424,11 @@ def Compliance_matrix(E=100000,v=0.3):
     Compliance_matrix_Count+=1
     return C
 
+
 def element_routine(X,Y,Z,weights,E,v,Uspan,Vspan,Wspan,xdegree,xknot_vector,ydegree,yknot_vector,zdegree,zknot_vector):
     global element_routine_Count
     global element_routine_ex_time
     start = time.time() 
-
     Gauss_points,gauss_weights=gauss_quadrature(xdegree,ydegree,zdegree)
     C=Compliance_matrix(E,v)
     Ke=np.zeros((3*((xdegree+1)*(ydegree+1)*(zdegree+1)),3*((xdegree+1)*(ydegree+1)*(zdegree+1))))
@@ -748,30 +450,9 @@ def element_routine(X,Y,Z,weights,E,v,Uspan,Vspan,Wspan,xdegree,xknot_vector,yde
 
 
 def assemble(K_G,K_E,elindices,ncp,K_disp=False):
-    '''
-    
-
-    Parameters
-    ----------
-    K_G : TYPE
-        DESCRIPTION.
-    K_E : TYPE
-        DESCRIPTION.
-    elindices : TYPE
-        DESCRIPTION.
-    ncp : TYPE
-        DESCRIPTION.
-
-    Returns
-    -------
-    K_G : TYPE
-        DESCRIPTION.
-
-    '''
     global assemble_Count
     global assemble_ex_time
     start = time.time()  
-
     elindices=np.array(elindices)
     dof=3
     gindices=np.sort(np.concatenate((elindices*dof,dof*elindices+1,dof*elindices+2)))
@@ -785,39 +466,11 @@ def assemble(K_G,K_E,elindices,ncp,K_disp=False):
     assemble_Count+=1
     return K_G
 
+
 def apply_BC(F_E,fixed_dof,load_dof,P,abc_disp=False):
-    '''
-    
-
-    Parameters
-    ----------
-    K_G : TYPE
-        DESCRIPTION.
-    F_E : TYPE
-        DESCRIPTION.
-    fixed_dof : TYPE
-        DESCRIPTION.
-    load_dof : TYPE
-        DESCRIPTION.
-    P : TYPE
-        DESCRIPTION.
-
-    Returns
-    -------
-    reduced_GK : TYPE
-        DESCRIPTION.
-    reduced_F_E : TYPE
-        DESCRIPTION.
-
-    '''
     global apply_BC_Count
     global apply_BC_ex_time
     start = time.time() 
-    #reduced_GK=np.delete(K_G,fixed_dof,axis=0) #axis=0 is row
-    #reduced_GK=np.delete(reduced_GK,fixed_dof,axis=1) 
-    
-    #reduced_GK=np.delete(np.delete(K_G, fixed_dof, 0),fixed_dof , 1)
-    #axis=0 is row
     F_E[load_dof]=P
     reduced_F_E=np.delete(F_E,fixed_dof,axis=0)
     if abc_disp:
@@ -828,28 +481,6 @@ def apply_BC(F_E,fixed_dof,load_dof,P,abc_disp=False):
     return reduced_F_E
 
 def Knearestneighbours(rmin,nelx,nely,nelz):
-    '''
-    
-
-    Parameters
-    ----------
-    rmin : TYPE
-        DESCRIPTION.
-    nelx : TYPE
-        DESCRIPTION.
-    nely : TYPE
-        DESCRIPTION.
-    nelz : TYPE
-        DESCRIPTION.
-
-    Returns
-    -------
-    H : TYPE
-        DESCRIPTION.
-    DH : TYPE
-        DESCRIPTION.
-
-    '''
     global Knearestneighbours_Count
     global Knearestneighbours_ex_time
     start = time.time() 
@@ -882,46 +513,6 @@ def Knearestneighbours(rmin,nelx,nely,nelz):
 
 
 def optimality_criteria(dfun,dCon,initial_X,constrain,H=None,DH=None,beta=0.1,oc_disp=True,g=1,tol=0.01,move=0.1,neta=0.5,initial_value=0,final_value=1e09):
-    '''
-    
-
-    Parameters
-    ----------
-    dfun : TYPE
-        DESCRIPTION.
-    dCon : TYPE
-        DESCRIPTION.
-    initial_X : TYPE
-        DESCRIPTION.
-    constrain : TYPE
-        DESCRIPTION.
-    H : TYPE
-        DESCRIPTION.
-    DH : TYPE
-        DESCRIPTION.
-    beta : TYPE
-        DESCRIPTION.
-    oc_disp : TYPE, optional
-        DESCRIPTION. The default is True.
-    g : TYPE, optional
-        DESCRIPTION. The default is 1.
-    tol : TYPE, optional
-        DESCRIPTION. The default is 0.01.
-    move : TYPE, optional
-        DESCRIPTION. The default is 0.1.
-    neta : TYPE, optional
-        DESCRIPTION. The default is 0.5.
-    initial_value : TYPE, optional
-        DESCRIPTION. The default is 0.
-    final_value : TYPE, optional
-        DESCRIPTION. The default is 1e09.
-
-    Returns
-    -------
-    X_new : TYPE
-        DESCRIPTION.
-
-    '''
     global optimality_criteria_Count
     global optimality_criteria_ex_time
     start = time.time() 
@@ -980,182 +571,54 @@ def optimality_criteria(dfun,dCon,initial_X,constrain,H=None,DH=None,beta=0.1,oc
 #def Moving_asymptoes
 
 def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_disp,m=0.2,m_tol=0.1):
-    '''
     
-
-    Parameters
-    ----------
-    dfun0 : TYPE
-        DESCRIPTION.
-    dcon : TYPE
-        DESCRIPTION.
-    f0 : TYPE
-        DESCRIPTION.
-    c0 : TYPE
-        DESCRIPTION.
-    x0 : TYPE
-        DESCRIPTION.
-    x1 : TYPE
-        DESCRIPTION.
-    x2 : TYPE
-        DESCRIPTION.
-    L : TYPE
-        DESCRIPTION.
-    U : TYPE
-        DESCRIPTION.
-    loop : TYPE
-        DESCRIPTION.
-    nel : TYPE
-        DESCRIPTION.
-    vel : TYPE
-        DESCRIPTION.
-    Xmin : TYPE
-        DESCRIPTION.
-    Xmax : TYPE
-        DESCRIPTION.
-    ma_disp : TYPE
-        DESCRIPTION.
-    m : TYPE, optional
-        DESCRIPTION. The default is 0.2.
-    m_tol : TYPE, optional
-        DESCRIPTION. The default is 0.1.
-
-    Returns
-    -------
-    TYPE
-        DESCRIPTION.
-
-    '''
     
     global Moving_asymptoes_Count
     global Moving_asymptoes_ex_time
     start = time.time() 
 
     def Asymptoes(loop=loop,x0=x0,x1=x1,x2=x2,n=nel,Xmin=Xmin,Xmax=Xmax,L=L,U=U,move_tol_low=0.01,move_tol_high=10):
-        '''
-        
-
-        Parameters
-        ----------
-        loop : TYPE, optional
-            DESCRIPTION. The default is loop.
-        x0 : TYPE, optional
-            DESCRIPTION. The default is x0.
-        x1 : TYPE, optional
-            DESCRIPTION. The default is x1.
-        x2 : TYPE, optional
-            DESCRIPTION. The default is x2.
-        n : TYPE, optional
-            DESCRIPTION. The default is nel.
-        Xmin : TYPE, optional
-            DESCRIPTION. The default is Xmin.
-        Xmax : TYPE, optional
-            DESCRIPTION. The default is Xmax.
-        L : TYPE, optional
-            DESCRIPTION. The default is L.
-        U : TYPE, optional
-            DESCRIPTION. The default is U.
-        move_tol_low : TYPE, optional
-            DESCRIPTION. The default is 0.01.
-        move_tol_high : TYPE, optional
-            DESCRIPTION. The default is 10.
-
-        Returns
-        -------
-        Lower : TYPE
-            DESCRIPTION.
-        Upper : TYPE
-            DESCRIPTION.
-        x0 : TYPE
-            DESCRIPTION.
-
-        '''
+    
         global Asymptoes_Count
         global Asymptoes_ex_time
         start = time.time() 
 
-        Lower=np.ones(n)
-        Upper=np.ones(n)
+        lower_value=np.ones(n)
+        upper_value=np.ones(n)
+        #iteration less then 3
         if loop<=2:
-            Lower=x0-0.5*(Xmax-Xmin)
-            Upper=x0+0.5*(Xmax-Xmin)
+            lower_value=x0-0.5*(Xmax-Xmin)  
+            upper_value=x0+0.5*(Xmax-Xmin)  
             #print(Lower,Upper,x)
-        else:
-            '''
-            gamma=(x0-x1)*(x1-x2)
-            gamma[gamma<0]=0.7
-            gamma[gamma>0]=1.2
-            #gamma[gamma==0]=0
-
-            Lower=x0-0.5*gamma*(x1-L)
-            Upper=x0+0.5*gamma*(U-x2)
-        
-            Lower=np.maximum(Lower,x0-move_tol_high)
-            Lower=np.minimum(Lower,x0-move_tol_low)
-            Upper=np.maximum(Upper,x0+move_tol_low)
-            Upper=np.minimum(Upper,x0+move_tol_high)
-            '''
-            xval=x0
-            xold1=x1
-            xold2=x2
-            zzz = (xval-xold1)*(xold1-xold2)
+            return lower_value,upper_value,x0
+        else: #iteration greater then 3
+            xval=x0  #current iteration value of x
+            xold1=x1 #pervious iteration value of x (k-1)
+            xold2=x2 #pervious iteration value of x (k-2)
+            zzz = (xval-xold1)*(xold1-xold2)  
             gamma = np.ones(nel)
-            gamma[np.where(zzz>0)] = 1.2
+            gamma[np.where(zzz>0)] = 1.2      
             gamma[np.where(zzz<0)] = 0.7
-            #gamma[np.where(zzz==0)]= 0 
-            Lower = xval-gamma*(xold1-L)
+            lower_value = xval-gamma*(xold1-L) 
             #print(Lower)
-            Upper = xval+gamma*(U-xold1)
+            upper_value = xval+gamma*(U-xold1)
             #print(Upper)
-            lowmin = xval-10*(Xmax-Xmin)
-            lowmax = xval-0.01*(Xmax-Xmin)
-            uppmin = xval+0.01*(Xmax-Xmin)
-            uppmax = xval+10*(Xmax-Xmin)
-            Lower = np.maximum(Lower,lowmin)
-            Lower = np.minimum(Lower,lowmax)
-            Upper = np.minimum(Upper,uppmax)
-            Upper = np.maximum(Upper,uppmin)
-        ##output as : [ 1.5  0.5 -0.5], [6.5 5.5 4.5], [4 3 2]
+            lmin = xval-move_tol_high*(Xmax-Xmin) 
+            lmax = xval-move_tol_low*(Xmax-Xmin) 
+            umin = xval+move_tol_low*(Xmax-Xmin)  
+            umax = xval+move_tol_high*(Xmax-Xmin) 
+            lower_value = np.maximum(lower_value,lmin)  
+            lower_value = np.minimum(lower_value,lmax) 
+            upper_value = np.minimum(upper_value,umax)  
+            upper_value = np.maximum(upper_value,umin)  
+            
             stop = time.time()
             Asymptoes_ex_time += (stop - start)
             Asymptoes_Count+=1
-        return Lower,Upper,x0
+        return lower_value,upper_value,x0
     
     def objective_constrains(x,Lower,Upper,dfun0=dfun0,f0=f0,Xmin=Xmin,Xmax=Xmax,tol=1e-5,tol1=0.001,tol2=1.001):
-        '''
-        
-
-        Parameters
-        ----------
-        x : TYPE
-            DESCRIPTION.
-        Lower : TYPE
-            DESCRIPTION.
-        Upper : TYPE
-            DESCRIPTION.
-        dfun0 : TYPE, optional
-            DESCRIPTION. The default is dfun0.
-        f0 : TYPE, optional
-            DESCRIPTION. The default is f0.
-        Xmin : TYPE, optional
-            DESCRIPTION. The default is Xmin.
-        Xmax : TYPE, optional
-            DESCRIPTION. The default is Xmax.
-        tol : TYPE, optional
-            DESCRIPTION. The default is 1e-5.
-        tol1 : TYPE, optional
-            DESCRIPTION. The default is 0.001.
-        tol2 : TYPE, optional
-            DESCRIPTION. The default is 1.001.
-
-        Returns
-        -------
-        p : TYPE
-            DESCRIPTION.
-        q : TYPE
-            DESCRIPTION.
-
-        '''
+       
         global objective_constrains_Count
         global objective_constrains_ex_time
         start = time.time() 
@@ -1182,44 +645,7 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
         return p,q
 
     def Minimizer_constrains(x,Lower,Upper,dcon=dcon,m=vel,c0=c0,Xmin=Xmin,Xmax=Xmax,tol=1e-5,tol1=0.001,tol2=1.001):
-        '''
-        
-
-        Parameters
-        ----------
-        x : TYPE
-            DESCRIPTION.
-        Lower : TYPE
-            DESCRIPTION.
-        Upper : TYPE
-            DESCRIPTION.
-        dcon : TYPE, optional
-            DESCRIPTION. The default is dcon.
-        m : TYPE, optional
-            DESCRIPTION. The default is vel.
-        c0 : TYPE, optional
-            DESCRIPTION. The default is c0.
-        Xmin : TYPE, optional
-            DESCRIPTION. The default is Xmin.
-        Xmax : TYPE, optional
-            DESCRIPTION. The default is Xmax.
-        tol : TYPE, optional
-            DESCRIPTION. The default is 1e-5.
-        tol1 : TYPE, optional
-            DESCRIPTION. The default is 0.001.
-        tol2 : TYPE, optional
-            DESCRIPTION. The default is 1.001.
-
-        Returns
-        -------
-        p : TYPE
-            DESCRIPTION.
-        q : TYPE
-            DESCRIPTION.
-        TYPE
-            DESCRIPTION.
-
-        '''
+       
         global Minimizer_constrains_Count
         global Minimizer_constrains_ex_time
         start = time.time() 
@@ -1258,97 +684,13 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
 
 
     def prime_dual(L,U,alpha,beta,p0,q0,pc,qc,a,b,c,d,n=nel,m=vel,epsimin=1e-7):
-        '''
         
-
-        Parameters
-        ----------
-        L : TYPE
-            DESCRIPTION.
-        U : TYPE
-            DESCRIPTION.
-        alpha : TYPE
-            DESCRIPTION.
-        beta : TYPE
-            DESCRIPTION.
-        p0 : TYPE
-            DESCRIPTION.
-        q0 : TYPE
-            DESCRIPTION.
-        pc : TYPE
-            DESCRIPTION.
-        qc : TYPE
-            DESCRIPTION.
-        a : TYPE
-            DESCRIPTION.
-        b : TYPE
-            DESCRIPTION.
-        c : TYPE
-            DESCRIPTION.
-        d : TYPE
-            DESCRIPTION.
-        n : TYPE, optional
-            DESCRIPTION. The default is nel.
-        m : TYPE, optional
-            DESCRIPTION. The default is vel.
-        epsimin : TYPE, optional
-            DESCRIPTION. The default is 1e-7.
-
-        Returns
-        -------
-        TYPE
-            DESCRIPTION.
-
-        '''
         global prime_dual_Count
         global prime_dual_ex_time
         pd_start = time.time()
 
         def initial_condition(alpha=alpha,beta=beta,o=n,k=m,c=c):
-            '''
             
-
-            Parameters
-            ----------
-            alpha : TYPE, optional
-                DESCRIPTION. The default is alpha.
-            beta : TYPE, optional
-                DESCRIPTION. The default is beta.
-            o : TYPE, optional
-                DESCRIPTION. The default is n.
-            k : TYPE, optional
-                DESCRIPTION. The default is m.
-            c : TYPE, optional
-                DESCRIPTION. The default is c.
-
-            Returns
-            -------
-            x : TYPE
-                DESCRIPTION.
-            y : TYPE
-                DESCRIPTION.
-            z : TYPE
-                DESCRIPTION.
-            epsi : TYPE
-                DESCRIPTION.
-            lamda : TYPE
-                DESCRIPTION.
-            s : TYPE
-                DESCRIPTION.
-            Zee : TYPE
-                DESCRIPTION.
-            eta : TYPE
-                DESCRIPTION.
-            neta : TYPE
-                DESCRIPTION.
-            nu : TYPE
-                DESCRIPTION.
-            variable_vector : TYPE
-                DESCRIPTION.
-            minimizer_vector : TYPE
-                DESCRIPTION.
-
-            '''
             global initial_condition_Count
             global initial_condition_ex_time
 
@@ -1375,60 +717,7 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
         x,y,z,epsi,lamda,s,Zeta,eta,neta,nu,variable_vector,minimizer_vector=initial_condition()
         #print('initial_condition',initial_condition())
         def optimal_condtition(x,y,z,lamda,s,Zeta,eta,neta,nu,epsi,o='o',U=U,L=L,p0=p0,q0=q0,pc=pc,qc=qc,b=b,variable_vector=variable_vector,minimizer_vector=minimizer_vector):
-            '''
             
-
-            Parameters
-            ----------
-            x : TYPE
-                DESCRIPTION.
-            y : TYPE
-                DESCRIPTION.
-            z : TYPE
-                DESCRIPTION.
-            lamda : TYPE
-                DESCRIPTION.
-            s : TYPE
-                DESCRIPTION.
-            Zeta : TYPE
-                DESCRIPTION.
-            eta : TYPE
-                DESCRIPTION.
-            neta : TYPE
-                DESCRIPTION.
-            nu : TYPE
-                DESCRIPTION.
-            epsi : TYPE
-                DESCRIPTION.
-            o : TYPE, optional
-                DESCRIPTION. The default is 'o'.
-            U : TYPE, optional
-                DESCRIPTION. The default is U.
-            L : TYPE, optional
-                DESCRIPTION. The default is L.
-            p0 : TYPE, optional
-                DESCRIPTION. The default is p0.
-            q0 : TYPE, optional
-                DESCRIPTION. The default is q0.
-            pc : TYPE, optional
-                DESCRIPTION. The default is pc.
-            qc : TYPE, optional
-                DESCRIPTION. The default is qc.
-            b : TYPE, optional
-                DESCRIPTION. The default is b.
-            variable_vector : TYPE, optional
-                DESCRIPTION. The default is variable_vector.
-            minimizer_vector : TYPE, optional
-                DESCRIPTION. The default is minimizer_vector.
-
-            Returns
-            -------
-            residumax : TYPE
-                DESCRIPTION.
-            residunorm : TYPE
-                DESCRIPTION.
-
-            '''
             global optimal_condtition_Count
             global optimal_condtition_ex_time
 
@@ -1491,104 +780,7 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
             return residumax,residunorm
         
         def line_search(w,dw,x,y,z,lamda,eta,neta,nu,Zeta,s,dx,dy,dz,dlamda,deta,dneta,dnu,dZeta,ds,resi_norm,epsi,p0=p0,q0=q0,pc=pc,qc=qc,U=U,L=L,alpha=alpha,beta=beta,variable_vector=variable_vector,minimizer_vector=minimizer_vector):
-            '''
-            
-
-            Parameters
-            ----------
-            w : TYPE
-                DESCRIPTION.
-            dw : TYPE
-                DESCRIPTION.
-            x : TYPE
-                DESCRIPTION.
-            y : TYPE
-                DESCRIPTION.
-            z : TYPE
-                DESCRIPTION.
-            lamda : TYPE
-                DESCRIPTION.
-            eta : TYPE
-                DESCRIPTION.
-            neta : TYPE
-                DESCRIPTION.
-            nu : TYPE
-                DESCRIPTION.
-            Zeta : TYPE
-                DESCRIPTION.
-            s : TYPE
-                DESCRIPTION.
-            dx : TYPE
-                DESCRIPTION.
-            dy : TYPE
-                DESCRIPTION.
-            dz : TYPE
-                DESCRIPTION.
-            dlamda : TYPE
-                DESCRIPTION.
-            deta : TYPE
-                DESCRIPTION.
-            dneta : TYPE
-                DESCRIPTION.
-            dnu : TYPE
-                DESCRIPTION.
-            dZeta : TYPE
-                DESCRIPTION.
-            ds : TYPE
-                DESCRIPTION.
-            resi_norm : TYPE
-                DESCRIPTION.
-            epsi : TYPE
-                DESCRIPTION.
-            p0 : TYPE, optional
-                DESCRIPTION. The default is p0.
-            q0 : TYPE, optional
-                DESCRIPTION. The default is q0.
-            pc : TYPE, optional
-                DESCRIPTION. The default is pc.
-            qc : TYPE, optional
-                DESCRIPTION. The default is qc.
-            U : TYPE, optional
-                DESCRIPTION. The default is U.
-            L : TYPE, optional
-                DESCRIPTION. The default is L.
-            alpha : TYPE, optional
-                DESCRIPTION. The default is alpha.
-            beta : TYPE, optional
-                DESCRIPTION. The default is beta.
-            variable_vector : TYPE, optional
-                DESCRIPTION. The default is variable_vector.
-            minimizer_vector : TYPE, optional
-                DESCRIPTION. The default is minimizer_vector.
-
-            Returns
-            -------
-            newx : TYPE
-                DESCRIPTION.
-            newy : TYPE
-                DESCRIPTION.
-            newz : TYPE
-                DESCRIPTION.
-            newlam : TYPE
-                DESCRIPTION.
-            neweta : TYPE
-                DESCRIPTION.
-            newneta : TYPE
-                DESCRIPTION.
-            newnu : TYPE
-                DESCRIPTION.
-            newZeta : TYPE
-                DESCRIPTION.
-            new_s : TYPE
-                DESCRIPTION.
-            new_residualmax : TYPE
-                DESCRIPTION.
-            new_residunorm : TYPE
-                DESCRIPTION.
-            it : TYPE
-                DESCRIPTION.
-
-            '''
+           
             #calculating initial step step
             #dw=np.maximum(dw,1e-5)
             #print(dw)
@@ -1605,18 +797,17 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
 
             ls_start = time.time()
 
-            stepxx = -1.01*dw/w
-            #out = -1.01*np.ones( (8) )  #preinit
-            #stepxx=-1.01*np.divide(dw, w, out=np.zeros_like(dw), where=w!=0)
-            stmxx = np.max(stepxx) 
-            stepalfa =-1.01*(dx/(x-np.array([alpha]).T))
-            stmalfa = np.max(stepalfa)
-            stepbeta = 1.01*(dx/((np.array([beta]).T)-x))
-            stmbeta = np.max(stepbeta)
-            stmalbe = max(stmalfa,stmbeta)
-            stmalbexx = max(stmalbe,stmxx)
-            stminv = max(stmalbexx,1.0)
-            a = 1.0/stminv
+            size = -1.01*dw/w
+
+            max_size = np.max(size) 
+            stepa =-1.01*(dx/(x-np.array([alpha]).T))
+            max_stepa = np.max(stepa)
+            stepb = 1.01*(dx/((np.array([beta]).T)-x))
+            max_stepb = np.max(stepb)
+            max_step = max(max_stepa,max_stepb)
+            final_step = max(max_step,max_size)
+            step_size = max(final_step,1.0)
+            a = 1.0/step_size
             #print('a',a)
             it=0
             max_iteration=200
@@ -1655,111 +846,13 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
             
         
         def Newton_method(U,L,x,y,z,alpha,beta,p0,q0,pc,qc,epsi,lamda,s,Zeta,eta,neta,nu,residumax,residunorm,variable_vector=variable_vector,minimizer_vector=minimizer_vector):
-            '''
-            
-
-            Parameters
-            ----------
-            U : TYPE
-                DESCRIPTION.
-            L : TYPE
-                DESCRIPTION.
-            x : TYPE
-                DESCRIPTION.
-            y : TYPE
-                DESCRIPTION.
-            z : TYPE
-                DESCRIPTION.
-            alpha : TYPE
-                DESCRIPTION.
-            beta : TYPE
-                DESCRIPTION.
-            p0 : TYPE
-                DESCRIPTION.
-            q0 : TYPE
-                DESCRIPTION.
-            pc : TYPE
-                DESCRIPTION.
-            qc : TYPE
-                DESCRIPTION.
-            epsi : TYPE
-                DESCRIPTION.
-            lamda : TYPE
-                DESCRIPTION.
-            s : TYPE
-                DESCRIPTION.
-            Zeta : TYPE
-                DESCRIPTION.
-            eta : TYPE
-                DESCRIPTION.
-            neta : TYPE
-                DESCRIPTION.
-            nu : TYPE
-                DESCRIPTION.
-            residumax : TYPE
-                DESCRIPTION.
-            residunorm : TYPE
-                DESCRIPTION.
-            variable_vector : TYPE, optional
-                DESCRIPTION. The default is variable_vector.
-            minimizer_vector : TYPE, optional
-                DESCRIPTION. The default is minimizer_vector.
-
-            Returns
-            -------
-            TYPE
-                DESCRIPTION.
-
-            '''
+           
             global Newton_method_Count
             global Newton_method_ex_time
             newton_start = time.time()
 
             def linear_system_assembly(Dx,Dy,Dlamda,delx,dely,delz,dellamda,G,a,z,Zeta,variable_vector=variable_vector,minimizer_vector=minimizer_vector):
-                '''
                 
-
-                Parameters
-                ----------
-                Dx : TYPE
-                    DESCRIPTION.
-                Dy : TYPE
-                    DESCRIPTION.
-                Dlamda : TYPE
-                    DESCRIPTION.
-                delx : TYPE
-                    DESCRIPTION.
-                dely : TYPE
-                    DESCRIPTION.
-                delz : TYPE
-                    DESCRIPTION.
-                dellamda : TYPE
-                    DESCRIPTION.
-                G : TYPE
-                    DESCRIPTION.
-                a : TYPE
-                    DESCRIPTION.
-                z : TYPE
-                    DESCRIPTION.
-                Zeta : TYPE
-                    DESCRIPTION.
-                variable_vector : TYPE, optional
-                    DESCRIPTION. The default is variable_vector.
-                minimizer_vector : TYPE, optional
-                    DESCRIPTION. The default is minimizer_vector.
-
-                Returns
-                -------
-                dx : TYPE
-                    DESCRIPTION.
-                dy : TYPE
-                    DESCRIPTION.
-                dz : TYPE
-                    DESCRIPTION.
-                dlamda : TYPE
-                    DESCRIPTION.
-
-                '''
                 global linear_system_assembly_Count
                 global linear_system_assembly_ex_time
                 linear_start = time.time()
@@ -1967,11 +1060,7 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
     p0,q0=objective_constrains(x,Lower,Upper)
     pc,qc,rc=Minimizer_constrains(x,Lower,Upper)
     b=-rc
-    #print(L,U)
-    #print(p0,q0,r0)
-    #print(pc,qc,b)
-    #print(a,b,c,d)
-    #print(Lower,Upper,alpha,beta,p0,q0,pc,qc,a,b,c,d)
+  
     x,exit_i,l_iit,res=prime_dual(Lower,Upper,alpha,beta,p0,q0,pc,qc,a,b,c,d)
     #print(x)
     if True:
@@ -1995,6 +1084,7 @@ def Moving_asymptoes(dfun0,dcon,f0,c0,x0,x1,x2,L,U,loop,nel,vel,Xmin,Xmax,ma_dis
     Moving_asymptoes_ex_time += (stop - start)
     Moving_asymptoes_Count+=1 
     return x,Lower,Upper
+
 
 def element_density_slided1(i,CP,nx,ny,nz,element_density,optimizer):
     global element_density_slided1_Count
@@ -2104,33 +1194,7 @@ def plotting(ii,CC,VV,Mnd,element_density,optimizer,option):
     path="./results/"+optimizer+"_discretness.png"
     fig.savefig(path)
 
-'''
-length=48
-height=12
-width=1
-option=3
-nx=3
-ny=3
-nz=3
-density=7850
-volume_frac=0.5
-pmax=5
-gmax=1
-rmin=1.5
-load=-200
-optimizer='MMA'
-Youngs_modulus=100000
-poission_ratio=0.3
-
-XI_DEGREE=1
-ETA_DEGREE=1
-NETA_DEGREE=1
-    
-
-
-pmax = 3.5
-gmax = 1
-'''
+##START OF THE MAIN PROGRAM
 XI_DEGREE = 1
 ETA_DEGREE = 1
 NETA_DEGREE = 1
@@ -2141,6 +1205,7 @@ P = ny
 Q = nz
 
 main_program_start=time.time()
+#inputs parameters to build IGA are generated
 C = Inputs(length, height, width, N, P, Q, XI_DEGREE, ETA_DEGREE, NETA_DEGREE)
 
 CONTROL_POINTS = C.crtpts_coordinates()
@@ -2156,10 +1221,10 @@ NETA_SPAN, NETA_KNOTCONNECTIVITY, NETA_UNIKNOTS, nW = C.neta_knotspan()
 
 print('\n')
 
-ncp = N * P * Q
+ncp = N * P * Q #number of control point
 dof = 3
-dofcp = ncp * dof
-nel = nU * nV * nW
+dofcp = ncp * dof #number of degrees of freedom of the system
+nel = nU * nV * nW #number of elements
 width1 = 120
 print('#' * width1)
 fmt = '{:^' + str(width1) + '}'
@@ -2190,6 +1255,7 @@ fmt = '{:^' + str(width1) + '}'
 print(fmt.format('Program has started \n'))
 
 K_disp = True
+#generating control point and knot connectivity to build element routine
 element_indicies = controlpointassembly(N, P, Q, nU, nV, nW, XI_DEGREE, ETA_DEGREE, NETA_DEGREE, XI_KNOTCONNECTIVITY,
                                         ETA_KNOTCONNECTIVITY, NETA_KNOTCONNECTIVITY)
 span_index = knot_connectivity(N, P, Q, XI_KNOTCONNECTIVITY, ETA_KNOTCONNECTIVITY, NETA_KNOTCONNECTIVITY)
@@ -2197,6 +1263,7 @@ print('$' * width1)
 fmt = '{:^' + str(width1) + '}'
 IGA_start = time.time() 
 print(fmt.format('Finite Element Analysis based on ISO-Geometric analysis(NURBS)\n'))
+#looped based on number of elements
 for i in range(0, nel):
     el_in = element_indicies[i, :]
     sp_in = span_index[i, :]
@@ -2207,23 +1274,27 @@ for i in range(0, nel):
     Uspan = XI_SPAN[sp_in[0], :]
     Vspan = ETA_SPAN[sp_in[1], :]
     Wspan = NETA_SPAN[sp_in[2], :]
-
+    #element stiffness matrix is obtained
     K_E, NURBS, R = element_routine(X, Y, Z, weights, Youngs_modulus, poission_ratio, Uspan, Vspan, Wspan, XI_DEGREE,
                                     XI_KNOTVECTOR, ETA_DEGREE, ETA_KNOTVECTOR, NETA_DEGREE, NETA_KNOTVECTOR)
+    #global stiffness matrix is built by mapping element stiffness matrix 
     K_G = assemble(K_G, K_E, el_in, ncp, K_disp)
     K_disp = False
 
 bc_disp = False
 abc_disp = True
+#boundary conditions are called 
 BC = BC_Switcher(CONTROL_POINTS, length, height, width, bc_disp)
 fixed_dof, load_dof, fixed_pts, load_pts = BC.indirect(option)
+#boundary coditions are applied
 reduced_k=np.delete(np.delete(K_G, fixed_dof, 0),fixed_dof , 1)
 reduced_F = apply_BC(F_E, fixed_dof, load_dof, load, abc_disp)
+#displacements are calculated
 U = np.linalg.solve(reduced_k, reduced_F)
 print('Calculating Displacements \n')
 for j in fixed_dof:
     U = np.insert(U, j, 0)
-
+#mapping displacements
 F_E[load_dof] = load
 IGA_stop = time.time() 
 U_new = np.array((U.reshape(len(CONTROL_POINTS), 3)), dtype='float64')
@@ -2233,15 +1304,17 @@ New_control_points = CONTROL_POINTS[:, :-2] + U.reshape(len(CONTROL_POINTS), 3)
 Ux = U_new[:, 0]
 Uy = U_new[:, 1]
 Uz = U_new[:, 2]
-energy_stored = np.dot(0.5, U @ F_E)
+energy_stored = np.dot(0.5, U @ F_E) #strain energy stored by structure due to deformation
 print('\nThe structure is not optimised and has 100% volume \n')
 print('The strain energy of the structure               :', energy_stored)
 print('$' * width1)
 CP = CONTROL_POINTS[:, :-2]
-#mesh_vis(CP, New_control_points, nx, ny, nz,optimizer)
 
+#START OF TOPOLOGY OPTIMIZATION
 Emin = 1e-09
 E0 = 1
+#intialization of dimension for Global stiffness matrix, external force vector  and displacements
+
 K_G = np.zeros((dofcp, dofcp))
 F_E = np.zeros(dofcp)
 U = np.zeros(dofcp)
@@ -2257,13 +1330,16 @@ fmt = '{:^' + str(width1) + '}'
 print(fmt.format('The percentage of volume which has to remain after optimization \n'))
 print('                                          ', volume_frac)
 print('+' * width1)
+#initialzing dimension and initial values of variables used in toplogy optimization
 density_basis = np.zeros(nel)
 ele_den_filter = np.zeros(nel)
 element_density = np.ones(nel) * volume_frac
 density_basis_dx = np.zeros(nel)
 dcompliance = np.zeros(nel)
 compliance = 0
+# performing sensitivity analysis i.e giving weights to the respective elements.
 nfilter = int(nel * ((2 * (np.ceil(rmin) - 1) + 1) ** 2))
+#Weight factor are obtained from the below function
 H, DH = Knearestneighbours(rmin, nU, nV, nW)
 loop = 0
 change = 1
@@ -2278,6 +1354,7 @@ fil_disp = True
 max_iterations = 250
 beta =1
 filter_N = np.zeros(((XI_DEGREE + 1) * (ETA_DEGREE + 1) * (NETA_DEGREE + 1), nel))
+#intializing dimension and initial value of the variables.
 Xmin = np.zeros(nel)
 Xmax = np.ones(nel)
 Lower = Xmin
@@ -2286,16 +1363,22 @@ E1 = element_density
 E2 = element_density
 TO_start=time.time()
 Total_time=0
+OC_residual=0
+# loop run until the termination condition is satisified i.e change in compliance from previous iteration 
+
 while change > 0.01:
+        #intializing the dimensions of global stiffness matrix, external force vector, compliance,change in compliance for toplogy optimization in each iteration.
     loop_start=time.time()
     K_G = np.zeros((dofcp, dofcp))
     F_E = np.zeros(dofcp)
     U = np.zeros(dofcp)
     dcompliance = np.zeros(nel)
     compliance = 0
+    # nodal density are calculated based on equ. 4.20
     node_density = np.ones((nel, (XI_DEGREE + 1) * (ETA_DEGREE + 1) * (NETA_DEGREE + 1)))
     for h in range(nel):
         node_density[h, :] = node_density[h, :] * element_density[h]
+     #looped over number of elements
     for i in range(0, nel):
         el_in = element_indicies[i, :]
         sp_in = span_index[i, :]
@@ -2328,7 +1411,9 @@ while change > 0.01:
 
     F_E[load_dof] = load
     # print(U@F_E)
-
+    # Untill now, The displacements of the optimized structure are calculated whose dispalcements are required to compute compliance and change in 
+    # compliance w.r.t element density. 
+    #looped over number of no of element to calculate compliance and dcompliance 
     for k in range(0, nel):
         el_in = element_indicies[k, :]
         sp_in = span_index[k, :]
@@ -2343,32 +1428,30 @@ while change > 0.01:
         K_E, NURBS, R = element_routine(X, Y, Z, weights, Youngs_modulus, poission_ratio, Uspan, Vspan, Wspan,
                                         XI_DEGREE, XI_KNOTVECTOR, ETA_DEGREE, ETA_KNOTVECTOR, NETA_DEGREE,
                                         NETA_KNOTVECTOR)
+        #Calculating element density based on equ. 4.20                                                               
         element_density[k] = np.dot(node_density[k, :], NURBS)
-
+        # Implemenation of SIMP method based on equ. 4.21
         density_basis[k] = Emin + (element_density[k] ** penal) * (E0 - Emin)
+                #derivative of equ. 4.21 w.r.t to element density
         density_basis_dx[k] = -penal * (element_density[k] ** (penal - 1)) * (E0 - Emin)
         dof_index = np.sort(np.concatenate((el_in * dof, dof * el_in + 1, dof * el_in + 2)))
+                #Calculating compliance and change in compliance
         compliance += np.transpose(U[dof_index]) @ (density_basis[k] * K_E) @ U[dof_index]
         dcompliance[k] = np.transpose(U[dof_index]) @ (density_basis_dx[k] * K_E) @ U[dof_index]
-    # compliance+=np.transpose(U)@(K_G)@U
+     #Initializing the change in volume fraction V0/V
     dv = np.ones(nel)
-    # dcompliance=(1/np.maximum(1e-3,element_density)*DH)*np.matmul(H,(element_density*dcompliance))
-    # delement_density=beta*np.exp(-beta*element_density)+np.exp(-beta)
-    # dcompliance=np.matmul(H,(delement_density*dcompliance/DH))
-    # dcompliance=np.matmul(H,(dcompliance/DH))
-    # dv=np.matmul(H,dv/DH)
-    # print(dcompliance)
+
     element_density = np.round(element_density, 5)
     old_el_density = element_density
-    # np.append(X,element_density)
-    # element_density=np.matmul(H,element_density/DH)
+
     constrain = nel * volume_frac
+        #To solve constrained based probelm, we used methods like penality method(OC) and active set strategy(MMA) to satisfy KKT conditions
     if optimizer == 'OC':
         
         dcompliance = (1 / np.maximum(1e-3, element_density) * DH) * np.matmul(H, (element_density * dcompliance))
         dv = np.matmul(H, dv / DH)
         
-        element_density_updated = optimality_criteria(dcompliance, dv, element_density, constrain, H, DH, beta, oc_disp,
+        element_density_updated,OC_residual = optimality_criteria(dcompliance, dv, element_density, constrain,OC_residual, H, DH, oc_disp,
                                                       g)
         element_density = element_density_updated
     if optimizer == 'MMA':
@@ -2376,11 +1459,8 @@ while change > 0.01:
         dv = np.matmul(H, dv / DH)
 
         v = (np.sum(element_density) / nel) - volume_frac
-        # print(v)
-
         dv_dx = (dv / (volume_frac * nel))
-        # print(dcompliance)
-        # print(dv)
+        
         dfun0 = dcompliance
         dcon = dv_dx
         f0 = compliance
@@ -2390,18 +1470,15 @@ while change > 0.01:
         E2 = E1.copy()
         E1 = element_density.copy()
         element_density = np.round(element_density_updated[:, 0], 4)
-    # Heavyside filter
-    # filter_density=Heavyside_filter(element_density,beta,fil_disp)
-    # print(element_density)
-    # element_density=filter_density
+
     if (loop % 50) == 0:
         beta *= 2
+    #Compliance and volume after each iteration are stored for analysis
     CC.append(compliance)
     ii.append(loop)
     VV.append(np.mean(element_density))
     change = np.linalg.norm(element_density - old_el_density)
-    # if optimizer=='MMA':
-    #    element_density=np.matmul(H,element_density/DH)
+
     if loop == 0:
         initial_compliance = compliance
     loop += 1
@@ -2416,13 +1493,12 @@ while change > 0.01:
     CPS = CONTROL_POINTS[:, :-2]
     loop_stop=time.time()
     loop_ex_time=loop_stop-loop_start
-    Total_time+=loop_ex_time
+    Total_time+=loop_ex_time #time taken to run the toplogy optimization loop is calculated
      
     print('       Execution time of this iteration :',loop_ex_time,'sec          Total execution Time:',Total_time,'sec') 
     print('=' * width1)
     print('\n')
-    if  change<0.01 or (loop in [1,5,10,20,40,60,80,100,120,140,160,180,200,220,250]):
-        #element_density_slided(i,CP,nx,ny,nz,element_density,optimizer,ns,'z','xz')
+    if  (change<0.01 or (loop in [1,5,10,20,40,60,80,100,120,140,160,180,200,220,250])) and iterative_display is True:
         element_density_slided1(loop,CP,nx,ny,nz,element_density,optimizer)
     if loop >= max_iterations:
         print('~' * width1)
@@ -2436,13 +1512,12 @@ TO_execution_time=  TO_stop-TO_start
 print('     The time taken to run Topology optimization:',TO_execution_time,'sec')
 print('+' * width1)
 
-
+#Measure of discretness - Calculated to show the efficiency of the method's abitlity to penalize the element desnsity as 0 or 1
 Mnd = np.dot(4 * element_density, (1 - element_density)) / nel * 100
 print('                                        Measure of discreteness: ', Mnd)
 
-element_density = np.round(element_density, 1)
-# element_density[element_density<0.1] = 0
-# element_density[element_density>=volume_frac] = 1
+element_density = np.round(element_density, 1) # FINAL OPTIMIZED STRUCTURE IS OBTAINED
+
 
 print('\n                               Final Volume of the optimised structure  :', np.mean(element_density))
 print('\n                               Mass of the beam at 100% volume          :',
@@ -2454,14 +1529,17 @@ print('\n                               Initial Compliance without optimization 
 final_compliance = np.dot(U, F_E)
 print('\n                               Final Compliance with optimization       :', final_compliance, '\n')
 
-
+#VTK file is genetated
 VTK(CONTROL_POINTS,element_density,nU,nV,nW,"Cantilever_beam")
 
 plotting(ii,CC,VV,Mnd,element_density,optimizer,option)
+#element density are stored in txt format
 np.savetxt("element_density.txt", element_density) 
-main_program_stop=time.time()
-main_program_execution_time=(main_program_stop-main_program_start)
+#TIME ANALYSIS
+main_program_stop=time.time() 
+main_program_execution_time=(main_program_stop-main_program_start) #total time taken  by the program
 print('                       Total execution time of the whole program:',main_program_execution_time,'sec')
+#MMA and OC have different function when called based which the log file is created
 if optimizer=='MMA':
       time_analysis_array=np.array([[' Folder ', Folder_Count , Folder_ex_time  , Folder_ex_time / Folder_Count ],
                               [' knot index ', knot_index_Count , knot_index_ex_time  , knot_index_ex_time / knot_index_Count ],
@@ -2507,7 +1585,8 @@ if optimizer=='OC':
 time_analysis_array_2=time_analysis_array
 time_analysis_array=time_analysis_array[time_analysis_array[:,-1].argsort()] 
 stdoutOrigin=sys.stdout 
-log_file_name="log_"+optimizer+".txt"
+#generation of log file
+log_file_name="./log_files/log_"+optimizer+".txt"
 sys.stdout = open(log_file_name, "w")
 print('AUTHOR : YASA VISWAMBHAR REDDY \n')
 import datetime;
@@ -2548,11 +1627,13 @@ print("                                         Log file is generated")
 sorted=time_analysis_array[time_analysis_array[:,1].argsort()]
 x=sorted[:12,0]
 y=sorted[:12,1]
-
+#plotting of pie chart
 time_analysis_plotting(x,y,optimizer)
 fig, ax = plt.subplots() 
 data=sorted[:5,-1]
 label=sorted[:5,0]
+colors = ['b', 'g', 'r', 'c', 'm']
+explode = (0.2, 0, 0, 0, 0)
 x=np.linspace(0,5,5)
 plt.xticks(x, label)
 plt.title("Time analysis Average execution time") 
