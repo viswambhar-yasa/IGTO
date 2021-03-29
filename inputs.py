@@ -189,7 +189,7 @@ if len(Input_list)==0:
     length=8
     height=5
     width=1
-    option=1
+    option=0
     nx=35
     ny=25   
     nz=3
