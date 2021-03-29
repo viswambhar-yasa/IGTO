@@ -4,7 +4,31 @@
 #------------------------------------------------------------#
 #STRUCTURAL TOPLOGY OPTIMIZATION USING ISO-GEOMETRIC ANALYSIS
 # -----------------------------------------------------------# 
+#_____________________________________________________________
+#NOTE: if the program fails to run due to plotting issue, enter verbose=0
+#NOTE: optimizated structure can be plotted using VTK file in paraview
+#_____________________________________________________________
+#########################################################################
+'''
+TEST CASE-1
+INPUTS (MMA):
+8 5 1 35 25 3 -100 0.4 3 1.5 150000 0.30 7850 0 1 1 
+INPUTS (OC):
+8 5 1 35 25 3 -100 0.4 3 1.5 150000 0.30 7850 0 0 1
 
+TEST CASE-2
+INPUTS (MMA):
+8 5 1 35 25 3 -100 0.4 3 1.5 150000 0.30 7850 5 1 1 
+INPUTS (OC):
+8 5 1 35 25 3 -100 0.4 3 1.5 150000 0.30 7850 5 0 1
+
+TEST CASE-3
+INPUTS (MMA):
+8 5 1 35 25 3 -100 0.2 3 1.5 150000 0.30 7850 1 1 1 
+INPUTS (OC):
+8 5 1 35 25 3 -100 0.2 3 1.5 150000 0.30 7850 1 0 1
+'''
+##########################################################################
 import sys
 import subprocess
 import pkg_resources
@@ -22,6 +46,7 @@ main_program_start=time.time()   #Start of the program
 #Checks for the given python libraries and installs them if not installed.
 for package in ['numpy', 'matplotlib', 'pyvista', 'pyEVTK','pytest']:
     try:
+        
         dist = pkg_resources.get_distribution(package)
         print(TGREEN+'{} ({}) is installed'.format(dist.key, dist.version)+ENDC)
     except pkg_resources.DistributionNotFound:
@@ -63,15 +88,3 @@ if __name__ == "__main__":
 
 from plotting import *
 plotting(ii,CC,VV,Mnd,element_density,optimizer,option)
-#8 5 1 5 8 3 -100 0.4 3 1.5 150000 0.35 7850 0 1 1
-#40 20 40 21 5 21 -100 0.2 3 1.5 150000 0.35 7850 1 1 1 
-#60 20 4 21 21 6 -100 0.3 3 1.5 700000 0.35 7850  2 1 1
-#8 5 1 35 25 3 -100 0.4 5 1.5 150000 0.35 7850 0 1 1
-#8 5 1 35 25 3 -100 0.4 10 1.5 150000 0.35 7850 0 1 1
-#8 5 1 35 25 3 -100 0.4 20 1.5 150000 0.35 7850 0 1 1
-#8 5 1 35 25 3 -100 0.4 30 1.5 150000 0.35 7850 0 1 1
-
-#8 5 1 35 25 3 -100 0.4 3.5 2 150000 0.35 7850 0 1 1
-#8 5 1 35 25 3 -100 0.4 3.5 5 150000 0.35 7850 0 1 1
-#8 5 1 35 25 3 -100 0.4 3.5 8 150000 0.35 7850 0 1 1
-#8 5 1 35 25 3 -100 0.4 3.5 15 150000 0.35 7850 0 1 1

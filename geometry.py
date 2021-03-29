@@ -129,10 +129,12 @@ def bspline_basis(knot_index,degree,U,knotvector):
     return Basis
 
 
-def derbspline_basis(i,p,xi,XI,g=1):#modify
+
+def derbspline_basis(knot_index,degree,U,knotvector,g=1):
     """
-    Modified version based on the alogorithm A2.3 in NURBS Book page no.72
-    Generates derivatives of basis function.
+    Based on the alogorithm A2.3 in NURBS Book page no.72
+
+    converted cpp code to python
 
     Parameters
     ----------
@@ -147,7 +149,8 @@ def derbspline_basis(i,p,xi,XI,g=1):#modify
 
     knotvector : array or list
             list of knot values.
-
+    g :int
+        order of derivatives ,default 1
     Returns
     -------
     Array 
@@ -155,42 +158,43 @@ def derbspline_basis(i,p,xi,XI,g=1):#modify
         It contains non-zero cox de boor based basis function
             Ex= if degree=2 and knotindex=4 
             der_basis=[N' 2_0, N' 3_1, N' 4_2].
-      """
-    #Inititation of dimentions for 2D matrices
-    ndu=np.zeros((p+1,p+1))
-    ders=np.zeros((p+1,p+1))
-    a=np.zeros((2,p+1))
-    left =np.zeros(p+2)
-    right =np.zeros(p+2)
     
-    ndu[0][0]=1.0
-    for j in range(1,p+1):
-        left[j] = xi - XI[i+1-j]
-        right[j] = XI[i+j] - xi
+    Test cases
+    ----------
+            pytest test_geometry.py::test__derbspline_basis_equal_true
+
+            pytest test_geometry.py::test__derbspline_basis_sum_equal_zero_true
+      """
+    initial_matrix=np.zeros((degree+1,degree+1))
+    derv=np.zeros((degree+1,degree+1))
+    a=np.zeros((2,degree+1))
+    left =np.zeros(degree+2)
+    right =np.zeros(degree+2)
+    
+    initial_matrix[0][0]=1.0
+    for j in range(1,degree+1):
+        left[j] = U - knotvector[knot_index+1-j]
+        right[j] = knotvector[knot_index+j] - U
         saved=0.0
         for r in range(j):
-            #Lower triangle
-            ndu[j][r] = right[r+1]+left[j-r]
-            temp=ndu[r][j-1]/ndu[j][r]
-            #Upper triangle
-            ndu[r][j] = saved+(right[r+1]*temp)
+            initial_matrix[j][r] = right[r+1]+left[j-r]
+            temp=initial_matrix[r][j-1]/initial_matrix[j][r]
+            initial_matrix[r][j] = saved+(right[r+1]*temp)
             saved=left[j-r]*temp
-        ndu[j][j] = saved
-    for j in range (p+1): #Load the basis functions
-        ders[0][j]=ndu[j][p]
-    #This secion computes the derivatives
-    for r in range(p+1):
+        initial_matrix[j][j] = saved
+    for j in range (degree+1): #
+        derv[0][j]=initial_matrix[j][degree]
+    for r in range(degree+1):
         s1=0
-        s2=1 #Alternative rows in array a
+        s2=1 
         a[0][0] = 1.0
-        #Loop to compute kth derivative
         for k in range(1,g+1):
             d=0.0
             rk=r-k
-            pk=p-k
+            pk=degree-k
             if(r>=k):
-                a[s2][0]=a[s1][0]/ndu[pk+1][rk]
-                d=a[s2][0]*ndu[rk][pk]
+                a[s2][0]=a[s1][0]/initial_matrix[pk+1][rk]
+                d=a[s2][0]*initial_matrix[rk][pk]
             if(rk>=-1):
                 j1=1
             else:
@@ -198,25 +202,24 @@ def derbspline_basis(i,p,xi,XI,g=1):#modify
             if(r-1<=pk):
                 j2=k-1
             else:
-                j2=p-r
+                j2=degree-r
             for j in range (j1,j2+1):
-                a[s2][j] =(a[s1][j]-a[s1][j-1])/ndu[pk+1][rk+j]
-                d += (a[s2][j]*ndu[rk+j][pk])
+                a[s2][j] =(a[s1][j]-a[s1][j-1])/initial_matrix[pk+1][rk+j]
+                d += (a[s2][j]*initial_matrix[rk+j][pk])
             if(r<=pk):
-                a[s2][k]=-a[s1][k-1]/ndu[pk+1][r]
-                d+=(a[s2][k]*ndu[r][pk])
-            ders[k][r]=d
-            #Switch rows
+                a[s2][k]=-a[s1][k-1]/initial_matrix[pk+1][r]
+                d+=(a[s2][k]*initial_matrix[r][pk])
+            derv[k][r]=d
             j=s1
             s1=s2
             s2=j
-            #Multiply through by the correct factors
-    r=p
+        
+    r=degree
     for k in range(1,g+1):
-        for j in range(p+1):
-            ders[k][j] =ders[k][j]* r
-        r =r* (p-k)
-    derivatives=ders[1,:]
+        for j in range(degree+1):
+            derv[k][j] =derv[k][j]* r
+        r =r* (degree-k)
+    derivatives=derv[1,:]
     return np.array(derivatives)
 
 def trilinear_der(Ux,Uy,Uz,weights,xdegree,xknotvector,ydegree,yknotvector,zdegree,zknotvector):

@@ -186,22 +186,22 @@ Input_list=Inputs_array.split()
 
 if len(Input_list)==0:
     # Defaults inputs parameters 
-    length=6
-    height=1
+    length=8
+    height=5
     width=1
     option=1
-    nx=11
-    ny=11
-    nz=11
+    nx=35
+    ny=25   
+    nz=3
     density=7850
-    volume_frac=0.2
-    penal=10
+    volume_frac=0.4
+    penal=3
     rmin=1.5
-    load=-1000
+    load=-100
     mesh_disp=True
     iterative_display=True
     optimizer='MMA'
-    Youngs_modulus=100000
+    Youngs_modulus=150000
     poission_ratio=0.30
     
 elif len(Input_list)==16:    
