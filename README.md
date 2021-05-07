@@ -1,6 +1,6 @@
 # Isogeometric analysis based topology optimization (IGTO)
 <p align="center">
-<img src="https://github.com/viswambhar-yasa/IGTO/blob/main/ezgifcom-gif-maker.gif"  width="500" height="350"/>
+<img src="https://github.com/viswambhar-yasa/IGTO/blob/main/ezgifcom-gif-maker.gif"/>
 </p>
 
 ## INTRODUCTION
