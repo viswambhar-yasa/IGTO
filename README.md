@@ -4,18 +4,27 @@
 </p>
 
 ## INTRODUCTION
-
-Topology optimization can be described as binary compliance problem which is
-use to find a "black and white" layout that minimizes the compliance subjected to
-volume constrain. There are many frameworks like homogenization method and
-density-based approach.In our case, the material properties are assumed constant
-within each element. We implement density-based approach as it restricts the
-formation of pores and solved the minimum compliance effectively.
-In density-based approach, the problem is parametrized by the material density
-distribution. The stiffness tensor are determined using a power-law interpolation
-function. The power-law implicitly penalizes the intermediate density values to
-remove pores in structure layout. This penalization method is referred as Solid
-Isotropic Material with Penalization (SIMP).
+In this project, structural topology optimization is performed on 3D structures.
+An Iso-geometric code based on NURBS volume is generated for parametric details.
+The advantage of NURBS over Lagrangian basis function is NURBS can
+correctly interpret geometry as it doesn't approximate it which allows us to build
+complex optimized structure which have less compliance. Unlike FEM, application
+of boundary condition in IGA for higher order basis function is quite difficult and
+special strategy like least square method have to be used. Only first order NURBS
+basis functions are used in IGTO due to difficulty in visualization of the structure
+for higher order basis. The optimization problem is solved using OC (optimality
+criterion) and MMA (method of moving asymptotes). From the analysing results,
+we can conclude that for iso-geometric topology optimization (IGTO) MMA is better
+suited as it is gradient based method and converges rapidly compared to OC.
+With OC, the solution may never reach optimal solution as it 
+uctuates about the
+constrain. Performance of OC can be optimized by using additional filters (Heavy
+side filter).
+The in
+uence of parameters like penalization factor and minimum radius on topology
+optimization is performed and discreteness of volume in the structure is calculated.
+To get checker-board free pattern,p greater then 3.5. The penalization factor depends
+on Young's modulus and Poissons ratio.
 
 ## USER MANUAL
 The following steps should be performed to run the program and test cases. All
