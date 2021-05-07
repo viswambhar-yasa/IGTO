@@ -84,7 +84,7 @@ Ft_op : 1
 verbose : 1
 
 #### Boundary condition option (BC op):
-Option :
+Options :
 
 0- Cantilever beam with load along the bottom edge of the free end.
 
@@ -103,14 +103,14 @@ end .
 6- Simple supported with load at top center.
 
 #### Optimizer option (Ft op):
-Option :
+Options :
 
 0-OC (optimality criterion)
 
 1-MMA (method of moving asymptotes)
 
 #### Verbose:
-Option :
+Options :
 
 0-Will not print plots using pyvista only VTK file is generated.
 
