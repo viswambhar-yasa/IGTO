@@ -1,26 +1,29 @@
+# Isogeometric analysis based topology optimization (IGTO)
 <p align="center">
-# IGTO
-Isogeometric analysis based topology optimization
-<\p>
-  
-The main idea behind structural optimization is to get structures with minimum
-weight for different stresses and design constraints. Topology optimization is a
-mathematical method of optimizing the distribution of material within the domain
-so that the structure would satisfy the design parameters. The design parameters
-include geometry of the domain, applied load and position of the load, the
-amount of mass which has remain after optimization. We implemented SIMP(Solid
-Isotropic Material with Penalization) method in order to remove porosity as this
-method is quite effective for minimum weight topology
-
-### Problem Statement 
-The problem of creep of a thick-walled pipe under internal pressure p is considered
-as sketched . The pressure rises linearly up to its final value pmax and
-is then hold until final time. Plain strain along z direction is 0 conditions are
-assumed.
-
-<p align="center">
-<img src="https://github.com/viswambhar-yasa/Non-Linear-FEM/raw/master/Annotation 2020-09-06 174514.png"  />
+<img src="https://github.com/viswambhar-yasa/IGTO/blob/main/ezgifcom-gif-maker.gif"  width="500" height="350"/>
 </p>
+
+## INTRODUCTION
+
+Topology optimization can be described as binary compliance problem which is
+use to find a "black and white" layout that minimizes the compliance subjected to
+volume constrain. There are many frameworks like homogenization method and
+density-based approach.In our case, the material properties are assumed constant
+within each element. We implement density-based approach as it restricts the
+formation of pores and solved the minimum compliance effectively.
+In density-based approach, the problem is parametrized by the material density
+distribution. The stiffness tensor are determined using a power-law interpolation
+function. The power-law implicitly penalizes the intermediate density values to
+remove pores in structure layout. This penalization method is referred as Solid
+Isotropic Material with Penalization (SIMP).
+
+## USER MANUAL
+
+<p align="center">
+<img src="https://github.com/viswambhar-yasa/Non-Linear-FEM/raw/master/program_structure.png"  />
+</p>
+
+
 
 #### Material Routine 
 The material is consider to be visco-elastic and thus non-linearity is implemented by using Newton Raphson method.
