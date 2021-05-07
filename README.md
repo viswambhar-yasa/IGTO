@@ -21,7 +21,7 @@ Isotropic Material with Penalization (SIMP).
 The following steps should be performed to run the program and test cases. All
 the files are written in python.
 <p align="center">
-<img src="https://github.com/viswambhar-yasa/IGTO/blob/main/Document/list_of_files.png" width="200" height="500" />
+<img src="https://github.com/viswambhar-yasa/IGTO/blob/main/Document/list_of_files.png" />
 </p>
 
 ### Procedure to run the program
