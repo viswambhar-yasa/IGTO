@@ -1,8 +1,8 @@
 <p align="center">
-
 # IGTO
 Isogeometric analysis based topology optimization
 <\p>
+  
 The main idea behind structural optimization is to get structures with minimum
 weight for different stresses and design constraints. Topology optimization is a
 mathematical method of optimizing the distribution of material within the domain
